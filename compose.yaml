@@ -1,0 +1,23 @@
+# Public demo, local or on a single host:
+#   docker compose up --build        -> http://localhost:8080
+# Replay mode needs no secrets. For live runs, copy .env.demo.example to
+# .env.demo, set DEMO_MODE=live and ANTHROPIC_API_KEY, and keep the caps.
+services:
+  demo:
+    build: .
+    ports:
+      - "8080:8080"
+    env_file:
+      - path: .env.demo
+        required: false
+    environment:
+      DEMO_SECURE_COOKIE: "0"          # plain http locally; set to 1 behind TLS
+    volumes:
+      - demo-data:/data                # the spend ledger survives restarts
+    read_only: true
+    tmpfs:
+      - /tmp
+    mem_limit: 1g                      # replay ~120 MB; live mode loads the embedding model (~660 MB peak)
+    restart: unless-stopped
+volumes:
+  demo-data:

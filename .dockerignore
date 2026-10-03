@@ -1,0 +1,14 @@
+.git
+.venv
+.env
+.env.*
+!.env.demo.example
+runs/
+data/*.db
+data/*.db-*
+data/slack_roles.json
+data/pending_approvals.json
+data/demo/
+evals/results/
+**/__pycache__
+.pytest_cache

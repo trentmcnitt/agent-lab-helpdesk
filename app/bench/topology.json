@@ -1,0 +1,211 @@
+{
+  "v": "bench-topology/0",
+  "app": {
+    "id": "slack-helpdesk",
+    "name": "Slack Helpdesk Agent",
+    "description": "LangGraph helpdesk agent. The model is called only in classify, draft_answer and propose_action; every other node is deterministic."
+  },
+  "nodes": [
+    {
+      "id": "ingest",
+      "label": "ingest",
+      "kind": "step"
+    },
+    {
+      "id": "retrieve",
+      "label": "retrieve (BM25 + embeddings)",
+      "kind": "retrieval"
+    },
+    {
+      "id": "classify",
+      "label": "classify",
+      "kind": "llm"
+    },
+    {
+      "id": "draft_answer",
+      "label": "draft answer",
+      "kind": "llm"
+    },
+    {
+      "id": "grounding_check",
+      "label": "grounding check",
+      "kind": "step"
+    },
+    {
+      "id": "propose_action",
+      "label": "propose action",
+      "kind": "llm"
+    },
+    {
+      "id": "permission_check",
+      "label": "permission check",
+      "kind": "step"
+    },
+    {
+      "id": "approval_gate",
+      "label": "approval gate",
+      "kind": "gate"
+    },
+    {
+      "id": "execute_action",
+      "label": "execute action",
+      "kind": "tool"
+    },
+    {
+      "id": "handoff",
+      "label": "hand off to a human",
+      "kind": "step"
+    },
+    {
+      "id": "respond",
+      "label": "respond",
+      "kind": "terminal"
+    }
+  ],
+  "edges": [
+    {
+      "from": "ingest",
+      "to": "retrieve"
+    },
+    {
+      "from": "retrieve",
+      "to": "classify"
+    },
+    {
+      "from": "classify",
+      "to": "draft_answer",
+      "from_branch": "answerable"
+    },
+    {
+      "from": "classify",
+      "to": "propose_action",
+      "from_branch": "needs_write"
+    },
+    {
+      "from": "classify",
+      "to": "handoff",
+      "from_branch": "escalate"
+    },
+    {
+      "from": "draft_answer",
+      "to": "grounding_check"
+    },
+    {
+      "from": "grounding_check",
+      "to": "respond",
+      "from_branch": "grounded"
+    },
+    {
+      "from": "grounding_check",
+      "to": "handoff",
+      "from_branch": "not_grounded"
+    },
+    {
+      "from": "propose_action",
+      "to": "permission_check"
+    },
+    {
+      "from": "permission_check",
+      "to": "approval_gate",
+      "from_branch": "allowed"
+    },
+    {
+      "from": "permission_check",
+      "to": "handoff",
+      "from_branch": "forbidden"
+    },
+    {
+      "from": "approval_gate",
+      "to": "execute_action",
+      "from_branch": "approved"
+    },
+    {
+      "from": "approval_gate",
+      "to": "handoff",
+      "from_branch": "denied"
+    },
+    {
+      "from": "execute_action",
+      "to": "respond"
+    },
+    {
+      "from": "handoff",
+      "to": "respond"
+    }
+  ],
+  "panels": [
+    {
+      "id": "retrieval",
+      "title": "Documents the model was given \u00b7 handbook sections, best match first",
+      "event_types": [
+        "retrieval"
+      ],
+      "story": true
+    },
+    {
+      "id": "classify",
+      "title": "Classification",
+      "event_types": [
+        "decision"
+      ],
+      "nodes": [
+        "classify"
+      ],
+      "story": true
+    },
+    {
+      "id": "grounding",
+      "title": "Grounding check",
+      "event_types": [
+        "decision"
+      ],
+      "nodes": [
+        "grounding_check"
+      ],
+      "story": true
+    },
+    {
+      "id": "permission",
+      "title": "Permission gate",
+      "event_types": [
+        "permission_verdict"
+      ],
+      "story": true
+    },
+    {
+      "id": "gate",
+      "title": "Approval (decided in the app)",
+      "event_types": [
+        "gate_waiting",
+        "gate_resolved"
+      ],
+      "mode": "append",
+      "story": true
+    },
+    {
+      "id": "llm",
+      "title": "Model calls",
+      "event_types": [
+        "llm_call"
+      ],
+      "mode": "append"
+    },
+    {
+      "id": "tools",
+      "title": "Tool calls",
+      "event_types": [
+        "tool_call"
+      ],
+      "mode": "append"
+    },
+    {
+      "id": "errors",
+      "title": "Errors",
+      "event_types": [
+        "error"
+      ],
+      "mode": "append"
+    }
+  ],
+  "story": true
+}

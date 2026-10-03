@@ -1,0 +1,26 @@
+display_information:
+  name: Northwire Helpdesk Agent
+  description: Internal IT/Ops helpdesk agent (Agent Lab demo, fake data)
+  background_color: "#0f1420"
+features:
+  bot_user:
+    display_name: helpdesk-agent
+    always_online: true
+oauth_config:
+  scopes:
+    bot:
+      - chat:write            # post answers and approval prompts
+      - chat:write.customize  # label seeded requests "<name> (seeded)"
+      - channels:history      # receive message events, read threads
+      - channels:read         # resolve #helpdesk-requests to its id
+      - channels:join         # join the channel without a manual /invite
+      - users:read            # show requester display names
+settings:
+  event_subscriptions:
+    bot_events:
+      - message.channels
+  interactivity:
+    is_enabled: true          # Approve/Deny buttons, delivered over the socket
+  org_deploy_enabled: false
+  socket_mode_enabled: true
+  token_rotation_enabled: false

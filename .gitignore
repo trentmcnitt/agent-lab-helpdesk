@@ -1,0 +1,19 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+runs/
+data/board.db
+node_modules/
+.DS_Store
+data/eval_board.db
+data/checkpoints.db
+data/pending_approvals.json
+data/slack_roles.json
+# SQLite side files (WAL/shared-memory) for every local database
+data/*.db-wal
+data/*.db-shm
+data/*.db-journal
+.env.demo
+data/demo/
+dist/

@@ -1,0 +1,31 @@
+[project]
+name = "request-queue"
+version = "0.1.0"
+description = "An IT/Ops helpdesk agent in Slack: LangGraph + Claude, a code permission gate, digest-bound human approval, and a live trace view."
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic>=1.8.0",
+    "fastapi>=0.141.1",
+    "fastembed>=0.8.1",
+    "langchain>=1.4.2",
+    "langchain-anthropic>=1.7.4",
+    "langfuse>=4.15.6",
+    "langgraph>=1.2.12",
+    "langgraph-checkpoint-sqlite>=3.1.1",
+    "mcp>=2.2.0",
+    "pydantic>=2.13.5",
+    "python-dotenv>=1.2.3",
+    "rank-bm25>=0.2.2",
+    "slack-bolt>=1.30.0",
+    "sse-starlette>=3.4.11",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["live: calls the Anthropic API (needs ANTHROPIC_API_KEY)"]
