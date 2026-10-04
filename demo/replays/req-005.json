@@ -2,21 +2,22 @@
  "scenario": "req-005",
  "requester_name": "Hana Kobayashi",
  "message": "gonna be working out of a coffee shop near my place for a few days while my home internet gets fixed - is that ok as long as i've got vpn on, or is public wifi a no-go regardless?",
- "recorded_at": "2026-09-29T10:41:05",
+ "recorded_at": "2026-09-29T10:40:57",
  "model": "claude-sonnet-5",
  "paused": false,
+ "regen_id": "1a5a37a03da2b947",
  "pre": [
   {
-   "run_id": "rec-a636370c",
+   "run_id": "rec-req-005",
    "node": "ingest",
    "event_type": "node_enter",
    "data": {
     "message": "gonna be working out of a coffee shop near my place for a few days while my home internet gets fixed - is that ok as long as i've got vpn on, or is public wifi a no-go regardless?"
    },
-   "ts": 1790696457.701094
+   "ts": 1790696457.702196
   },
   {
-   "run_id": "rec-a636370c",
+   "run_id": "rec-req-005",
    "node": "retrieve",
    "event_type": "retrieval_hits",
    "data": {
@@ -24,37 +25,37 @@
      {
       "chunk_id": "sec-9",
       "section": "9. Remote Access Policy",
-      "text": "## 9. Remote Access Policy\nEmployees may work remotely and connect via VPN (Section 4) from any location with a stable internet connection, including home, co-working spaces, and public locations such as cafes or airports, provided SecureLink VPN is active before accessing any internal system.\n\n- Public/shared Wi-Fi (cafes, airports, hotels) is permitted for remote work as long as VPN is connected; do not access internal systems over public Wi-Fi without VPN active.\n- Split-tunnel VPN means general web browsing does not route through the VPN, but any connection to `*.northwire.internal` resources must go through VPN regardless of network.\n- Company laptops must have disk encryption and the standard endpoint security agent active at all times (verified automatically at VPN connect) \u2014 this cannot be disabled by the employee.\n- International travel: notify IT Operations at least 3 business days before departure if working from outside your home country, as some VPN gateways apply region-based access rules. This is an FYI/logging step, not an approval gate, for most destinations.",
+      "text": "## 9. Remote Access Policy\nEmployees may work remotely and connect via VPN (Section 4) from any location with a stable internet connection, including home, co-working spaces, and public locations such as cafes or airports, provided SecureLink VPN is active before accessing any internal system.\n\n- Public/shared Wi-Fi (cafes, airports, hotels) is permitted for remote work as long as VPN is connected; do not access internal systems over public Wi-Fi without VPN active.\n- Split-tunnel VPN means general web browsing does not route through the VPN, but any connection to `*.northwire.internal` resources must go through VPN regardless of network.\n- Company laptops must have disk encryption and the standard endpoint security agent active at all times (verified automatically at VPN connect) — this cannot be disabled by the employee.\n- International travel: notify IT Operations at least 3 business days before departure if working from outside your home country, as some VPN gateways apply region-based access rules. This is an FYI/logging step, not an approval gate, for most destinations.",
       "score": 0.0333,
       "bm25": 19.63
      },
      {
       "chunk_id": "sec-4",
       "section": "4. VPN Access: Requesting, Approval, and Renewal",
-      "text": "## 4. VPN Access: Requesting, Approval, and Renewal\nRemote connections to internal systems require SecureLink VPN (VPN profile: NW-VPN). VPN certificates are issued per-device and expire automatically after 180 days.\n\n**Requesting VPN access (new):**\n1. Open a Waypoint ticket under \"VPN Access Request,\" specifying the device and the systems you need to reach.\n2. New-hire VPN provisioning is handled automatically as part of onboarding (Section 12) and does not require a separate request.\n3. Contractor VPN access requires a sponsoring manager listed on the ticket and is provisioned for the duration of the contract, not indefinitely.\n\n**Renewing an expiring or expired certificate:**\n1. You'll receive an automated reminder 14 days before expiration. If you missed it, open a Waypoint ticket under \"VPN Certificate Renewal.\"\n2. Renewal for an existing employee on an existing device is a same-day, low-risk action and does not require additional manager approval.\n3. If your certificate has already expired, you will be unable to connect until it is renewed \u2014 this is expected behavior, not a bug.\n\n**Common VPN connectivity issues (self-serve first):**\n- Frequent disconnects: switch from Wi-Fi to a wired connection if available, and confirm you are not on a captive-portal network (hotel/airport Wi-Fi) that blocks VPN traffic.\n- \"Certificate not trusted\" errors: usually means the certificate has expired or the device clock is more than 5 minutes out of sync \u2014 check the device clock first.\n- Slow throughput: split-tunnel mode is enabled by default; general internet traffic does not route through VPN and should not be affected by VPN speed.\n\nVPN access is a standard access-tier-agnostic grant (available to Viewer, Operator, and Admin accounts alike) but is still logged and time-bounded for contractors per the above.",
+      "text": "## 4. VPN Access: Requesting, Approval, and Renewal\nRemote connections to internal systems require SecureLink VPN (VPN profile: NW-VPN). VPN certificates are issued per-device and expire automatically after 180 days.\n\n**Requesting VPN access (new):**\n1. Open a Waypoint ticket under \"VPN Access Request,\" specifying the device and the systems you need to reach.\n2. New-hire VPN provisioning is handled automatically as part of onboarding (Section 12) and does not require a separate request.\n3. Contractor VPN access requires a sponsoring manager listed on the ticket and is provisioned for the duration of the contract, not indefinitely.\n\n**Renewing an expiring or expired certificate:**\n1. You'll receive an automated reminder 14 days before expiration. If you missed it, open a Waypoint ticket under \"VPN Certificate Renewal.\"\n2. Renewal for an existing employee on an existing device is a same-day, low-risk action and does not require additional manager approval.\n3. If your certificate has already expired, you will be unable to connect until it is renewed — this is expected behavior, not a bug.\n\n**Common VPN connectivity issues (self-serve first):**\n- Frequent disconnects: switch from Wi-Fi to a wired connection if available, and confirm you are not on a captive-portal network (hotel/airport Wi-Fi) that blocks VPN traffic.\n- \"Certificate not trusted\" errors: usually means the certificate has expired or the device clock is more than 5 minutes out of sync — check the device clock first.\n- Slow throughput: split-tunnel mode is enabled by default; general internet traffic does not route through VPN and should not be affected by VPN speed.\n\nVPN access is a standard access-tier-agnostic grant (available to Viewer, Operator, and Admin accounts alike) but is still logged and time-bounded for contractors per the above.",
       "score": 0.0328,
       "bm25": 4.86
      },
      {
       "chunk_id": "sec-14",
       "section": "14. Printer and Network Troubleshooting",
-      "text": "## 14. Printer and Network Troubleshooting\n**Printer issues (self-serve first):**\n1. Check the printer's display panel for an error code (paper jam, low toner, offline) \u2014 most issues are visible there directly.\n2. Confirm you're connected to the correct office network (printers are not reachable over VPN from home).\n3. Try removing and reseating the paper tray for jams; do not force stuck paper \u2014 this can damage the feed mechanism.\n4. If the printer shows \"offline\" but has power, a reboot of the printer (power off 30 seconds, back on) resolves most connectivity issues.\n5. If none of the above resolves it, open a Waypoint \"Facilities/Hardware\" ticket noting the printer's location label (printed on a sticker on the unit) and the error shown.\n\n**Office network / Wi-Fi issues:**\n1. Confirm the issue is affecting more than one device \u2014 a single device's issue is usually local to that device, not the network.\n2. Try forgetting and rejoining the office Wi-Fi network.\n3. Wired connections are available at every desk if Wi-Fi is unreliable in a specific area \u2014 check the wall jack labeled to match your desk number.\n4. Persistent, multi-device outages in a specific area should be reported via Waypoint \"Network Issue\" with the office floor/area noted, so IT can check switch/access-point health for that zone.",
+      "text": "## 14. Printer and Network Troubleshooting\n**Printer issues (self-serve first):**\n1. Check the printer's display panel for an error code (paper jam, low toner, offline) — most issues are visible there directly.\n2. Confirm you're connected to the correct office network (printers are not reachable over VPN from home).\n3. Try removing and reseating the paper tray for jams; do not force stuck paper — this can damage the feed mechanism.\n4. If the printer shows \"offline\" but has power, a reboot of the printer (power off 30 seconds, back on) resolves most connectivity issues.\n5. If none of the above resolves it, open a Waypoint \"Facilities/Hardware\" ticket noting the printer's location label (printed on a sticker on the unit) and the error shown.\n\n**Office network / Wi-Fi issues:**\n1. Confirm the issue is affecting more than one device — a single device's issue is usually local to that device, not the network.\n2. Try forgetting and rejoining the office Wi-Fi network.\n3. Wired connections are available at every desk if Wi-Fi is unreliable in a specific area — check the wall jack labeled to match your desk number.\n4. Persistent, multi-device outages in a specific area should be reported via Waypoint \"Network Issue\" with the office floor/area noted, so IT can check switch/access-point health for that zone.",
       "score": 0.0318,
       "bm25": 2.42
      },
      {
       "chunk_id": "sec-12",
       "section": "12. Onboarding and Offboarding Equipment & Access Procedure",
-      "text": "## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists \u2014 it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) \u2014 no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling.",
+      "text": "## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists — it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) — no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling.",
       "score": 0.0311,
       "bm25": 3.89
      }
     ]
    },
-   "ts": 1790696457.7145238
+   "ts": 1790696457.710882
   },
   {
-   "run_id": "rec-a636370c",
+   "run_id": "rec-req-005",
    "node": "classify",
    "event_type": "llm_call",
    "data": {
@@ -73,7 +74,7 @@
     "messages": [
      {
       "role": "user",
-      "content": "You are the triage step of an internal IT/Ops helpdesk agent for Northwire Technologies. A message arrived in #helpdesk-requests. Decide whether it is:\n- 'answerable': fully answerable from the handbook excerpts below, no system change needed. This includes questions *about* a change -- whether it needs approval, how it's done, who handles it -- and changes the handbook says the employee makes themselves: the requester asked, so the reply is the answer, not a ticket.\n- 'needs_write': the requester wants IT/Ops to make a system change (a ticket created/assigned, an access grant, or anything else that changes state) -- even if policy will ultimately forbid it. Name what they're actually asking for; do not pre-judge policy here.\n- 'escalate': you cannot determine the right answer from the handbook, the request is ambiguous or out of scope, or it involves a security/identity matter serious enough that a human should look at it regardless of what the handbook says. A request whose system, dataset or scope can't be identified from the message itself -- known only by who showed it, where it came up, or 'same access as someone else' -- is ambiguous: the handbook says not to guess, so a human asks which one.\n\nFor 'needs_write', phrase the rationale as the decision itself (what the write is and why it needs a ticket/approval), not as a deferral -- the agent completes needs_write cases itself once approved; only 'escalate' hands off to a human.\n\nRequester role: viewer (one of viewer/operator/admin)\nMessage: gonna be working out of a coffee shop near my place for a few days while my home internet gets fixed - is that ok as long as i've got vpn on, or is public wifi a no-go regardless?\n\nRelevant handbook excerpts:\n[sec-9] ## 9. Remote Access Policy\nEmployees may work remotely and connect via VPN (Section 4) from any location with a stable internet connection, including home, co-working spaces, and public locations such as cafes or airports, provided SecureLink VPN is active before accessing any internal system.\n\n- Public/shared Wi-Fi (cafes, airports, hotels) is permitted for remote work as long as VPN is connected; do not access internal systems over public Wi-Fi without VPN active.\n- Split-tunnel VPN means general web browsing does not route through the VPN, but any connection to `*.northwire.internal` resources must go through VPN regardless of network.\n- Company laptops must have disk encryption and the standard endpoint security agent active at all times (verified automatically at VPN connect) \u2014 this cannot be disabled by the employee.\n- International travel: notify IT Operations at least 3 business days before departure if working from outside your home country, as some VPN gateways apply region-based access rules. This is an FYI/logging step, not an approval gate, for most destinations.\n\n[sec-4] ## 4. VPN Access: Requesting, Approval, and Renewal\nRemote connections to internal systems require SecureLink VPN (VPN profile: NW-VPN). VPN certificates are issued per-device and expire automatically after 180 days.\n\n**Requesting VPN access (new):**\n1. Open a Waypoint ticket under \"VPN Access Request,\" specifying the device and the systems you need to reach.\n2. New-hire VPN provisioning is handled automatically as part of onboarding (Section 12) and does not require a separate request.\n3. Contractor VPN access requires a sponsoring manager listed on the ticket and is provisioned for the duration of the contract, not indefinitely.\n\n**Renewing an expiring or expired certificate:**\n1. You'll receive an automated reminder 14 days before expiration. If you missed it, open a Waypoint ticket under \"VPN Certificate Renewal.\"\n2. Renewal for an existing employee on an existing device is a same-day, low-risk action and does not require additional manager approval.\n3. If your certificate has already expired, you will be unable to connect until it is renewed \u2014 this is expected behavior, not a bug.\n\n**Common VPN connectivity issues (self-serve first):**\n- Frequent disconnects: switch from Wi-Fi to a wired connection if available, and confirm you are not on a captive-portal network (hotel/airport Wi-Fi) that blocks VPN traffic.\n- \"Certificate not trusted\" errors: usually means the certificate has expired or the device clock is more than 5 minutes out of sync \u2014 check the device clock first.\n- Slow throughput: split-tunnel mode is enabled by default; general internet traffic does not route through VPN and should not be affected by VPN speed.\n\nVPN access is a standard access-tier-agnostic grant (available to Viewer, Operator, and Admin accounts alike) but is still logged and time-bounded for contractors per the above.\n\n[sec-14] ## 14. Printer and Network Troubleshooting\n**Printer issues (self-serve first):**\n1. Check the printer's display panel for an error code (paper jam, low toner, offline) \u2014 most issues are visible there directly.\n2. Confirm you're connected to the correct office network (printers are not reachable over VPN from home).\n3. Try removing and reseating the paper tray for jams; do not force stuck paper \u2014 this can damage the feed mechanism.\n4. If the printer shows \"offline\" but has power, a reboot of the printer (power off 30 seconds, back on) resolves most connectivity issues.\n5. If none of the above resolves it, open a Waypoint \"Facilities/Hardware\" ticket noting the printer's location label (printed on a sticker on the unit) and the error shown.\n\n**Office network / Wi-Fi issues:**\n1. Confirm the issue is affecting more than one device \u2014 a single device's issue is usually local to that device, not the network.\n2. Try forgetting and rejoining the office Wi-Fi network.\n3. Wired connections are available at every desk if Wi-Fi is unreliable in a specific area \u2014 check the wall jack labeled to match your desk number.\n4. Persistent, multi-device outages in a specific area should be reported via Waypoint \"Network Issue\" with the office floor/area noted, so IT can check switch/access-point health for that zone.\n\n[sec-12] ## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists \u2014 it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) \u2014 no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling.\n\nGive a rationale a human could audit this decision by, and a confidence 0-1."
+      "content": "You are the triage step of an internal IT/Ops helpdesk agent for Northwire Technologies. A message arrived in #helpdesk-requests. Decide whether it is:\n- 'answerable': fully answerable from the handbook excerpts below, no system change needed. This includes questions *about* a change -- whether it needs approval, how it's done, who handles it -- and changes the handbook says the employee makes themselves: the requester asked, so the reply is the answer, not a ticket.\n- 'needs_write': the requester wants IT/Ops to make a system change (a ticket created/assigned, an access grant, or anything else that changes state) -- even if policy will ultimately forbid it. Name what they're actually asking for; do not pre-judge policy here.\n- 'escalate': you cannot determine the right answer from the handbook, the request is ambiguous or out of scope, or it involves a security/identity matter serious enough that a human should look at it regardless of what the handbook says. A request whose system, dataset or scope can't be identified from the message itself -- known only by who showed it, where it came up, or 'same access as someone else' -- is ambiguous: the handbook says not to guess, so a human asks which one.\n\nFor 'needs_write', phrase the rationale as the decision itself (what the write is and why it needs a ticket/approval), not as a deferral -- the agent completes needs_write cases itself once approved; only 'escalate' hands off to a human.\n\nRequester role: viewer (one of viewer/operator/admin)\nMessage: gonna be working out of a coffee shop near my place for a few days while my home internet gets fixed - is that ok as long as i've got vpn on, or is public wifi a no-go regardless?\n\nRelevant handbook excerpts:\n[sec-9] ## 9. Remote Access Policy\nEmployees may work remotely and connect via VPN (Section 4) from any location with a stable internet connection, including home, co-working spaces, and public locations such as cafes or airports, provided SecureLink VPN is active before accessing any internal system.\n\n- Public/shared Wi-Fi (cafes, airports, hotels) is permitted for remote work as long as VPN is connected; do not access internal systems over public Wi-Fi without VPN active.\n- Split-tunnel VPN means general web browsing does not route through the VPN, but any connection to `*.northwire.internal` resources must go through VPN regardless of network.\n- Company laptops must have disk encryption and the standard endpoint security agent active at all times (verified automatically at VPN connect) — this cannot be disabled by the employee.\n- International travel: notify IT Operations at least 3 business days before departure if working from outside your home country, as some VPN gateways apply region-based access rules. This is an FYI/logging step, not an approval gate, for most destinations.\n\n[sec-4] ## 4. VPN Access: Requesting, Approval, and Renewal\nRemote connections to internal systems require SecureLink VPN (VPN profile: NW-VPN). VPN certificates are issued per-device and expire automatically after 180 days.\n\n**Requesting VPN access (new):**\n1. Open a Waypoint ticket under \"VPN Access Request,\" specifying the device and the systems you need to reach.\n2. New-hire VPN provisioning is handled automatically as part of onboarding (Section 12) and does not require a separate request.\n3. Contractor VPN access requires a sponsoring manager listed on the ticket and is provisioned for the duration of the contract, not indefinitely.\n\n**Renewing an expiring or expired certificate:**\n1. You'll receive an automated reminder 14 days before expiration. If you missed it, open a Waypoint ticket under \"VPN Certificate Renewal.\"\n2. Renewal for an existing employee on an existing device is a same-day, low-risk action and does not require additional manager approval.\n3. If your certificate has already expired, you will be unable to connect until it is renewed — this is expected behavior, not a bug.\n\n**Common VPN connectivity issues (self-serve first):**\n- Frequent disconnects: switch from Wi-Fi to a wired connection if available, and confirm you are not on a captive-portal network (hotel/airport Wi-Fi) that blocks VPN traffic.\n- \"Certificate not trusted\" errors: usually means the certificate has expired or the device clock is more than 5 minutes out of sync — check the device clock first.\n- Slow throughput: split-tunnel mode is enabled by default; general internet traffic does not route through VPN and should not be affected by VPN speed.\n\nVPN access is a standard access-tier-agnostic grant (available to Viewer, Operator, and Admin accounts alike) but is still logged and time-bounded for contractors per the above.\n\n[sec-14] ## 14. Printer and Network Troubleshooting\n**Printer issues (self-serve first):**\n1. Check the printer's display panel for an error code (paper jam, low toner, offline) — most issues are visible there directly.\n2. Confirm you're connected to the correct office network (printers are not reachable over VPN from home).\n3. Try removing and reseating the paper tray for jams; do not force stuck paper — this can damage the feed mechanism.\n4. If the printer shows \"offline\" but has power, a reboot of the printer (power off 30 seconds, back on) resolves most connectivity issues.\n5. If none of the above resolves it, open a Waypoint \"Facilities/Hardware\" ticket noting the printer's location label (printed on a sticker on the unit) and the error shown.\n\n**Office network / Wi-Fi issues:**\n1. Confirm the issue is affecting more than one device — a single device's issue is usually local to that device, not the network.\n2. Try forgetting and rejoining the office Wi-Fi network.\n3. Wired connections are available at every desk if Wi-Fi is unreliable in a specific area — check the wall jack labeled to match your desk number.\n4. Persistent, multi-device outages in a specific area should be reported via Waypoint \"Network Issue\" with the office floor/area noted, so IT can check switch/access-point health for that zone.\n\n[sec-12] ## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists — it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) — no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling.\n\nGive a rationale a human could audit this decision by, and a confidence 0-1."
      }
     ],
     "output": "{\"category\":\"answerable\",\"rationale\":\"Section 9 explicitly permits working from public Wi-Fi (cafes, airports, hotels) as long as VPN is active before accessing internal systems - no ticket or approval needed, this is just informing the employee of existing policy.\",\"confidence\":0.97}",
@@ -112,10 +113,10 @@
      }
     }
    },
-   "ts": 1790696459.862124
+   "ts": 1790696459.8762
   },
   {
-   "run_id": "rec-a636370c",
+   "run_id": "rec-req-005",
    "node": "classify",
    "event_type": "decision",
    "data": {
@@ -128,10 +129,10 @@
     ],
     "rationale_cites_unretrieved": []
    },
-   "ts": 1790696459.8625019
+   "ts": 1790696459.876501
   },
   {
-   "run_id": "rec-a636370c",
+   "run_id": "rec-req-005",
    "node": "draft_answer",
    "event_type": "llm_call",
    "data": {
@@ -150,10 +151,10 @@
     "messages": [
      {
       "role": "user",
-      "content": "Answer this Northwire Technologies helpdesk request using ONLY the handbook excerpts below. Cite the chunk id(s) you relied on. If the excerpts don't actually support a confident answer, say so plainly rather than filling the gap.\n\nMessage: gonna be working out of a coffee shop near my place for a few days while my home internet gets fixed - is that ok as long as i've got vpn on, or is public wifi a no-go regardless?\n\nHandbook excerpts:\n[sec-9] ## 9. Remote Access Policy\nEmployees may work remotely and connect via VPN (Section 4) from any location with a stable internet connection, including home, co-working spaces, and public locations such as cafes or airports, provided SecureLink VPN is active before accessing any internal system.\n\n- Public/shared Wi-Fi (cafes, airports, hotels) is permitted for remote work as long as VPN is connected; do not access internal systems over public Wi-Fi without VPN active.\n- Split-tunnel VPN means general web browsing does not route through the VPN, but any connection to `*.northwire.internal` resources must go through VPN regardless of network.\n- Company laptops must have disk encryption and the standard endpoint security agent active at all times (verified automatically at VPN connect) \u2014 this cannot be disabled by the employee.\n- International travel: notify IT Operations at least 3 business days before departure if working from outside your home country, as some VPN gateways apply region-based access rules. This is an FYI/logging step, not an approval gate, for most destinations.\n\n[sec-4] ## 4. VPN Access: Requesting, Approval, and Renewal\nRemote connections to internal systems require SecureLink VPN (VPN profile: NW-VPN). VPN certificates are issued per-device and expire automatically after 180 days.\n\n**Requesting VPN access (new):**\n1. Open a Waypoint ticket under \"VPN Access Request,\" specifying the device and the systems you need to reach.\n2. New-hire VPN provisioning is handled automatically as part of onboarding (Section 12) and does not require a separate request.\n3. Contractor VPN access requires a sponsoring manager listed on the ticket and is provisioned for the duration of the contract, not indefinitely.\n\n**Renewing an expiring or expired certificate:**\n1. You'll receive an automated reminder 14 days before expiration. If you missed it, open a Waypoint ticket under \"VPN Certificate Renewal.\"\n2. Renewal for an existing employee on an existing device is a same-day, low-risk action and does not require additional manager approval.\n3. If your certificate has already expired, you will be unable to connect until it is renewed \u2014 this is expected behavior, not a bug.\n\n**Common VPN connectivity issues (self-serve first):**\n- Frequent disconnects: switch from Wi-Fi to a wired connection if available, and confirm you are not on a captive-portal network (hotel/airport Wi-Fi) that blocks VPN traffic.\n- \"Certificate not trusted\" errors: usually means the certificate has expired or the device clock is more than 5 minutes out of sync \u2014 check the device clock first.\n- Slow throughput: split-tunnel mode is enabled by default; general internet traffic does not route through VPN and should not be affected by VPN speed.\n\nVPN access is a standard access-tier-agnostic grant (available to Viewer, Operator, and Admin accounts alike) but is still logged and time-bounded for contractors per the above.\n\n[sec-14] ## 14. Printer and Network Troubleshooting\n**Printer issues (self-serve first):**\n1. Check the printer's display panel for an error code (paper jam, low toner, offline) \u2014 most issues are visible there directly.\n2. Confirm you're connected to the correct office network (printers are not reachable over VPN from home).\n3. Try removing and reseating the paper tray for jams; do not force stuck paper \u2014 this can damage the feed mechanism.\n4. If the printer shows \"offline\" but has power, a reboot of the printer (power off 30 seconds, back on) resolves most connectivity issues.\n5. If none of the above resolves it, open a Waypoint \"Facilities/Hardware\" ticket noting the printer's location label (printed on a sticker on the unit) and the error shown.\n\n**Office network / Wi-Fi issues:**\n1. Confirm the issue is affecting more than one device \u2014 a single device's issue is usually local to that device, not the network.\n2. Try forgetting and rejoining the office Wi-Fi network.\n3. Wired connections are available at every desk if Wi-Fi is unreliable in a specific area \u2014 check the wall jack labeled to match your desk number.\n4. Persistent, multi-device outages in a specific area should be reported via Waypoint \"Network Issue\" with the office floor/area noted, so IT can check switch/access-point health for that zone.\n\n[sec-12] ## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists \u2014 it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) \u2014 no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling."
+      "content": "Answer this Northwire Technologies helpdesk request using ONLY the handbook excerpts below. Cite the chunk id(s) you relied on. If the excerpts don't actually support a confident answer, say so plainly rather than filling the gap.\n\nMessage: gonna be working out of a coffee shop near my place for a few days while my home internet gets fixed - is that ok as long as i've got vpn on, or is public wifi a no-go regardless?\n\nHandbook excerpts:\n[sec-9] ## 9. Remote Access Policy\nEmployees may work remotely and connect via VPN (Section 4) from any location with a stable internet connection, including home, co-working spaces, and public locations such as cafes or airports, provided SecureLink VPN is active before accessing any internal system.\n\n- Public/shared Wi-Fi (cafes, airports, hotels) is permitted for remote work as long as VPN is connected; do not access internal systems over public Wi-Fi without VPN active.\n- Split-tunnel VPN means general web browsing does not route through the VPN, but any connection to `*.northwire.internal` resources must go through VPN regardless of network.\n- Company laptops must have disk encryption and the standard endpoint security agent active at all times (verified automatically at VPN connect) — this cannot be disabled by the employee.\n- International travel: notify IT Operations at least 3 business days before departure if working from outside your home country, as some VPN gateways apply region-based access rules. This is an FYI/logging step, not an approval gate, for most destinations.\n\n[sec-4] ## 4. VPN Access: Requesting, Approval, and Renewal\nRemote connections to internal systems require SecureLink VPN (VPN profile: NW-VPN). VPN certificates are issued per-device and expire automatically after 180 days.\n\n**Requesting VPN access (new):**\n1. Open a Waypoint ticket under \"VPN Access Request,\" specifying the device and the systems you need to reach.\n2. New-hire VPN provisioning is handled automatically as part of onboarding (Section 12) and does not require a separate request.\n3. Contractor VPN access requires a sponsoring manager listed on the ticket and is provisioned for the duration of the contract, not indefinitely.\n\n**Renewing an expiring or expired certificate:**\n1. You'll receive an automated reminder 14 days before expiration. If you missed it, open a Waypoint ticket under \"VPN Certificate Renewal.\"\n2. Renewal for an existing employee on an existing device is a same-day, low-risk action and does not require additional manager approval.\n3. If your certificate has already expired, you will be unable to connect until it is renewed — this is expected behavior, not a bug.\n\n**Common VPN connectivity issues (self-serve first):**\n- Frequent disconnects: switch from Wi-Fi to a wired connection if available, and confirm you are not on a captive-portal network (hotel/airport Wi-Fi) that blocks VPN traffic.\n- \"Certificate not trusted\" errors: usually means the certificate has expired or the device clock is more than 5 minutes out of sync — check the device clock first.\n- Slow throughput: split-tunnel mode is enabled by default; general internet traffic does not route through VPN and should not be affected by VPN speed.\n\nVPN access is a standard access-tier-agnostic grant (available to Viewer, Operator, and Admin accounts alike) but is still logged and time-bounded for contractors per the above.\n\n[sec-14] ## 14. Printer and Network Troubleshooting\n**Printer issues (self-serve first):**\n1. Check the printer's display panel for an error code (paper jam, low toner, offline) — most issues are visible there directly.\n2. Confirm you're connected to the correct office network (printers are not reachable over VPN from home).\n3. Try removing and reseating the paper tray for jams; do not force stuck paper — this can damage the feed mechanism.\n4. If the printer shows \"offline\" but has power, a reboot of the printer (power off 30 seconds, back on) resolves most connectivity issues.\n5. If none of the above resolves it, open a Waypoint \"Facilities/Hardware\" ticket noting the printer's location label (printed on a sticker on the unit) and the error shown.\n\n**Office network / Wi-Fi issues:**\n1. Confirm the issue is affecting more than one device — a single device's issue is usually local to that device, not the network.\n2. Try forgetting and rejoining the office Wi-Fi network.\n3. Wired connections are available at every desk if Wi-Fi is unreliable in a specific area — check the wall jack labeled to match your desk number.\n4. Persistent, multi-device outages in a specific area should be reported via Waypoint \"Network Issue\" with the office floor/area noted, so IT can check switch/access-point health for that zone.\n\n[sec-12] ## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists — it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) — no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling."
      }
     ],
-    "output": "{\"answer\":\"Yes, working from the coffee shop is fine. Per Section 9, public/shared Wi-Fi (cafes, airports, hotels) is explicitly permitted for remote work as long as SecureLink VPN is connected \u2014 it's not a no-go regardless of VPN. Just keep in mind: don't access any internal systems over that public Wi-Fi unless VPN is active first, and since it's split-tunnel, general web browsing won't route through VPN but anything hitting *.northwire.internal resources must go through VPN no matter what network you're on. Also, your company laptop's disk encryption and endpoint security agent stay on automatically and can't be disabled, so that's not something you need to manage. If you happen to be on captive-portal Wi-Fi (common in some cafes) and see frequent VPN disconnects, that's a known issue per Section 4 \u2014 switching networks or using a wired connection if available can help.\",\"cited_chunk_ids\":[\"sec-9\",\"sec-4\"]}",
+    "output": "{\"answer\":\"Yes, working from the coffee shop is fine. Per Section 9, public/shared Wi-Fi (cafes, airports, hotels) is explicitly permitted for remote work as long as SecureLink VPN is connected — it's not a no-go regardless of VPN. Just keep in mind: don't access any internal systems over that public Wi-Fi unless VPN is active first, and since it's split-tunnel, general web browsing won't route through VPN but anything hitting *.northwire.internal resources must go through VPN no matter what network you're on. Also, your company laptop's disk encryption and endpoint security agent stay on automatically and can't be disabled, so that's not something you need to manage. If you happen to be on captive-portal Wi-Fi (common in some cafes) and see frequent VPN disconnects, that's a known issue per Section 4 — switching networks or using a wired connection if available can help.\",\"cited_chunk_ids\":[\"sec-9\",\"sec-4\"]}",
     "params": {
      "response_format": "DraftAnswer",
      "json_schema": {
@@ -180,10 +181,10 @@
      }
     }
    },
-   "ts": 1790696465.864057
+   "ts": 1790696465.892333
   },
   {
-   "run_id": "rec-a636370c",
+   "run_id": "rec-req-005",
    "node": "grounding_check",
    "event_type": "decision",
    "data": {
@@ -195,18 +196,521 @@
      "sec-4"
     ]
    },
-   "ts": 1790696465.866247
+   "ts": 1790696465.893582
   },
   {
-   "run_id": "rec-a636370c",
+   "run_id": "rec-req-005",
    "node": "respond",
    "event_type": "respond",
    "data": {
     "outcome": "answered",
-    "response": "Yes, working from the coffee shop is fine. Per Section 9, public/shared Wi-Fi (cafes, airports, hotels) is explicitly permitted for remote work as long as SecureLink VPN is connected \u2014 it's not a no-go regardless of VPN. Just keep in mind: don't access any internal systems over that public Wi-Fi unless VPN is active first, and since it's split-tunnel, general web browsing won't route through VPN but anything hitting *.northwire.internal resources must go through VPN no matter what network you're on. Also, your company laptop's disk encryption and endpoint security agent stay on automatically and can't be disabled, so that's not something you need to manage. If you happen to be on captive-portal Wi-Fi (common in some cafes) and see frequent VPN disconnects, that's a known issue per Section 4 \u2014 switching networks or using a wired connection if available can help."
+    "response": "Yes, working from the coffee shop is fine. Per Section 9, public/shared Wi-Fi (cafes, airports, hotels) is explicitly permitted for remote work as long as SecureLink VPN is connected — it's not a no-go regardless of VPN. Just keep in mind: don't access any internal systems over that public Wi-Fi unless VPN is active first, and since it's split-tunnel, general web browsing won't route through VPN but anything hitting *.northwire.internal resources must go through VPN no matter what network you're on. Also, your company laptop's disk encryption and endpoint security agent stay on automatically and can't be disabled, so that's not something you need to manage. If you happen to be on captive-portal Wi-Fi (common in some cafes) and see frequent VPN disconnects, that's a known issue per Section 4 — switching networks or using a wired connection if available can help."
    },
-   "ts": 1790696465.867211
+   "ts": 1790696465.894021
   }
  ],
- "final": "Yes, working from the coffee shop is fine. Per Section 9, public/shared Wi-Fi (cafes, airports, hotels) is explicitly permitted for remote work as long as SecureLink VPN is connected \u2014 it's not a no-go regardless of VPN. Just keep in mind: don't access any internal systems over that public Wi-Fi unless VPN is active first, and since it's split-tunnel, general web browsing won't route through VPN but anything hitting *.northwire.internal resources must go through VPN no matter what network you're on. Also, your company laptop's disk encryption and endpoint security agent stay on automatically and can't be disabled, so that's not something you need to manage. If you happen to be on captive-portal Wi-Fi (common in some cafes) and see frequent VPN disconnects, that's a known issue per Section 4 \u2014 switching networks or using a wired connection if available can help."
+ "final": "Yes, working from the coffee shop is fine. Per Section 9, public/shared Wi-Fi (cafes, airports, hotels) is explicitly permitted for remote work as long as SecureLink VPN is connected — it's not a no-go regardless of VPN. Just keep in mind: don't access any internal systems over that public Wi-Fi unless VPN is active first, and since it's split-tunnel, general web browsing won't route through VPN but anything hitting *.northwire.internal resources must go through VPN no matter what network you're on. Also, your company laptop's disk encryption and endpoint security agent stay on automatically and can't be disabled, so that's not something you need to manage. If you happen to be on captive-portal Wi-Fi (common in some cafes) and see frequent VPN disconnects, that's a known issue per Section 4 — switching networks or using a wired connection if available can help.",
+ "bench": {
+  "events": [
+   {
+    "v": "bench/0",
+    "run_id": "req-005",
+    "ts": 1790696457.701094,
+    "node": "_run",
+    "event_type": "run_started",
+    "content_mode": "redacted",
+    "data": {
+     "via": "agentlab",
+     "app": "slack-helpdesk",
+     "thread": "rec-req-005",
+     "map_hash": "5fb23d041f566d2d464b39f1e91d7c6ac4386b6edd3ec69563465f3fc3553c3f",
+     "input": {
+      "run_id": "rec-req-005",
+      "request_id": "req-005",
+      "requester_name": "Hana Kobayashi",
+      "requester_role": "viewer",
+      "requester_id": null,
+      "channel": "helpdesk-requests",
+      "thread_ts": "0",
+      "message": "gonna be working out of a coffee shop near my place for a few days while my home internet gets fixed - is that ok as long as i've got vpn on, or is public wifi a no-go regardless?",
+      "auto_approve": false
+     }
+    },
+    "seq": 0,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-005",
+    "ts": 1790696457.702145,
+    "node": "ingest",
+    "event_type": "step_started",
+    "content_mode": "redacted",
+    "data": {},
+    "step_id": "req-005:ingest:1",
+    "seq": 1,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-005",
+    "ts": 1790696457.702224,
+    "node": "ingest",
+    "event_type": "step_finished",
+    "content_mode": "redacted",
+    "data": {
+     "status": "ok",
+     "latency_ms": 0.1
+    },
+    "step_id": "req-005:ingest:1",
+    "seq": 2,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-005",
+    "ts": 1790696457.702412,
+    "node": "retrieve",
+    "event_type": "step_started",
+    "content_mode": "redacted",
+    "data": {},
+    "step_id": "req-005:retrieve:1",
+    "seq": 3,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-005",
+    "ts": 1790696457.711796,
+    "node": "retrieve",
+    "event_type": "retrieval",
+    "content_mode": "redacted",
+    "data": {
+     "hits": [
+      {
+       "id": "sec-9",
+       "title": "9. Remote Access Policy",
+       "score": 0.0333,
+       "text": "## 9. Remote Access Policy\nEmployees may work remotely and connect via VPN (Section 4) from any location with a stable internet connection, including home, co-working spaces, and public locations such as cafes or airports, provided SecureLink VPN is active before accessing any internal system.\n\n- Public/shared Wi-Fi (cafes, airports, hotels) is permitted for remote work as long as VPN is connected; do not access internal systems over public Wi-Fi without VPN active.\n- Split-tunnel VPN means general web browsing does not route through the VPN, but any connection to `*.northwire.internal` resources must go through VPN regardless of network.\n- Company laptops must have disk encryption and the standard endpoint security agent active at all times (verified automatically at VPN connect) — this cannot be disabled by the employee.\n- International travel: notify IT Operations at least 3 business days before departure if working from outside your home country, as some VPN gateways apply region-based access rules. This is an FYI/logging step, not an approval gate, for most destinations.",
+       "bm25": 19.63
+      },
+      {
+       "id": "sec-4",
+       "title": "4. VPN Access: Requesting, Approval, and Renewal",
+       "score": 0.0328,
+       "text": "## 4. VPN Access: Requesting, Approval, and Renewal\nRemote connections to internal systems require SecureLink VPN (VPN profile: NW-VPN). VPN certificates are issued per-device and expire automatically after 180 days.\n\n**Requesting VPN access (new):**\n1. Open a Waypoint ticket under \"VPN Access Request,\" specifying the device and the systems you need to reach.\n2. New-hire VPN provisioning is handled automatically as part of onboarding (Section 12) and does not require a separate request.\n3. Contractor VPN access requires a sponsoring manager listed on the ticket and is provisioned for the duration of the contract, not indefinitely.\n\n**Renewing an expiring or expired certificate:**\n1. You'll receive an automated reminder 14 days before expiration. If you missed it, open a Waypoint ticket under \"VPN Certificate Renewal.\"\n2. Renewal for an existing employee on an existing device is a same-day, low-risk action and does not require additional manager approval.\n3. If your certificate has already expired, you will be unable to connect until it is renewed — this is expected behavior, not a bug.\n\n**Common VPN connectivity issues (self-serve first):**\n- Frequent disconnects: switch from Wi-Fi to a wired connection if available, and confirm you are not on a captive-portal network (hotel/airport Wi-Fi) that blocks VPN traffic.\n- \"Certificate not trusted\" errors: usually means the certificate has expired or the device clock is more than 5 minutes out of sync — check the device clock first.\n- Slow throughput: split-tunnel mode is enabled by default; general internet traffic does not route through VPN and should not be affected by VPN speed.\n\nVPN access is a standard access-tier-agnostic grant (available to Viewer, Operator, and Admin accounts alike) but is still logged and time-bounded for contractors per the above.",
+       "bm25": 4.86
+      },
+      {
+       "id": "sec-14",
+       "title": "14. Printer and Network Troubleshooting",
+       "score": 0.0318,
+       "text": "## 14. Printer and Network Troubleshooting\n**Printer issues (self-serve first):**\n1. Check the printer's display panel for an error code (paper jam, low toner, offline) — most issues are visible there directly.\n2. Confirm you're connected to the correct office network (printers are not reachable over VPN from home).\n3. Try removing and reseating the paper tray for jams; do not force stuck paper — this can damage the feed mechanism.\n4. If the printer shows \"offline\" but has power, a reboot of the printer (power off 30 seconds, back on) resolves most connectivity issues.\n5. If none of the above resolves it, open a Waypoint \"Facilities/Hardware\" ticket noting the printer's location label (printed on a sticker on the unit) and the error shown.\n\n**Office network / Wi-Fi issues:**\n1. Confirm the issue is affecting more than one device — a single device's issue is usually local to that device, not the network.\n2. Try forgetting and rejoining the office Wi-Fi network.\n3. Wired connections are available at every desk if Wi-Fi is unreliable in a specific area — check the wall jack labeled to match your desk number.\n4. Persistent, multi-device outages in a specific area should be reported via Waypoint \"Network Issue\" with the office floor/area noted, so IT can check switch/access-point health for that zone.",
+       "bm25": 2.42
+      },
+      {
+       "id": "sec-12",
+       "title": "12. Onboarding and Offboarding Equipment & Access Procedure",
+       "score": 0.0311,
+       "text": "## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists — it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) — no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling.",
+       "bm25": 3.89
+      }
+     ],
+     "source": "handbook",
+     "query": "gonna be working out of a coffee shop near my place for a few days while my home internet gets fixed - is that ok as long as i've got vpn on, or is public wifi a no-go regardless?",
+     "corpus_hash": "89db310d699ea02340b4bc2aec4d63755e96bfba88af538f71c61681065192b4"
+    },
+    "step_id": "req-005:retrieve:1",
+    "seq": 4,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-005",
+    "ts": 1790696457.711838,
+    "node": "retrieve",
+    "event_type": "step_finished",
+    "content_mode": "redacted",
+    "data": {
+     "status": "ok",
+     "latency_ms": 9.4
+    },
+    "step_id": "req-005:retrieve:1",
+    "seq": 5,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-005",
+    "ts": 1790696457.712292,
+    "node": "classify",
+    "event_type": "step_started",
+    "content_mode": "redacted",
+    "data": {},
+    "step_id": "req-005:classify:1",
+    "seq": 6,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-005",
+    "ts": 1790696459.873687,
+    "node": "classify",
+    "event_type": "llm_call",
+    "content_mode": "redacted",
+    "data": {
+     "model": "claude-sonnet-5",
+     "input_tokens": 3129,
+     "output_tokens": 99,
+     "cache_read_tokens": 0,
+     "cache_write_tokens": 0,
+     "latency_ms": 2159.5,
+     "provider": "anthropic",
+     "messages": [
+      {
+       "role": "user",
+       "content": "You are the triage step of an internal IT/Ops helpdesk agent for Northwire Technologies. A message arrived in #helpdesk-requests. Decide whether it is:\n- 'answerable': fully answerable from the handbook excerpts below, no system change needed. This includes questions *about* a change -- whether it needs approval, how it's done, who handles it -- and changes the handbook says the employee makes themselves: the requester asked, so the reply is the answer, not a ticket.\n- 'needs_write': the requester wants IT/Ops to make a system change (a ticket created/assigned, an access grant, or anything else that changes state) -- even if policy will ultimately forbid it. Name what they're actually asking for; do not pre-judge policy here.\n- 'escalate': you cannot determine the right answer from the handbook, the request is ambiguous or out of scope, or it involves a security/identity matter serious enough that a human should look at it regardless of what the handbook says. A request whose system, dataset or scope can't be identified from the message itself -- known only by who showed it, where it came up, or 'same access as someone else' -- is ambiguous: the handbook says not to guess, so a human asks which one.\n\nFor 'needs_write', phrase the rationale as the decision itself (what the write is and why it needs a ticket/approval), not as a deferral -- the agent completes needs_write cases itself once approved; only 'escalate' hands off to a human.\n\nRequester role: viewer (one of viewer/operator/admin)\nMessage: gonna be working out of a coffee shop near my place for a few days while my home internet gets fixed - is that ok as long as i've got vpn on, or is public wifi a no-go regardless?\n\nRelevant handbook excerpts:\n[sec-9] ## 9. Remote Access Policy\nEmployees may work remotely and connect via VPN (Section 4) from any location with a stable internet connection, including home, co-working spaces, and public locations such as cafes or airports, provided SecureLink VPN is active before accessing any internal system.\n\n- Public/shared Wi-Fi (cafes, airports, hotels) is permitted for remote work as long as VPN is connected; do not access internal systems over public Wi-Fi without VPN active.\n- Split-tunnel VPN means general web browsing does not route through the VPN, but any connection to `*.northwire.internal` resources must go through VPN regardless of network.\n- Company laptops must have disk encryption and the standard endpoint security agent active at all times (verified automatically at VPN connect) — this cannot be disabled by the employee.\n- International travel: notify IT Operations at least 3 business days before departure if working from outside your home country, as some VPN gateways apply region-based access rules. This is an FYI/logging step, not an approval gate, for most destinations.\n\n[sec-4] ## 4. VPN Access: Requesting, Approval, and Renewal\nRemote connections to internal systems require SecureLink VPN (VPN profile: NW-VPN). VPN certificates are issued per-device and expire automatically after 180 days.\n\n**Requesting VPN access (new):**\n1. Open a Waypoint ticket under \"VPN Access Request,\" specifying the device and the systems you need to reach.\n2. New-hire VPN provisioning is handled automatically as part of onboarding (Section 12) and does not require a separate request.\n3. Contractor VPN access requires a sponsoring manager listed on the ticket and is provisioned for the duration of the contract, not indefinitely.\n\n**Renewing an expiring or expired certificate:**\n1. You'll receive an automated reminder 14 days before expiration. If you missed it, open a Waypoint ticket under \"VPN Certificate Renewal.\"\n2. Renewal for an existing employee on an existing device is a same-day, low-risk action and does not require additional manager approval.\n3. If your certificate has already expired, you will be unable to connect until it is renewed — this is expected behavior, not a bug.\n\n**Common VPN connectivity issues (self-serve first):**\n- Frequent disconnects: switch from Wi-Fi to a wired connection if available, and confirm you are not on a captive-portal network (hotel/airport Wi-Fi) that blocks VPN traffic.\n- \"Certificate not trusted\" errors: usually means the certificate has expired or the device clock is more than 5 minutes out of sync — check the device clock first.\n- Slow throughput: split-tunnel mode is enabled by default; general internet traffic does not route through VPN and should not be affected by VPN speed.\n\nVPN access is a standard access-tier-agnostic grant (available to Viewer, Operator, and Admin accounts alike) but is still logged and time-bounded for contractors per the above.\n\n[sec-14] ## 14. Printer and Network Troubleshooting\n**Printer issues (self-serve first):**\n1. Check the printer's display panel for an error code (paper jam, low toner, offline) — most issues are visible there directly.\n2. Confirm you're connected to the correct office network (printers are not reachable over VPN from home).\n3. Try removing and reseating the paper tray for jams; do not force stuck paper — this can damage the feed mechanism.\n4. If the printer shows \"offline\" but has power, a reboot of the printer (power off 30 seconds, back on) resolves most connectivity issues.\n5. If none of the above resolves it, open a Waypoint \"Facilities/Hardware\" ticket noting the printer's location label (printed on a sticker on the unit) and the error shown.\n\n**Office network / Wi-Fi issues:**\n1. Confirm the issue is affecting more than one device — a single device's issue is usually local to that device, not the network.\n2. Try forgetting and rejoining the office Wi-Fi network.\n3. Wired connections are available at every desk if Wi-Fi is unreliable in a specific area — check the wall jack labeled to match your desk number.\n4. Persistent, multi-device outages in a specific area should be reported via Waypoint \"Network Issue\" with the office floor/area noted, so IT can check switch/access-point health for that zone.\n\n[sec-12] ## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists — it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) — no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling.\n\nGive a rationale a human could audit this decision by, and a confidence 0-1."
+      }
+     ],
+     "output": "{\"category\":\"answerable\",\"rationale\":\"Section 9 explicitly permits working from public Wi-Fi (cafes, airports, hotels) as long as VPN is active before accessing internal systems - no ticket or approval needed, this is just informing the employee of existing policy.\",\"confidence\":0.97}",
+     "params": {
+      "json_schema": {
+       "title": "ClassifyResult",
+       "description": "",
+       "properties": {
+        "category": {
+         "enum": [
+          "answerable",
+          "needs_write",
+          "escalate"
+         ],
+         "type": "string"
+        },
+        "rationale": {
+         "description": "One or two sentences a human could audit this decision by. Phrase it as the decision itself, not a deferral -- e.g. for needs_write, 'This is a data-access request, which needs a Data Access Request ticket' (the agent will propose and, once approved, execute the write itself), not 'this should be routed to X rather than judged here' (that phrasing describes escalate, where a human takes over -- don't use it for needs_write, which the agent completes itself once approved).",
+         "type": "string"
+        },
+        "confidence": {
+         "maximum": 1.0,
+         "minimum": 0.0,
+         "type": "number"
+        }
+       },
+       "required": [
+        "category",
+        "rationale",
+        "confidence"
+       ],
+       "type": "object"
+      }
+     },
+     "cost_usd": 0.007248,
+     "cost_source": "estimated",
+     "cost_basis": "request-queue price table (app/config.py)"
+    },
+    "step_id": "req-005:classify:1",
+    "seq": 7,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-005",
+    "ts": 1790696459.876549,
+    "node": "classify",
+    "event_type": "decision",
+    "content_mode": "redacted",
+    "data": {
+     "rationale": "Section 9 explicitly permits working from public Wi-Fi (cafes, airports, hotels) as long as VPN is active before accessing internal systems - no ticket or approval needed, this is just informing the employee of existing policy.",
+     "confidence": 0.97,
+     "cited": [
+      "sec-9"
+     ]
+    },
+    "step_id": "req-005:classify:1",
+    "seq": 8,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-005",
+    "ts": 1790696459.876575,
+    "node": "classify",
+    "event_type": "check_result",
+    "content_mode": "redacted",
+    "data": {
+     "name": "confidence_check",
+     "passed": true,
+     "state": "passed",
+     "detail": "The AI was sure enough of its choice.",
+     "kind": "confidence",
+     "words": {
+      "passed": "Passed",
+      "failed": "Not sure enough: sent to a person"
+     }
+    },
+    "step_id": "req-005:classify:1",
+    "seq": 9,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-005",
+    "ts": 1790696459.876592,
+    "node": "classify",
+    "event_type": "triage",
+    "content_mode": "redacted",
+    "data": {
+     "picked": "answerable",
+     "routed": "answerable",
+     "unseen": []
+    },
+    "step_id": "req-005:classify:1",
+    "seq": 10,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-005",
+    "ts": 1790696459.876718,
+    "node": "classify",
+    "event_type": "step_finished",
+    "content_mode": "redacted",
+    "data": {
+     "status": "ok",
+     "latency_ms": 2164.4
+    },
+    "step_id": "req-005:classify:1",
+    "seq": 11,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-005",
+    "ts": 1790696459.877,
+    "node": "draft_answer",
+    "event_type": "step_started",
+    "content_mode": "redacted",
+    "data": {},
+    "step_id": "req-005:draft_answer:1",
+    "seq": 12,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-005",
+    "ts": 1790696465.890074,
+    "node": "draft_answer",
+    "event_type": "llm_call",
+    "content_mode": "redacted",
+    "data": {
+     "model": "claude-sonnet-5",
+     "input_tokens": 2511,
+     "output_tokens": 325,
+     "cache_read_tokens": 0,
+     "cache_write_tokens": 0,
+     "latency_ms": 6012.8,
+     "provider": "anthropic",
+     "messages": [
+      {
+       "role": "user",
+       "content": "Answer this Northwire Technologies helpdesk request using ONLY the handbook excerpts below. Cite the chunk id(s) you relied on. If the excerpts don't actually support a confident answer, say so plainly rather than filling the gap.\n\nMessage: gonna be working out of a coffee shop near my place for a few days while my home internet gets fixed - is that ok as long as i've got vpn on, or is public wifi a no-go regardless?\n\nHandbook excerpts:\n[sec-9] ## 9. Remote Access Policy\nEmployees may work remotely and connect via VPN (Section 4) from any location with a stable internet connection, including home, co-working spaces, and public locations such as cafes or airports, provided SecureLink VPN is active before accessing any internal system.\n\n- Public/shared Wi-Fi (cafes, airports, hotels) is permitted for remote work as long as VPN is connected; do not access internal systems over public Wi-Fi without VPN active.\n- Split-tunnel VPN means general web browsing does not route through the VPN, but any connection to `*.northwire.internal` resources must go through VPN regardless of network.\n- Company laptops must have disk encryption and the standard endpoint security agent active at all times (verified automatically at VPN connect) — this cannot be disabled by the employee.\n- International travel: notify IT Operations at least 3 business days before departure if working from outside your home country, as some VPN gateways apply region-based access rules. This is an FYI/logging step, not an approval gate, for most destinations.\n\n[sec-4] ## 4. VPN Access: Requesting, Approval, and Renewal\nRemote connections to internal systems require SecureLink VPN (VPN profile: NW-VPN). VPN certificates are issued per-device and expire automatically after 180 days.\n\n**Requesting VPN access (new):**\n1. Open a Waypoint ticket under \"VPN Access Request,\" specifying the device and the systems you need to reach.\n2. New-hire VPN provisioning is handled automatically as part of onboarding (Section 12) and does not require a separate request.\n3. Contractor VPN access requires a sponsoring manager listed on the ticket and is provisioned for the duration of the contract, not indefinitely.\n\n**Renewing an expiring or expired certificate:**\n1. You'll receive an automated reminder 14 days before expiration. If you missed it, open a Waypoint ticket under \"VPN Certificate Renewal.\"\n2. Renewal for an existing employee on an existing device is a same-day, low-risk action and does not require additional manager approval.\n3. If your certificate has already expired, you will be unable to connect until it is renewed — this is expected behavior, not a bug.\n\n**Common VPN connectivity issues (self-serve first):**\n- Frequent disconnects: switch from Wi-Fi to a wired connection if available, and confirm you are not on a captive-portal network (hotel/airport Wi-Fi) that blocks VPN traffic.\n- \"Certificate not trusted\" errors: usually means the certificate has expired or the device clock is more than 5 minutes out of sync — check the device clock first.\n- Slow throughput: split-tunnel mode is enabled by default; general internet traffic does not route through VPN and should not be affected by VPN speed.\n\nVPN access is a standard access-tier-agnostic grant (available to Viewer, Operator, and Admin accounts alike) but is still logged and time-bounded for contractors per the above.\n\n[sec-14] ## 14. Printer and Network Troubleshooting\n**Printer issues (self-serve first):**\n1. Check the printer's display panel for an error code (paper jam, low toner, offline) — most issues are visible there directly.\n2. Confirm you're connected to the correct office network (printers are not reachable over VPN from home).\n3. Try removing and reseating the paper tray for jams; do not force stuck paper — this can damage the feed mechanism.\n4. If the printer shows \"offline\" but has power, a reboot of the printer (power off 30 seconds, back on) resolves most connectivity issues.\n5. If none of the above resolves it, open a Waypoint \"Facilities/Hardware\" ticket noting the printer's location label (printed on a sticker on the unit) and the error shown.\n\n**Office network / Wi-Fi issues:**\n1. Confirm the issue is affecting more than one device — a single device's issue is usually local to that device, not the network.\n2. Try forgetting and rejoining the office Wi-Fi network.\n3. Wired connections are available at every desk if Wi-Fi is unreliable in a specific area — check the wall jack labeled to match your desk number.\n4. Persistent, multi-device outages in a specific area should be reported via Waypoint \"Network Issue\" with the office floor/area noted, so IT can check switch/access-point health for that zone.\n\n[sec-12] ## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists — it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) — no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling."
+      }
+     ],
+     "output": "{\"answer\":\"Yes, working from the coffee shop is fine. Per Section 9, public/shared Wi-Fi (cafes, airports, hotels) is explicitly permitted for remote work as long as SecureLink VPN is connected — it's not a no-go regardless of VPN. Just keep in mind: don't access any internal systems over that public Wi-Fi unless VPN is active first, and since it's split-tunnel, general web browsing won't route through VPN but anything hitting *.northwire.internal resources must go through VPN no matter what network you're on. Also, your company laptop's disk encryption and endpoint security agent stay on automatically and can't be disabled, so that's not something you need to manage. If you happen to be on captive-portal Wi-Fi (common in some cafes) and see frequent VPN disconnects, that's a known issue per Section 4 — switching networks or using a wired connection if available can help.\",\"cited_chunk_ids\":[\"sec-9\",\"sec-4\"]}",
+     "params": {
+      "json_schema": {
+       "title": "DraftAnswer",
+       "description": "",
+       "properties": {
+        "answer": {
+         "type": "string"
+        },
+        "cited_chunk_ids": {
+         "description": "Handbook chunk ids (e.g. 'sec-3') this answer relies on.",
+         "items": {
+          "type": "string"
+         },
+         "type": "array"
+        }
+       },
+       "required": [
+        "answer",
+        "cited_chunk_ids"
+       ],
+       "type": "object"
+      }
+     },
+     "cost_usd": 0.008272,
+     "cost_source": "estimated",
+     "cost_basis": "request-queue price table (app/config.py)"
+    },
+    "step_id": "req-005:draft_answer:1",
+    "seq": 13,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-005",
+    "ts": 1790696465.892387,
+    "node": "draft_answer",
+    "event_type": "step_finished",
+    "content_mode": "redacted",
+    "data": {
+     "status": "ok",
+     "latency_ms": 6015.4
+    },
+    "step_id": "req-005:draft_answer:1",
+    "seq": 14,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-005",
+    "ts": 1790696465.892848,
+    "node": "grounding_check",
+    "event_type": "step_started",
+    "content_mode": "redacted",
+    "data": {},
+    "step_id": "req-005:grounding_check:1",
+    "seq": 15,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-005",
+    "ts": 1790696465.893616,
+    "node": "grounding_check",
+    "event_type": "check_result",
+    "content_mode": "redacted",
+    "data": {
+     "name": "grounded",
+     "passed": true,
+     "state": "passed",
+     "detail": "The answer's wording matches the handbook sections it cites: section 9 and section 4.",
+     "kind": "grounding",
+     "evidence": [
+      "sec-9",
+      "sec-4"
+     ]
+    },
+    "step_id": "req-005:grounding_check:1",
+    "seq": 16,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-005",
+    "ts": 1790696465.893705,
+    "node": "grounding_check",
+    "event_type": "step_finished",
+    "content_mode": "redacted",
+    "data": {
+     "status": "ok",
+     "latency_ms": 0.9
+    },
+    "step_id": "req-005:grounding_check:1",
+    "seq": 17,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-005",
+    "ts": 1790696465.893904,
+    "node": "respond",
+    "event_type": "step_started",
+    "content_mode": "redacted",
+    "data": {},
+    "step_id": "req-005:respond:1",
+    "seq": 18,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-005",
+    "ts": 1790696465.894043,
+    "node": "respond",
+    "event_type": "step_finished",
+    "content_mode": "redacted",
+    "data": {
+     "status": "ok",
+     "latency_ms": 0.1
+    },
+    "step_id": "req-005:respond:1",
+    "seq": 19,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-005",
+    "ts": 1790696465.895544,
+    "node": "_run",
+    "event_type": "run_finished",
+    "content_mode": "redacted",
+    "data": {
+     "status": "ok",
+     "latency_ms": 8194.4,
+     "outcome": "answered",
+     "output": {
+      "run_id": "rec-req-005",
+      "request_id": "req-005",
+      "requester_name": "Hana Kobayashi",
+      "requester_role": "viewer",
+      "requester_id": null,
+      "channel": "helpdesk-requests",
+      "thread_ts": "0",
+      "message": "gonna be working out of a coffee shop near my place for a few days while my home internet gets fixed - is that ok as long as i've got vpn on, or is public wifi a no-go regardless?",
+      "auto_approve": false,
+      "retrieved": [
+       {
+        "chunk_id": "sec-9",
+        "section": "9. Remote Access Policy",
+        "text": "## 9. Remote Access Policy\nEmployees may work remotely and connect via VPN (Section 4) from any location with a stable internet connection, including home, co-working spaces, and public locations such as cafes or airports, provided SecureLink VPN is active before accessing any internal system.\n\n- Public/shared Wi-Fi (cafes, airports, hotels) is permitted for remote work as long as VPN is connected; do not access internal systems over public Wi-Fi without VPN active.\n- Split-tunnel VPN means general web browsing does not route through the VPN, but any connection to `*.northwire.internal` resources must go through VPN regardless of network.\n- Company laptops must have disk encryption and the standard endpoint security agent active at all times (verified automatically at VPN connect) — this cannot be disabled by the employee.\n- International travel: notify IT Operations at least 3 business days before departure if working from outside your home country, as some VPN gateways apply region-based access rules. This is an FYI/logging step, not an approval gate, for most destinations.",
+        "score": 0.0333,
+        "bm25": 19.63
+       },
+       {
+        "chunk_id": "sec-4",
+        "section": "4. VPN Access: Requesting, Approval, and Renewal",
+        "text": "## 4. VPN Access: Requesting, Approval, and Renewal\nRemote connections to internal systems require SecureLink VPN (VPN profile: NW-VPN). VPN certificates are issued per-device and expire automatically after 180 days.\n\n**Requesting VPN access (new):**\n1. Open a Waypoint ticket under \"VPN Access Request,\" specifying the device and the systems you need to reach.\n2. New-hire VPN provisioning is handled automatically as part of onboarding (Section 12) and does not require a separate request.\n3. Contractor VPN access requires a sponsoring manager listed on the ticket and is provisioned for the duration of the contract, not indefinitely.\n\n**Renewing an expiring or expired certificate:**\n1. You'll receive an automated reminder 14 days before expiration. If you missed it, open a Waypoint ticket under \"VPN Certificate Renewal.\"\n2. Renewal for an existing employee on an existing device is a same-day, low-risk action and does not require additional manager approval.\n3. If your certificate has already expired, you will be unable to connect until it is renewed — this is expected behavior, not a bug.\n\n**Common VPN connectivity issues (self-serve first):**\n- Frequent disconnects: switch from Wi-Fi to a wired connection if available, and confirm you are not on a captive-portal network (hotel/airport Wi-Fi) that blocks VPN traffic.\n- \"Certificate not trusted\" errors: usually means the certificate has expired or the device clock is more than 5 minutes out of sync — check the device clock first.\n- Slow throughput: split-tunnel mode is enabled by default; general internet traffic does not route through VPN and should not be affected by VPN speed.\n\nVPN access is a standard access-tier-agnostic grant (available to Viewer, Operator, and Admin accounts alike) but is still logged and time-bounded for contractors per the above.",
+        "score": 0.0328,
+        "bm25": 4.86
+       },
+       {
+        "chunk_id": "sec-14",
+        "section": "14. Printer and Network Troubleshooting",
+        "text": "## 14. Printer and Network Troubleshooting\n**Printer issues (self-serve first):**\n1. Check the printer's display panel for an error code (paper jam, low toner, offline) — most issues are visible there directly.\n2. Confirm you're connected to the correct office network (printers are not reachable over VPN from home).\n3. Try removing and reseating the paper tray for jams; do not force stuck paper — this can damage the feed mechanism.\n4. If the printer shows \"offline\" but has power, a reboot of the printer (power off 30 seconds, back on) resolves most connectivity issues.\n5. If none of the above resolves it, open a Waypoint \"Facilities/Hardware\" ticket noting the printer's location label (printed on a sticker on the unit) and the error shown.\n\n**Office network / Wi-Fi issues:**\n1. Confirm the issue is affecting more than one device — a single device's issue is usually local to that device, not the network.\n2. Try forgetting and rejoining the office Wi-Fi network.\n3. Wired connections are available at every desk if Wi-Fi is unreliable in a specific area — check the wall jack labeled to match your desk number.\n4. Persistent, multi-device outages in a specific area should be reported via Waypoint \"Network Issue\" with the office floor/area noted, so IT can check switch/access-point health for that zone.",
+        "score": 0.0318,
+        "bm25": 2.42
+       },
+       {
+        "chunk_id": "sec-12",
+        "section": "12. Onboarding and Offboarding Equipment & Access Procedure",
+        "text": "## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists — it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) — no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling.",
+        "score": 0.0311,
+        "bm25": 3.89
+       }
+      ],
+      "category": "answerable",
+      "original_category": "answerable",
+      "rationale": "Section 9 explicitly permits working from public Wi-Fi (cafes, airports, hotels) as long as VPN is active before accessing internal systems - no ticket or approval needed, this is just informing the employee of existing policy.",
+      "confidence": 0.97,
+      "rationale_cites_unretrieved": [],
+      "answer": "Yes, working from the coffee shop is fine. Per Section 9, public/shared Wi-Fi (cafes, airports, hotels) is explicitly permitted for remote work as long as SecureLink VPN is connected — it's not a no-go regardless of VPN. Just keep in mind: don't access any internal systems over that public Wi-Fi unless VPN is active first, and since it's split-tunnel, general web browsing won't route through VPN but anything hitting *.northwire.internal resources must go through VPN no matter what network you're on. Also, your company laptop's disk encryption and endpoint security agent stay on automatically and can't be disabled, so that's not something you need to manage. If you happen to be on captive-portal Wi-Fi (common in some cafes) and see frequent VPN disconnects, that's a known issue per Section 4 — switching networks or using a wired connection if available can help.",
+      "cited_chunk_ids": [
+       "sec-9",
+       "sec-4"
+      ],
+      "grounded": true,
+      "grounding_reason": "ok",
+      "handoff_reason": null,
+      "final_outcome": "answered",
+      "final_response": "Yes, working from the coffee shop is fine. Per Section 9, public/shared Wi-Fi (cafes, airports, hotels) is explicitly permitted for remote work as long as SecureLink VPN is connected — it's not a no-go regardless of VPN. Just keep in mind: don't access any internal systems over that public Wi-Fi unless VPN is active first, and since it's split-tunnel, general web browsing won't route through VPN but anything hitting *.northwire.internal resources must go through VPN no matter what network you're on. Also, your company laptop's disk encryption and endpoint security agent stay on automatically and can't be disabled, so that's not something you need to manage. If you happen to be on captive-portal Wi-Fi (common in some cafes) and see frequent VPN disconnects, that's a known issue per Section 4 — switching networks or using a wired connection if available can help."
+     },
+     "baseline": "answer: ~3–5 min · ticket: ~10–15 min · hand-off: human judgment required"
+    },
+    "seq": 20,
+    "session_id": "recording"
+   }
+  ]
+ }
 }

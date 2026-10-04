@@ -83,4 +83,14 @@ APPROVER_ROLES = frozenset({"admin"})
 
 # Never permitted, regardless of requester role or model output.
 # The Decawork lesson, encoded in code rather than left to the model.
-FORBIDDEN_ACTION_TYPES = frozenset({"disable_mfa", "reset_mfa", "share_credentials"})
+# A tuple, not a set: its order is the order Agent Lab lists them (permissions.NEVER).
+FORBIDDEN_ACTION_TYPES = ("disable_mfa", "reset_mfa", "share_credentials")
+
+# The team's estimate of each kind of request done by hand (not a measurement), by category.
+# The web UI shows it per scenario; Agent Lab shows it as the app's baseline (app/agent_lab.py).
+MANUAL_ESTIMATE = {
+    "answerable": "manual: ~3–5 min, self-service or a quick lookup",
+    "needs_write": "manual: ~10–15 min, handbook + Waypoint ticket + wait for provisioning",
+    "escalate": "manual: human judgment required, no fixed time",
+}
+

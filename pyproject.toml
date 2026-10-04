@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "An IT/Ops helpdesk agent in Slack: LangGraph + Claude, a code permission gate, digest-bound human approval, and a live trace view."
 requires-python = ">=3.12"
 dependencies = [
+    "agentlab[langgraph]",
     "anthropic>=1.8.0",
     "fastapi>=0.141.1",
     "fastembed>=0.8.1",
@@ -25,6 +26,11 @@ dependencies = [
 dev = [
     "pytest>=9.1.1",
 ]
+
+[tool.uv.sources]
+# Agent Lab's library (not on PyPI yet), from a clone of https://github.com/trentmcnitt/agent-lab
+# beside this repo: git clone https://github.com/trentmcnitt/agent-lab.git ../agent-lab
+agentlab = { path = "../agent-lab/sdk/python", editable = true }
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

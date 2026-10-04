@@ -1,0 +1,20 @@
+{
+  "fingerprints": {
+    "node:approval_gate": "0c0cb9f2ee20947979665866c3775ce44f9cf8b369328422a10bf14ef9cfdc14",
+    "node:classify": "1032acaa8ab1e6ebe732739f3c0cb429d794078dd145d171ab5a01d9d8b7f337",
+    "node:draft_answer": "caa7306f5cd7242a9aa6cd7e3137c0f90ad08a4faa6bdc33fb3e0c17fbd288b6",
+    "node:execute_action": "965fd5b71700e9194d0646b161d5ffb2a01965330a1b28fb7e5bedc8457dec89",
+    "node:grounding_check": "4fe2e9c1e9db0db845319348f75024854e16e75b1b55b32a651968d83b14354a",
+    "node:handoff": "96824ef63a62bd0c0a9af20612a2cae3886dc6f1d21a90f8bedc0e5514d37a5c",
+    "node:ingest": "d31ff05c877642a6bb54925ee6aa2b15df85c42a8413123a6fe9489fde750128",
+    "node:permission_check": "cd7315b75902b5e68b4baa66a379b31e8ebcdf9e91785da4e39ec606d6bc6177",
+    "node:propose_action": "494993738b28b6ca1d6ca12046a87fd2ffef6d5bd85a2941c677c09532f4fffe",
+    "node:respond": "9b89bbb77dd17e07340a7d03fa81a63edf004bdbbc5060eb6ccafa42f73da9bf",
+    "node:retrieve": "edc8327db9e9a83ef31ffb5d73eace44838f5d1fef59b95fcd5ef07e987c732c",
+    "paths:approval_gate": "eadaefec7d6bf3e67eabd5ba14aa7f41e9f180b4eecb8e0f24cf881342a2b612",
+    "paths:classify": "eccad4fab4a4b12d524774d21cf820de2d2abfa798c0857e5cf8fed01b9f8812",
+    "paths:grounding_check": "82f4ec7fe5b3e574cd432d67967e083c57abdc3d40528cf4c3d7f5ae2b089c7a",
+    "paths:permission_check": "b2265452d1d30241e75c708a26621ecb1f3c35bb53102eea766304fbb8a61ac6"
+  },
+  "v": "agentlab-lock/0"
+}

@@ -13,7 +13,13 @@ import time
 import uuid
 from pathlib import Path
 
+import agentlab as lab
+
 from . import config
+
+# The one change the agent can make in the world, for Agent Lab's "what it can do" list.
+CREATE_TICKET = lab.Action("create_ticket", "Open an IT ticket",
+                           "Files a ticket on the IT team's board, only after a person approves that exact ticket.")
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS tickets (

@@ -1,0 +1,52 @@
+{
+ "v": "agentlab-cassette/0",
+ "scenario": "req-009",
+ "title": "My VPN keeps dropping, what should I check?",
+ "group": "It answers",
+ "recorded": "09-29-26",
+ "t0": 1790696465.877116,
+ "latency_basis": "the gap before each call's llm_call event in the original recording",
+ "input": {
+  "run_id": "rec-req-009",
+  "request_id": "req-009",
+  "requester_name": "Ruth Feldman",
+  "requester_role": "viewer",
+  "requester_id": null,
+  "channel": "helpdesk-requests",
+  "thread_ts": "0",
+  "message": "vpn has been dropping every 10-15 min all morning, i'm on wifi at home. anything obvious i should check before this turns into a ticket",
+  "auto_approve": false
+ },
+ "run_id": "rec-req-009",
+ "resumes": null,
+ "calls": [
+  {
+   "node": "classify",
+   "key": "2f4ec737730d11ecf7463bc6ce67abde2b1d3c0412deb72a908a2b5fc1ef423c",
+   "model": "claude-sonnet-5",
+   "output": "{\"category\":\"answerable\",\"rationale\":\"The handbook's self-serve VPN troubleshooting steps directly address frequent disconnects on Wi-Fi: switch to a wired connection and confirm the network isn't a captive-portal type that blocks VPN traffic. No ticket is needed yet since the requester is asking what to check before filing one.\",\"confidence\":0.9}",
+   "usage": {
+    "input_tokens": 2991,
+    "output_tokens": 123,
+    "cache_read": 0,
+    "cache_write": 0
+   },
+   "latency_ms": 2095.6,
+   "finish_reason": null
+  },
+  {
+   "node": "draft_answer",
+   "key": "eae2c9e3574bac38e00989d9e375423fcce118fbc443f0ff3b1c66ca7a396aaa",
+   "model": "claude-sonnet-5",
+   "output": "{\"answer\":\"Before filing a ticket, try the self-serve steps for frequent VPN disconnects: switch from Wi-Fi to a wired connection if you have one available at home, and confirm your home network isn't a captive-portal-style network (this mainly applies to hotel/airport Wi-Fi blocking VPN traffic, so likely not the cause on home Wi-Fi, but worth ruling out). If disconnects come with a 'certificate not trusted' error, check whether your device clock is more than 5 minutes out of sync, since that's a common cause alongside an expired certificate. If switching to wired and confirming these don't resolve it, go ahead and open a ticket — the handbook's self-serve list for this issue doesn't cover cases where wired isn't an option or the above checks don't help, so I can't say confidently what else to try beyond that.\",\"cited_chunk_ids\":[\"sec-4\"]}",
+   "usage": {
+    "input_tokens": 2373,
+    "output_tokens": 298,
+    "cache_read": 0,
+    "cache_write": 0
+   },
+   "latency_ms": 5008.8,
+   "finish_reason": null
+  }
+ ]
+}

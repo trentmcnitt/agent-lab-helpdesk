@@ -18,7 +18,8 @@ This is v0 of Agent Lab, a portfolio piece built to answer one question: *what d
   - the forbidden-intent screen is a keyword regex;
   - no human-labeled eval yet;
   - access requests become tickets, not real grants.
-- **Run it:** `uv sync && bash scripts/ci.sh` runs the tests with no API key. Then `ANTHROPIC_API_KEY=... uv run uvicorn server:app --port 8731` starts the web view ([setup](SETUP.md)).
+- **Run it:** clone [Agent Lab](https://github.com/trentmcnitt/agent-lab) beside this repo first (its `agentlab` library isn't on PyPI yet; [setup](SETUP.md#install)), then `uv sync && bash scripts/ci.sh` runs the tests with no API key. Then `ANTHROPIC_API_KEY=... uv run uvicorn server:app --port 8731` starts the web view ([setup](SETUP.md)).
+- **Watch it on Agent Lab:** start the bench from its checkout (`uv run uvicorn bench.server:app --port 8790`); the servers and the CLI send every run to it with no settings (`AGENT_LAB_URL` only when it runs elsewhere). The map, words, sources and checks all come from the code ([how](app/bench/README.md)); the static export plays each recording's own bench events in the bench's side-by-side shell.
 - **How it flows:** [diagram](#how-a-request-flows).
 
 ![Peek-behind-the-curtain view](docs/screenshots/peek-view.jpg)

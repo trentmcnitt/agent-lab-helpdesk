@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import re
 
+import agentlab as lab
+
 from . import config
 
 _MFA = r"(?:mfa|2fa|two[- ]?factor|multi[- ]?factor|authenticator)"
@@ -18,6 +20,15 @@ FORBIDDEN_INTENTS = [
     (re.compile(rf"\b{_WEAKEN}\w*\b[^.\n]{{0,40}}\b{_MFA}\b|\b{_MFA}\b[^.\n]{{0,40}}\b{_WEAKEN}", re.I), "disable_mfa"),
     (re.compile(rf"\b(?:share|send|give|provide|tell|disclose)\w*\b[^.\n]{{0,40}}\b{_SECRET}s?\b", re.I), "share_credentials"),
 ]
+
+
+# What the app can never do, in plain words for Agent Lab: one line per forbidden type, here beside
+# the rules that enforce them. A type added to config without words here fails lab.verify (R4).
+NEVER = lab.never(config.FORBIDDEN_ACTION_TYPES, words={
+    "disable_mfa": "Turn off two-factor sign-in",
+    "reset_mfa": "Reset two-factor sign-in",
+    "share_credentials": "Share passwords or other credentials",
+})
 
 
 def forbidden_intent(text: str) -> str | None:

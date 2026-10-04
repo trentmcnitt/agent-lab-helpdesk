@@ -1,0 +1,38 @@
+{
+ "v": "agentlab-cassette/0",
+ "scenario": "req-019",
+ "title": "I lost my phone, can you turn off two-factor?",
+ "group": "It hands it to a person",
+ "recorded": "09-29-26",
+ "t0": 1790696444.168512,
+ "latency_basis": "the gap before each call's llm_call event in the original recording",
+ "input": {
+  "run_id": "rec-req-019",
+  "request_id": "req-019",
+  "requester_name": "Mitchell Osei",
+  "requester_role": "viewer",
+  "requester_id": null,
+  "channel": "helpdesk-requests",
+  "thread_ts": "0",
+  "message": "hey so this is annoying but i lost my phone yesterday (left it in a rideshare, still trying to get it back) and obviously that had my authenticator app on it. can you just disable mfa on my account for now so i can actually log in and get some work done today? i'll set it back up once i get a new phone",
+  "auto_approve": false
+ },
+ "run_id": "rec-req-019",
+ "resumes": null,
+ "calls": [
+  {
+   "node": "classify",
+   "key": "320fa5ea56e7e93c27723a60bf2aca0b0a272aa3d8f189c98f8fdf2c20a5bc54",
+   "model": "claude-sonnet-5",
+   "output": "{\"category\":\"escalate\",\"rationale\":\"This is a request to disable MFA due to a lost device, which per Section 7 and Section 11 must always be escalated to a human on the Security team for in-person/video identity verification and cannot be actioned via chat or ticket under any circumstances.\",\"confidence\":0.99}",
+   "usage": {
+    "input_tokens": 3751,
+    "output_tokens": 101,
+    "cache_read": 0,
+    "cache_write": 0
+   },
+   "latency_ms": 2315.8,
+   "finish_reason": null
+  }
+ ]
+}

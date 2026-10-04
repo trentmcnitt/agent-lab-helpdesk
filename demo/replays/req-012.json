@@ -2,21 +2,22 @@
  "scenario": "req-012",
  "requester_name": "Greg Talvert",
  "message": "can i get a jetbrains license? i'm doing a lot more backend work lately and vs code just isn't cutting it for the debugging i need to do",
- "recorded_at": "2026-09-29T10:40:26",
+ "recorded_at": "2026-09-29T10:40:18",
  "model": "claude-sonnet-5",
  "paused": true,
+ "regen_id": "fa8bb8a172d3c078",
  "pre": [
   {
-   "run_id": "rec-64f5e059",
+   "run_id": "rec-req-012",
    "node": "ingest",
    "event_type": "node_enter",
    "data": {
     "message": "can i get a jetbrains license? i'm doing a lot more backend work lately and vs code just isn't cutting it for the debugging i need to do"
    },
-   "ts": 1790696418.441806
+   "ts": 1790696418.44255
   },
   {
-   "run_id": "rec-64f5e059",
+   "run_id": "rec-req-012",
    "node": "retrieve",
    "event_type": "retrieval_hits",
    "data": {
@@ -24,37 +25,37 @@
      {
       "chunk_id": "sec-5",
       "section": "5. Software License Requests",
-      "text": "## 5. Software License Requests\nStandard software (listed in the Waypoint software catalog \u2014 includes common design, development, and productivity tools) can be requested by any employee through a Waypoint \"Software License Request\" ticket, specifying the tool and a brief business justification.\n\n- Requests for tools already in the catalog with an available seat are typically approved same-day by the requester's manager (auto-routed) and provisioned by IT within 1 business day, but still require a logged ticket \u2014 provisioning is not automatic without one.\n- Requests for tools not in the catalog, or requests that would require a new vendor contract, are routed to the IT Operations lead for review and may take 1-2 weeks.\n- License requests do not require Operator or Admin tier \u2014 any Viewer may request standard software for their own use.\n- IT does not purchase or provision software outside of the Waypoint catalog process, including personal reimbursement for software bought directly by an employee, except as described in Section 15.",
+      "text": "## 5. Software License Requests\nStandard software (listed in the Waypoint software catalog — includes common design, development, and productivity tools) can be requested by any employee through a Waypoint \"Software License Request\" ticket, specifying the tool and a brief business justification.\n\n- Requests for tools already in the catalog with an available seat are typically approved same-day by the requester's manager (auto-routed) and provisioned by IT within 1 business day, but still require a logged ticket — provisioning is not automatic without one.\n- Requests for tools not in the catalog, or requests that would require a new vendor contract, are routed to the IT Operations lead for review and may take 1-2 weeks.\n- License requests do not require Operator or Admin tier — any Viewer may request standard software for their own use.\n- IT does not purchase or provision software outside of the Waypoint catalog process, including personal reimbursement for software bought directly by an employee, except as described in Section 15.",
       "score": 0.0328,
       "bm25": 3.21
      },
      {
       "chunk_id": "sec-15",
       "section": "15. Expense and Reimbursement for Hardware Purchases",
-      "text": "## 15. Expense and Reimbursement for Hardware Purchases\nStandard equipment should be requested through IT (Section 6) rather than purchased personally, since IT-issued equipment is asset-tagged, covered under warranty/insurance, and pre-configured with required security software.\n\n**When personal reimbursement is allowed:**\n- Home-office ergonomic equipment (a second monitor, keyboard, chair, desk accessory) up to $300/year, submitted through the standard Expense system (not Waypoint) with a receipt, and does not require pre-approval below that threshold.\n- Emergency hardware replacement while traveling, where waiting for IT-issued equipment isn't practical \u2014 requires a brief note to your manager but can be purchased first and expensed after, up to $500, with a receipt.\n- Above these thresholds, or for anything that isn't ergonomic/replacement in nature (e.g., a personal software subscription, a phone upgrade), submit a Waypoint Hardware Request (Section 6) or Software License Request (Section 5) first rather than purchasing personally \u2014 IT cannot guarantee reimbursement for out-of-process purchases above the thresholds above.\n\nReimbursement itself is processed through the Expense system, not through IT/Ops \u2014 the helpdesk can point an employee to the right process and threshold but does not process reimbursements directly.",
+      "text": "## 15. Expense and Reimbursement for Hardware Purchases\nStandard equipment should be requested through IT (Section 6) rather than purchased personally, since IT-issued equipment is asset-tagged, covered under warranty/insurance, and pre-configured with required security software.\n\n**When personal reimbursement is allowed:**\n- Home-office ergonomic equipment (a second monitor, keyboard, chair, desk accessory) up to $300/year, submitted through the standard Expense system (not Waypoint) with a receipt, and does not require pre-approval below that threshold.\n- Emergency hardware replacement while traveling, where waiting for IT-issued equipment isn't practical — requires a brief note to your manager but can be purchased first and expensed after, up to $500, with a receipt.\n- Above these thresholds, or for anything that isn't ergonomic/replacement in nature (e.g., a personal software subscription, a phone upgrade), submit a Waypoint Hardware Request (Section 6) or Software License Request (Section 5) first rather than purchasing personally — IT cannot guarantee reimbursement for out-of-process purchases above the thresholds above.\n\nReimbursement itself is processed through the Expense system, not through IT/Ops — the helpdesk can point an employee to the right process and threshold but does not process reimbursements directly.",
       "score": 0.0323,
       "bm25": 6.52
      },
      {
       "chunk_id": "sec-12",
       "section": "12. Onboarding and Offboarding Equipment & Access Procedure",
-      "text": "## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists \u2014 it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) \u2014 no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling.",
+      "text": "## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists — it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) — no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling.",
       "score": 0.0318,
       "bm25": 2.28
      },
      {
       "chunk_id": "sec-6",
       "section": "6. Hardware and Equipment Requests",
-      "text": "## 6. Hardware and Equipment Requests\nStandard hardware for a new hire (Section 12) is bundled into onboarding automatically. This section covers hardware requests outside of onboarding: replacements, upgrades, peripherals, and equipment for an existing employee or a contractor whose onboarding ticket hasn't been filed yet.\n\n**Requesting hardware:**\n1. Open a Waypoint \"Hardware Request\" ticket specifying the item, quantity, and business reason (e.g., replacement for a failed device, a second monitor, a peripheral needed for a new role).\n2. Standard catalog items (listed in the Waypoint hardware catalog: standard laptop models, monitors, docks, keyboards/mice, headsets) are typically approved by the requester's manager same-day and fulfilled within 3-5 business days.\n3. Non-catalog or higher-cost items (specialized equipment, non-standard laptop configurations) require IT Operations lead review in addition to manager approval and may take longer.\n4. For a contractor who hasn't had an onboarding ticket filed yet, the sponsoring manager should be named on the Hardware Request ticket so IT can provision equipment ahead of or alongside the formal onboarding record.\n\n**Broken or malfunctioning hardware:**\n1. For a broken company-issued device, open a Waypoint \"Hardware Request\" ticket tagged as a repair/replacement, describing the symptom.\n2. Loaner equipment is available for pickup at the IT desk while a repair or replacement is processed, for employees at any access tier.\n3. This handbook does not diagnose specific hardware failures (e.g., a laptop that won't power on, a cracked screen) beyond basic troubleshooting already covered for printers and network issues (Section 14) \u2014 open a ticket rather than attempting a repair yourself.\n\nHardware requests are independent of a person's Viewer/Operator/Admin access tier \u2014 any employee can request standard hardware for their own use through the process above.",
+      "text": "## 6. Hardware and Equipment Requests\nStandard hardware for a new hire (Section 12) is bundled into onboarding automatically. This section covers hardware requests outside of onboarding: replacements, upgrades, peripherals, and equipment for an existing employee or a contractor whose onboarding ticket hasn't been filed yet.\n\n**Requesting hardware:**\n1. Open a Waypoint \"Hardware Request\" ticket specifying the item, quantity, and business reason (e.g., replacement for a failed device, a second monitor, a peripheral needed for a new role).\n2. Standard catalog items (listed in the Waypoint hardware catalog: standard laptop models, monitors, docks, keyboards/mice, headsets) are typically approved by the requester's manager same-day and fulfilled within 3-5 business days.\n3. Non-catalog or higher-cost items (specialized equipment, non-standard laptop configurations) require IT Operations lead review in addition to manager approval and may take longer.\n4. For a contractor who hasn't had an onboarding ticket filed yet, the sponsoring manager should be named on the Hardware Request ticket so IT can provision equipment ahead of or alongside the formal onboarding record.\n\n**Broken or malfunctioning hardware:**\n1. For a broken company-issued device, open a Waypoint \"Hardware Request\" ticket tagged as a repair/replacement, describing the symptom.\n2. Loaner equipment is available for pickup at the IT desk while a repair or replacement is processed, for employees at any access tier.\n3. This handbook does not diagnose specific hardware failures (e.g., a laptop that won't power on, a cracked screen) beyond basic troubleshooting already covered for printers and network issues (Section 14) — open a ticket rather than attempting a repair yourself.\n\nHardware requests are independent of a person's Viewer/Operator/Admin access tier — any employee can request standard hardware for their own use through the process above.",
       "score": 0.0315,
       "bm25": 1.78
      }
     ]
    },
-   "ts": 1790696418.449594
+   "ts": 1790696418.45025
   },
   {
-   "run_id": "rec-64f5e059",
+   "run_id": "rec-req-012",
    "node": "classify",
    "event_type": "llm_call",
    "data": {
@@ -73,7 +74,7 @@
     "messages": [
      {
       "role": "user",
-      "content": "You are the triage step of an internal IT/Ops helpdesk agent for Northwire Technologies. A message arrived in #helpdesk-requests. Decide whether it is:\n- 'answerable': fully answerable from the handbook excerpts below, no system change needed. This includes questions *about* a change -- whether it needs approval, how it's done, who handles it -- and changes the handbook says the employee makes themselves: the requester asked, so the reply is the answer, not a ticket.\n- 'needs_write': the requester wants IT/Ops to make a system change (a ticket created/assigned, an access grant, or anything else that changes state) -- even if policy will ultimately forbid it. Name what they're actually asking for; do not pre-judge policy here.\n- 'escalate': you cannot determine the right answer from the handbook, the request is ambiguous or out of scope, or it involves a security/identity matter serious enough that a human should look at it regardless of what the handbook says. A request whose system, dataset or scope can't be identified from the message itself -- known only by who showed it, where it came up, or 'same access as someone else' -- is ambiguous: the handbook says not to guess, so a human asks which one.\n\nFor 'needs_write', phrase the rationale as the decision itself (what the write is and why it needs a ticket/approval), not as a deferral -- the agent completes needs_write cases itself once approved; only 'escalate' hands off to a human.\n\nRequester role: operator (one of viewer/operator/admin)\nMessage: can i get a jetbrains license? i'm doing a lot more backend work lately and vs code just isn't cutting it for the debugging i need to do\n\nRelevant handbook excerpts:\n[sec-5] ## 5. Software License Requests\nStandard software (listed in the Waypoint software catalog \u2014 includes common design, development, and productivity tools) can be requested by any employee through a Waypoint \"Software License Request\" ticket, specifying the tool and a brief business justification.\n\n- Requests for tools already in the catalog with an available seat are typically approved same-day by the requester's manager (auto-routed) and provisioned by IT within 1 business day, but still require a logged ticket \u2014 provisioning is not automatic without one.\n- Requests for tools not in the catalog, or requests that would require a new vendor contract, are routed to the IT Operations lead for review and may take 1-2 weeks.\n- License requests do not require Operator or Admin tier \u2014 any Viewer may request standard software for their own use.\n- IT does not purchase or provision software outside of the Waypoint catalog process, including personal reimbursement for software bought directly by an employee, except as described in Section 15.\n\n[sec-15] ## 15. Expense and Reimbursement for Hardware Purchases\nStandard equipment should be requested through IT (Section 6) rather than purchased personally, since IT-issued equipment is asset-tagged, covered under warranty/insurance, and pre-configured with required security software.\n\n**When personal reimbursement is allowed:**\n- Home-office ergonomic equipment (a second monitor, keyboard, chair, desk accessory) up to $300/year, submitted through the standard Expense system (not Waypoint) with a receipt, and does not require pre-approval below that threshold.\n- Emergency hardware replacement while traveling, where waiting for IT-issued equipment isn't practical \u2014 requires a brief note to your manager but can be purchased first and expensed after, up to $500, with a receipt.\n- Above these thresholds, or for anything that isn't ergonomic/replacement in nature (e.g., a personal software subscription, a phone upgrade), submit a Waypoint Hardware Request (Section 6) or Software License Request (Section 5) first rather than purchasing personally \u2014 IT cannot guarantee reimbursement for out-of-process purchases above the thresholds above.\n\nReimbursement itself is processed through the Expense system, not through IT/Ops \u2014 the helpdesk can point an employee to the right process and threshold but does not process reimbursements directly.\n\n[sec-12] ## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists \u2014 it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) \u2014 no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling.\n\n[sec-6] ## 6. Hardware and Equipment Requests\nStandard hardware for a new hire (Section 12) is bundled into onboarding automatically. This section covers hardware requests outside of onboarding: replacements, upgrades, peripherals, and equipment for an existing employee or a contractor whose onboarding ticket hasn't been filed yet.\n\n**Requesting hardware:**\n1. Open a Waypoint \"Hardware Request\" ticket specifying the item, quantity, and business reason (e.g., replacement for a failed device, a second monitor, a peripheral needed for a new role).\n2. Standard catalog items (listed in the Waypoint hardware catalog: standard laptop models, monitors, docks, keyboards/mice, headsets) are typically approved by the requester's manager same-day and fulfilled within 3-5 business days.\n3. Non-catalog or higher-cost items (specialized equipment, non-standard laptop configurations) require IT Operations lead review in addition to manager approval and may take longer.\n4. For a contractor who hasn't had an onboarding ticket filed yet, the sponsoring manager should be named on the Hardware Request ticket so IT can provision equipment ahead of or alongside the formal onboarding record.\n\n**Broken or malfunctioning hardware:**\n1. For a broken company-issued device, open a Waypoint \"Hardware Request\" ticket tagged as a repair/replacement, describing the symptom.\n2. Loaner equipment is available for pickup at the IT desk while a repair or replacement is processed, for employees at any access tier.\n3. This handbook does not diagnose specific hardware failures (e.g., a laptop that won't power on, a cracked screen) beyond basic troubleshooting already covered for printers and network issues (Section 14) \u2014 open a ticket rather than attempting a repair yourself.\n\nHardware requests are independent of a person's Viewer/Operator/Admin access tier \u2014 any employee can request standard hardware for their own use through the process above.\n\nGive a rationale a human could audit this decision by, and a confidence 0-1."
+      "content": "You are the triage step of an internal IT/Ops helpdesk agent for Northwire Technologies. A message arrived in #helpdesk-requests. Decide whether it is:\n- 'answerable': fully answerable from the handbook excerpts below, no system change needed. This includes questions *about* a change -- whether it needs approval, how it's done, who handles it -- and changes the handbook says the employee makes themselves: the requester asked, so the reply is the answer, not a ticket.\n- 'needs_write': the requester wants IT/Ops to make a system change (a ticket created/assigned, an access grant, or anything else that changes state) -- even if policy will ultimately forbid it. Name what they're actually asking for; do not pre-judge policy here.\n- 'escalate': you cannot determine the right answer from the handbook, the request is ambiguous or out of scope, or it involves a security/identity matter serious enough that a human should look at it regardless of what the handbook says. A request whose system, dataset or scope can't be identified from the message itself -- known only by who showed it, where it came up, or 'same access as someone else' -- is ambiguous: the handbook says not to guess, so a human asks which one.\n\nFor 'needs_write', phrase the rationale as the decision itself (what the write is and why it needs a ticket/approval), not as a deferral -- the agent completes needs_write cases itself once approved; only 'escalate' hands off to a human.\n\nRequester role: operator (one of viewer/operator/admin)\nMessage: can i get a jetbrains license? i'm doing a lot more backend work lately and vs code just isn't cutting it for the debugging i need to do\n\nRelevant handbook excerpts:\n[sec-5] ## 5. Software License Requests\nStandard software (listed in the Waypoint software catalog — includes common design, development, and productivity tools) can be requested by any employee through a Waypoint \"Software License Request\" ticket, specifying the tool and a brief business justification.\n\n- Requests for tools already in the catalog with an available seat are typically approved same-day by the requester's manager (auto-routed) and provisioned by IT within 1 business day, but still require a logged ticket — provisioning is not automatic without one.\n- Requests for tools not in the catalog, or requests that would require a new vendor contract, are routed to the IT Operations lead for review and may take 1-2 weeks.\n- License requests do not require Operator or Admin tier — any Viewer may request standard software for their own use.\n- IT does not purchase or provision software outside of the Waypoint catalog process, including personal reimbursement for software bought directly by an employee, except as described in Section 15.\n\n[sec-15] ## 15. Expense and Reimbursement for Hardware Purchases\nStandard equipment should be requested through IT (Section 6) rather than purchased personally, since IT-issued equipment is asset-tagged, covered under warranty/insurance, and pre-configured with required security software.\n\n**When personal reimbursement is allowed:**\n- Home-office ergonomic equipment (a second monitor, keyboard, chair, desk accessory) up to $300/year, submitted through the standard Expense system (not Waypoint) with a receipt, and does not require pre-approval below that threshold.\n- Emergency hardware replacement while traveling, where waiting for IT-issued equipment isn't practical — requires a brief note to your manager but can be purchased first and expensed after, up to $500, with a receipt.\n- Above these thresholds, or for anything that isn't ergonomic/replacement in nature (e.g., a personal software subscription, a phone upgrade), submit a Waypoint Hardware Request (Section 6) or Software License Request (Section 5) first rather than purchasing personally — IT cannot guarantee reimbursement for out-of-process purchases above the thresholds above.\n\nReimbursement itself is processed through the Expense system, not through IT/Ops — the helpdesk can point an employee to the right process and threshold but does not process reimbursements directly.\n\n[sec-12] ## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists — it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) — no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling.\n\n[sec-6] ## 6. Hardware and Equipment Requests\nStandard hardware for a new hire (Section 12) is bundled into onboarding automatically. This section covers hardware requests outside of onboarding: replacements, upgrades, peripherals, and equipment for an existing employee or a contractor whose onboarding ticket hasn't been filed yet.\n\n**Requesting hardware:**\n1. Open a Waypoint \"Hardware Request\" ticket specifying the item, quantity, and business reason (e.g., replacement for a failed device, a second monitor, a peripheral needed for a new role).\n2. Standard catalog items (listed in the Waypoint hardware catalog: standard laptop models, monitors, docks, keyboards/mice, headsets) are typically approved by the requester's manager same-day and fulfilled within 3-5 business days.\n3. Non-catalog or higher-cost items (specialized equipment, non-standard laptop configurations) require IT Operations lead review in addition to manager approval and may take longer.\n4. For a contractor who hasn't had an onboarding ticket filed yet, the sponsoring manager should be named on the Hardware Request ticket so IT can provision equipment ahead of or alongside the formal onboarding record.\n\n**Broken or malfunctioning hardware:**\n1. For a broken company-issued device, open a Waypoint \"Hardware Request\" ticket tagged as a repair/replacement, describing the symptom.\n2. Loaner equipment is available for pickup at the IT desk while a repair or replacement is processed, for employees at any access tier.\n3. This handbook does not diagnose specific hardware failures (e.g., a laptop that won't power on, a cracked screen) beyond basic troubleshooting already covered for printers and network issues (Section 14) — open a ticket rather than attempting a repair yourself.\n\nHardware requests are independent of a person's Viewer/Operator/Admin access tier — any employee can request standard hardware for their own use through the process above.\n\nGive a rationale a human could audit this decision by, and a confidence 0-1."
      }
     ],
     "output": "{\"category\":\"needs_write\",\"rationale\":\"The requester wants a JetBrains software license, which is a Software License Request per Section 5 requiring a logged Waypoint ticket with business justification, regardless of whether JetBrains is in the standard catalog.\",\"confidence\":0.9}",
@@ -112,10 +113,10 @@
      }
     }
    },
-   "ts": 1790696422.030978
+   "ts": 1790696422.048137
   },
   {
-   "run_id": "rec-64f5e059",
+   "run_id": "rec-req-012",
    "node": "classify",
    "event_type": "decision",
    "data": {
@@ -128,10 +129,10 @@
     ],
     "rationale_cites_unretrieved": []
    },
-   "ts": 1790696422.031334
+   "ts": 1790696422.048372
   },
   {
-   "run_id": "rec-64f5e059",
+   "run_id": "rec-req-012",
    "node": "propose_action",
    "event_type": "llm_call",
    "data": {
@@ -237,10 +238,10 @@
      }
     }
    },
-   "ts": 1790696426.168671
+   "ts": 1790696426.198398
   },
   {
-   "run_id": "rec-64f5e059",
+   "run_id": "rec-req-012",
    "node": "permission_check",
    "event_type": "permission_verdict",
    "data": {
@@ -250,10 +251,10 @@
     "requires_approval": true,
     "reason": "Benign write; still requires human sign-off before executing."
    },
-   "ts": 1790696426.169557
+   "ts": 1790696426.198764
   },
   {
-   "run_id": "rec-64f5e059",
+   "run_id": "rec-req-012",
    "node": "approval_gate",
    "event_type": "approval_requested",
    "data": {
@@ -266,17 +267,17 @@
      "target_tier": null,
      "assignee": null
     },
-    "action_digest": "d614955548dae326b4454be97b022cc267644a0e844112ee8b85b7121c589120"
+    "action_digest": "bcb9108f0ace6126808017f95cef77c0e3e9c6eaf9b65c84e53e53b0f0197a68"
    },
-   "ts": 1790696426.171229
+   "ts": 1790696426.199727
   }
  ],
- "action_digest": "d614955548dae326b4454be97b022cc267644a0e844112ee8b85b7121c589120",
+ "action_digest": "bcb9108f0ace6126808017f95cef77c0e3e9c6eaf9b65c84e53e53b0f0197a68",
  "tails": {
   "approved": {
    "events": [
     {
-     "run_id": "rec-64f5e059",
+     "run_id": "rec-req-012",
      "node": "approval_gate",
      "event_type": "approval_result",
      "data": {
@@ -284,61 +285,61 @@
       "approved_by": "You (demo)",
       "approver_via": "web",
       "mode": "human",
-      "action_digest": "d614955548dae326b4454be97b022cc267644a0e844112ee8b85b7121c589120",
+      "action_digest": "bcb9108f0ace6126808017f95cef77c0e3e9c6eaf9b65c84e53e53b0f0197a68",
       "digest_match": true,
       "reason": null
      },
-     "ts": 1790696426.172277
+     "ts": 1790696426.200255
     },
     {
-     "run_id": "rec-64f5e059",
+     "run_id": "rec-req-012",
      "node": "execute_action",
      "event_type": "tool_call",
      "data": {
       "tool": "board",
       "transport": "local",
       "ticket": {
-       "id": "REQ-078d5c",
+       "id": "REQ-e9e8a3",
        "title": "Software License Request: JetBrains IDE",
-       "description": "Requester Greg Talvert (operator) is requesting a JetBrains license (e.g. IntelliJ IDEA or similar) to replace VS Code for backend development work, citing the need for more advanced debugging capabilities.\n\nApproved by You (demo) at 10:40 AM (action sha256:d614955548da).",
+       "description": "Requester Greg Talvert (operator) is requesting a JetBrains license (e.g. IntelliJ IDEA or similar) to replace VS Code for backend development work, citing the need for more advanced debugging capabilities.\n\nApproved by You (demo) at 10:40 AM (action sha256:bcb9108f0ace).",
        "status": "open",
        "assignee": null,
        "labels": "",
        "created_by": "Greg Talvert",
-       "created_at": 1790696426.173325
+       "created_at": 1791078195.547767
       }
      },
-     "ts": 1790696426.1734881
+     "ts": 1790696426.200895
     },
     {
-     "run_id": "rec-64f5e059",
+     "run_id": "rec-req-012",
      "node": "respond",
      "event_type": "respond",
      "data": {
       "outcome": "executed",
-      "response": "Opened REQ-078d5c: Software License Request: JetBrains IDE. IT/Ops will take it from here. Approved by You (demo) at 10:40 AM."
+      "response": "Opened REQ-e9e8a3: Software License Request: JetBrains IDE. IT/Ops will take it from here. Approved by You (demo) at 10:40 AM."
      },
-     "ts": 1790696426.174043
+     "ts": 1790696426.201177
     }
    ],
-   "final": "Opened REQ-078d5c: Software License Request: JetBrains IDE. IT/Ops will take it from here. Approved by You (demo) at 10:40 AM.",
+   "final": "Opened REQ-e9e8a3: Software License Request: JetBrains IDE. IT/Ops will take it from here. Approved by You (demo) at 10:40 AM.",
    "tickets": [
     {
-     "id": "REQ-078d5c",
+     "id": "REQ-e9e8a3",
      "title": "Software License Request: JetBrains IDE",
-     "description": "Requester Greg Talvert (operator) is requesting a JetBrains license (e.g. IntelliJ IDEA or similar) to replace VS Code for backend development work, citing the need for more advanced debugging capabilities.\n\nApproved by You (demo) at 10:40 AM (action sha256:d614955548da).",
+     "description": "Requester Greg Talvert (operator) is requesting a JetBrains license (e.g. IntelliJ IDEA or similar) to replace VS Code for backend development work, citing the need for more advanced debugging capabilities.\n\nApproved by You (demo) at 10:40 AM (action sha256:bcb9108f0ace).",
      "status": "open",
      "assignee": null,
      "labels": "",
      "created_by": "Greg Talvert",
-     "created_at": 1790696426.173325
+     "created_at": 1791078195.547767
     }
    ]
   },
   "denied": {
    "events": [
     {
-     "run_id": "rec-a03598f4",
+     "run_id": "rec-req-012",
      "node": "approval_gate",
      "event_type": "approval_result",
      "data": {
@@ -346,24 +347,963 @@
       "approved_by": "You (demo)",
       "approver_via": "web",
       "mode": "human",
-      "action_digest": "d614955548dae326b4454be97b022cc267644a0e844112ee8b85b7121c589120",
+      "action_digest": "bcb9108f0ace6126808017f95cef77c0e3e9c6eaf9b65c84e53e53b0f0197a68",
       "digest_match": true,
       "reason": "You (demo) denied the proposed action, so nothing was executed."
      },
-     "ts": 1790696431.265035
+     "ts": 1790696426.194999
     },
     {
-     "run_id": "rec-a03598f4",
+     "run_id": "rec-req-012",
      "node": "handoff",
      "event_type": "handoff",
      "data": {
       "reason": "You (demo) denied the proposed action, so nothing was executed."
      },
-     "ts": 1790696431.266592
+     "ts": 1790696426.195507
     }
    ],
-   "final": "I've flagged this for a human on the IT/Ops team rather than acting on it myself \u2014 You (demo) denied the proposed action, so nothing was executed.",
+   "final": "I've flagged this for a human on the IT/Ops team rather than acting on it myself — You (demo) denied the proposed action, so nothing was executed.",
    "tickets": []
+  }
+ },
+ "bench": {
+  "pre": [
+   {
+    "v": "bench/0",
+    "run_id": "req-012",
+    "ts": 1790696418.441806,
+    "node": "_run",
+    "event_type": "run_started",
+    "content_mode": "redacted",
+    "data": {
+     "via": "agentlab",
+     "app": "slack-helpdesk",
+     "thread": "rec-req-012",
+     "map_hash": "5fb23d041f566d2d464b39f1e91d7c6ac4386b6edd3ec69563465f3fc3553c3f",
+     "input": {
+      "run_id": "rec-req-012",
+      "request_id": "req-012",
+      "requester_name": "Greg Talvert",
+      "requester_role": "operator",
+      "requester_id": null,
+      "channel": "helpdesk-requests",
+      "thread_ts": "0",
+      "message": "can i get a jetbrains license? i'm doing a lot more backend work lately and vs code just isn't cutting it for the debugging i need to do",
+      "auto_approve": false
+     }
+    },
+    "seq": 0,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-012",
+    "ts": 1790696418.442515,
+    "node": "ingest",
+    "event_type": "step_started",
+    "content_mode": "redacted",
+    "data": {},
+    "step_id": "req-012:ingest:1",
+    "seq": 1,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-012",
+    "ts": 1790696418.442574,
+    "node": "ingest",
+    "event_type": "step_finished",
+    "content_mode": "redacted",
+    "data": {
+     "status": "ok",
+     "latency_ms": 0.1
+    },
+    "step_id": "req-012:ingest:1",
+    "seq": 2,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-012",
+    "ts": 1790696418.442812,
+    "node": "retrieve",
+    "event_type": "step_started",
+    "content_mode": "redacted",
+    "data": {},
+    "step_id": "req-012:retrieve:1",
+    "seq": 3,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-012",
+    "ts": 1790696418.451138,
+    "node": "retrieve",
+    "event_type": "retrieval",
+    "content_mode": "redacted",
+    "data": {
+     "hits": [
+      {
+       "id": "sec-5",
+       "title": "5. Software License Requests",
+       "score": 0.0328,
+       "text": "## 5. Software License Requests\nStandard software (listed in the Waypoint software catalog — includes common design, development, and productivity tools) can be requested by any employee through a Waypoint \"Software License Request\" ticket, specifying the tool and a brief business justification.\n\n- Requests for tools already in the catalog with an available seat are typically approved same-day by the requester's manager (auto-routed) and provisioned by IT within 1 business day, but still require a logged ticket — provisioning is not automatic without one.\n- Requests for tools not in the catalog, or requests that would require a new vendor contract, are routed to the IT Operations lead for review and may take 1-2 weeks.\n- License requests do not require Operator or Admin tier — any Viewer may request standard software for their own use.\n- IT does not purchase or provision software outside of the Waypoint catalog process, including personal reimbursement for software bought directly by an employee, except as described in Section 15.",
+       "bm25": 3.21
+      },
+      {
+       "id": "sec-15",
+       "title": "15. Expense and Reimbursement for Hardware Purchases",
+       "score": 0.0323,
+       "text": "## 15. Expense and Reimbursement for Hardware Purchases\nStandard equipment should be requested through IT (Section 6) rather than purchased personally, since IT-issued equipment is asset-tagged, covered under warranty/insurance, and pre-configured with required security software.\n\n**When personal reimbursement is allowed:**\n- Home-office ergonomic equipment (a second monitor, keyboard, chair, desk accessory) up to $300/year, submitted through the standard Expense system (not Waypoint) with a receipt, and does not require pre-approval below that threshold.\n- Emergency hardware replacement while traveling, where waiting for IT-issued equipment isn't practical — requires a brief note to your manager but can be purchased first and expensed after, up to $500, with a receipt.\n- Above these thresholds, or for anything that isn't ergonomic/replacement in nature (e.g., a personal software subscription, a phone upgrade), submit a Waypoint Hardware Request (Section 6) or Software License Request (Section 5) first rather than purchasing personally — IT cannot guarantee reimbursement for out-of-process purchases above the thresholds above.\n\nReimbursement itself is processed through the Expense system, not through IT/Ops — the helpdesk can point an employee to the right process and threshold but does not process reimbursements directly.",
+       "bm25": 6.52
+      },
+      {
+       "id": "sec-12",
+       "title": "12. Onboarding and Offboarding Equipment & Access Procedure",
+       "score": 0.0318,
+       "text": "## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists — it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) — no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling.",
+       "bm25": 2.28
+      },
+      {
+       "id": "sec-6",
+       "title": "6. Hardware and Equipment Requests",
+       "score": 0.0315,
+       "text": "## 6. Hardware and Equipment Requests\nStandard hardware for a new hire (Section 12) is bundled into onboarding automatically. This section covers hardware requests outside of onboarding: replacements, upgrades, peripherals, and equipment for an existing employee or a contractor whose onboarding ticket hasn't been filed yet.\n\n**Requesting hardware:**\n1. Open a Waypoint \"Hardware Request\" ticket specifying the item, quantity, and business reason (e.g., replacement for a failed device, a second monitor, a peripheral needed for a new role).\n2. Standard catalog items (listed in the Waypoint hardware catalog: standard laptop models, monitors, docks, keyboards/mice, headsets) are typically approved by the requester's manager same-day and fulfilled within 3-5 business days.\n3. Non-catalog or higher-cost items (specialized equipment, non-standard laptop configurations) require IT Operations lead review in addition to manager approval and may take longer.\n4. For a contractor who hasn't had an onboarding ticket filed yet, the sponsoring manager should be named on the Hardware Request ticket so IT can provision equipment ahead of or alongside the formal onboarding record.\n\n**Broken or malfunctioning hardware:**\n1. For a broken company-issued device, open a Waypoint \"Hardware Request\" ticket tagged as a repair/replacement, describing the symptom.\n2. Loaner equipment is available for pickup at the IT desk while a repair or replacement is processed, for employees at any access tier.\n3. This handbook does not diagnose specific hardware failures (e.g., a laptop that won't power on, a cracked screen) beyond basic troubleshooting already covered for printers and network issues (Section 14) — open a ticket rather than attempting a repair yourself.\n\nHardware requests are independent of a person's Viewer/Operator/Admin access tier — any employee can request standard hardware for their own use through the process above.",
+       "bm25": 1.78
+      }
+     ],
+     "source": "handbook",
+     "query": "can i get a jetbrains license? i'm doing a lot more backend work lately and vs code just isn't cutting it for the debugging i need to do",
+     "corpus_hash": "89db310d699ea02340b4bc2aec4d63755e96bfba88af538f71c61681065192b4"
+    },
+    "step_id": "req-012:retrieve:1",
+    "seq": 4,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-012",
+    "ts": 1790696418.451174,
+    "node": "retrieve",
+    "event_type": "step_finished",
+    "content_mode": "redacted",
+    "data": {
+     "status": "ok",
+     "latency_ms": 8.4
+    },
+    "step_id": "req-012:retrieve:1",
+    "seq": 5,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-012",
+    "ts": 1790696418.451424,
+    "node": "classify",
+    "event_type": "step_started",
+    "content_mode": "redacted",
+    "data": {},
+    "step_id": "req-012:classify:1",
+    "seq": 6,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-012",
+    "ts": 1790696422.045678,
+    "node": "classify",
+    "event_type": "llm_call",
+    "content_mode": "redacted",
+    "data": {
+     "model": "claude-sonnet-5",
+     "input_tokens": 3096,
+     "output_tokens": 93,
+     "cache_read_tokens": 0,
+     "cache_write_tokens": 0,
+     "latency_ms": 3593.4,
+     "provider": "anthropic",
+     "messages": [
+      {
+       "role": "user",
+       "content": "You are the triage step of an internal IT/Ops helpdesk agent for Northwire Technologies. A message arrived in #helpdesk-requests. Decide whether it is:\n- 'answerable': fully answerable from the handbook excerpts below, no system change needed. This includes questions *about* a change -- whether it needs approval, how it's done, who handles it -- and changes the handbook says the employee makes themselves: the requester asked, so the reply is the answer, not a ticket.\n- 'needs_write': the requester wants IT/Ops to make a system change (a ticket created/assigned, an access grant, or anything else that changes state) -- even if policy will ultimately forbid it. Name what they're actually asking for; do not pre-judge policy here.\n- 'escalate': you cannot determine the right answer from the handbook, the request is ambiguous or out of scope, or it involves a security/identity matter serious enough that a human should look at it regardless of what the handbook says. A request whose system, dataset or scope can't be identified from the message itself -- known only by who showed it, where it came up, or 'same access as someone else' -- is ambiguous: the handbook says not to guess, so a human asks which one.\n\nFor 'needs_write', phrase the rationale as the decision itself (what the write is and why it needs a ticket/approval), not as a deferral -- the agent completes needs_write cases itself once approved; only 'escalate' hands off to a human.\n\nRequester role: operator (one of viewer/operator/admin)\nMessage: can i get a jetbrains license? i'm doing a lot more backend work lately and vs code just isn't cutting it for the debugging i need to do\n\nRelevant handbook excerpts:\n[sec-5] ## 5. Software License Requests\nStandard software (listed in the Waypoint software catalog — includes common design, development, and productivity tools) can be requested by any employee through a Waypoint \"Software License Request\" ticket, specifying the tool and a brief business justification.\n\n- Requests for tools already in the catalog with an available seat are typically approved same-day by the requester's manager (auto-routed) and provisioned by IT within 1 business day, but still require a logged ticket — provisioning is not automatic without one.\n- Requests for tools not in the catalog, or requests that would require a new vendor contract, are routed to the IT Operations lead for review and may take 1-2 weeks.\n- License requests do not require Operator or Admin tier — any Viewer may request standard software for their own use.\n- IT does not purchase or provision software outside of the Waypoint catalog process, including personal reimbursement for software bought directly by an employee, except as described in Section 15.\n\n[sec-15] ## 15. Expense and Reimbursement for Hardware Purchases\nStandard equipment should be requested through IT (Section 6) rather than purchased personally, since IT-issued equipment is asset-tagged, covered under warranty/insurance, and pre-configured with required security software.\n\n**When personal reimbursement is allowed:**\n- Home-office ergonomic equipment (a second monitor, keyboard, chair, desk accessory) up to $300/year, submitted through the standard Expense system (not Waypoint) with a receipt, and does not require pre-approval below that threshold.\n- Emergency hardware replacement while traveling, where waiting for IT-issued equipment isn't practical — requires a brief note to your manager but can be purchased first and expensed after, up to $500, with a receipt.\n- Above these thresholds, or for anything that isn't ergonomic/replacement in nature (e.g., a personal software subscription, a phone upgrade), submit a Waypoint Hardware Request (Section 6) or Software License Request (Section 5) first rather than purchasing personally — IT cannot guarantee reimbursement for out-of-process purchases above the thresholds above.\n\nReimbursement itself is processed through the Expense system, not through IT/Ops — the helpdesk can point an employee to the right process and threshold but does not process reimbursements directly.\n\n[sec-12] ## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists — it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) — no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling.\n\n[sec-6] ## 6. Hardware and Equipment Requests\nStandard hardware for a new hire (Section 12) is bundled into onboarding automatically. This section covers hardware requests outside of onboarding: replacements, upgrades, peripherals, and equipment for an existing employee or a contractor whose onboarding ticket hasn't been filed yet.\n\n**Requesting hardware:**\n1. Open a Waypoint \"Hardware Request\" ticket specifying the item, quantity, and business reason (e.g., replacement for a failed device, a second monitor, a peripheral needed for a new role).\n2. Standard catalog items (listed in the Waypoint hardware catalog: standard laptop models, monitors, docks, keyboards/mice, headsets) are typically approved by the requester's manager same-day and fulfilled within 3-5 business days.\n3. Non-catalog or higher-cost items (specialized equipment, non-standard laptop configurations) require IT Operations lead review in addition to manager approval and may take longer.\n4. For a contractor who hasn't had an onboarding ticket filed yet, the sponsoring manager should be named on the Hardware Request ticket so IT can provision equipment ahead of or alongside the formal onboarding record.\n\n**Broken or malfunctioning hardware:**\n1. For a broken company-issued device, open a Waypoint \"Hardware Request\" ticket tagged as a repair/replacement, describing the symptom.\n2. Loaner equipment is available for pickup at the IT desk while a repair or replacement is processed, for employees at any access tier.\n3. This handbook does not diagnose specific hardware failures (e.g., a laptop that won't power on, a cracked screen) beyond basic troubleshooting already covered for printers and network issues (Section 14) — open a ticket rather than attempting a repair yourself.\n\nHardware requests are independent of a person's Viewer/Operator/Admin access tier — any employee can request standard hardware for their own use through the process above.\n\nGive a rationale a human could audit this decision by, and a confidence 0-1."
+      }
+     ],
+     "output": "{\"category\":\"needs_write\",\"rationale\":\"The requester wants a JetBrains software license, which is a Software License Request per Section 5 requiring a logged Waypoint ticket with business justification, regardless of whether JetBrains is in the standard catalog.\",\"confidence\":0.9}",
+     "params": {
+      "json_schema": {
+       "title": "ClassifyResult",
+       "description": "",
+       "properties": {
+        "category": {
+         "enum": [
+          "answerable",
+          "needs_write",
+          "escalate"
+         ],
+         "type": "string"
+        },
+        "rationale": {
+         "description": "One or two sentences a human could audit this decision by. Phrase it as the decision itself, not a deferral -- e.g. for needs_write, 'This is a data-access request, which needs a Data Access Request ticket' (the agent will propose and, once approved, execute the write itself), not 'this should be routed to X rather than judged here' (that phrasing describes escalate, where a human takes over -- don't use it for needs_write, which the agent completes itself once approved).",
+         "type": "string"
+        },
+        "confidence": {
+         "maximum": 1.0,
+         "minimum": 0.0,
+         "type": "number"
+        }
+       },
+       "required": [
+        "category",
+        "rationale",
+        "confidence"
+       ],
+       "type": "object"
+      }
+     },
+     "cost_usd": 0.007122,
+     "cost_source": "estimated",
+     "cost_basis": "request-queue price table (app/config.py)"
+    },
+    "step_id": "req-012:classify:1",
+    "seq": 7,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-012",
+    "ts": 1790696422.048415,
+    "node": "classify",
+    "event_type": "decision",
+    "content_mode": "redacted",
+    "data": {
+     "rationale": "The requester wants a JetBrains software license, which is a Software License Request per Section 5 requiring a logged Waypoint ticket with business justification, regardless of whether JetBrains is in the standard catalog.",
+     "confidence": 0.9,
+     "cited": [
+      "sec-5"
+     ]
+    },
+    "step_id": "req-012:classify:1",
+    "seq": 8,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-012",
+    "ts": 1790696422.048436,
+    "node": "classify",
+    "event_type": "check_result",
+    "content_mode": "redacted",
+    "data": {
+     "name": "confidence_check",
+     "passed": true,
+     "state": "passed",
+     "detail": "The AI was sure enough of its choice.",
+     "kind": "confidence",
+     "words": {
+      "passed": "Passed",
+      "failed": "Not sure enough: sent to a person"
+     }
+    },
+    "step_id": "req-012:classify:1",
+    "seq": 9,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-012",
+    "ts": 1790696422.048452,
+    "node": "classify",
+    "event_type": "triage",
+    "content_mode": "redacted",
+    "data": {
+     "picked": "needs_write",
+     "routed": "needs_write",
+     "unseen": []
+    },
+    "step_id": "req-012:classify:1",
+    "seq": 10,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-012",
+    "ts": 1790696422.048544,
+    "node": "classify",
+    "event_type": "step_finished",
+    "content_mode": "redacted",
+    "data": {
+     "status": "ok",
+     "latency_ms": 3597.1
+    },
+    "step_id": "req-012:classify:1",
+    "seq": 11,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-012",
+    "ts": 1790696422.048926,
+    "node": "propose_action",
+    "event_type": "step_started",
+    "content_mode": "redacted",
+    "data": {},
+    "step_id": "req-012:propose_action:1",
+    "seq": 12,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-012",
+    "ts": 1790696426.197378,
+    "node": "propose_action",
+    "event_type": "llm_call",
+    "content_mode": "redacted",
+    "data": {
+     "model": "claude-sonnet-5",
+     "input_tokens": 1235,
+     "output_tokens": 146,
+     "cache_read_tokens": 0,
+     "cache_write_tokens": 0,
+     "latency_ms": 4148.0,
+     "provider": "anthropic",
+     "messages": [
+      {
+       "role": "user",
+       "content": "The requester wants a system change. Propose the concrete action, naming what they are actually asking for honestly (see the action_type field description) -- even if you suspect policy will forbid it. A separate policy layer decides that, not you.\n\nRequester: Greg Talvert (operator)\nMessage: can i get a jetbrains license? i'm doing a lot more backend work lately and vs code just isn't cutting it for the debugging i need to do"
+      }
+     ],
+     "output": "{\"action_type\":\"create_ticket\",\"title\":\"Software License Request: JetBrains IDE\",\"description\":\"Requester Greg Talvert (operator) is requesting a JetBrains license (e.g. IntelliJ IDEA or similar) to replace VS Code for backend development work, citing the need for more advanced debugging capabilities.\",\"target_system\":\"JetBrains IDE\",\"system_as_written\":\"a jetbrains license\",\"assignee\":null}",
+     "params": {
+      "json_schema": {
+       "title": "ProposedAction",
+       "description": "",
+       "properties": {
+        "action_type": {
+         "description": "Use 'create_ticket' for any ordinary work item -- VPN/hardware/software renewals or requests, standard follow-ups -- even if the handbook's own instructions describe it as 'open a ticket for X'; that IS create_ticket, not a new type. Use 'assign_ticket' only when routing an existing ticket to a specific person. A request for access to a system or dataset (any tier) is also 'create_ticket': a Data Access Request titled 'Data Access Request: <system>', naming the system, the dataset if given, the business reason, and the tier in target_tier (handbook section 8: access is granted only by the system's admins after an approved Data Access Request ticket exists; a chat approval alone is not enough). Use 'grant_access' only if the request is explicitly to grant access right now, bypassing that ticket. Otherwise -- specifically when the request itself is a security-sensitive or identity action policy is likely to forbid (e.g. disabling MFA, sharing credentials) -- name that action honestly (e.g. 'disable_mfa') rather than laundering it into 'create_ticket'; a separate policy layer decides whether it's allowed, not you.",
+         "type": "string"
+        },
+        "title": {
+         "type": "string"
+        },
+        "description": {
+         "type": "string"
+        },
+        "target_system": {
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ],
+         "default": null
+        },
+        "system_as_written": {
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ],
+         "default": null,
+         "description": "The words in the message that name or describe the target system, copied exactly as the requester wrote them (e.g. 'the Ledger billing dashboard'). Null if the message doesn't say which system -- a label you'd have to make up doesn't count."
+        },
+        "target_tier": {
+         "anyOf": [
+          {
+           "enum": [
+            "viewer",
+            "operator",
+            "admin"
+           ],
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ],
+         "default": null,
+         "description": "For access requests: the access tier being requested."
+        },
+        "assignee": {
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ],
+         "default": null
+        }
+       },
+       "required": [
+        "action_type",
+        "title",
+        "description"
+       ],
+       "type": "object"
+      }
+     },
+     "cost_usd": 0.00393,
+     "cost_source": "estimated",
+     "cost_basis": "request-queue price table (app/config.py)"
+    },
+    "step_id": "req-012:propose_action:1",
+    "seq": 13,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-012",
+    "ts": 1790696426.198454,
+    "node": "propose_action",
+    "event_type": "step_finished",
+    "content_mode": "redacted",
+    "data": {
+     "status": "ok",
+     "latency_ms": 4149.5
+    },
+    "step_id": "req-012:propose_action:1",
+    "seq": 14,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-012",
+    "ts": 1790696426.198715,
+    "node": "permission_check",
+    "event_type": "step_started",
+    "content_mode": "redacted",
+    "data": {},
+    "step_id": "req-012:permission_check:1",
+    "seq": 15,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-012",
+    "ts": 1790696426.198799,
+    "node": "permission_check",
+    "event_type": "permission_verdict",
+    "content_mode": "redacted",
+    "data": {
+     "action_type": "create_ticket",
+     "asked_for": "Open an IT ticket",
+     "allowed": true,
+     "forbidden": false,
+     "requires_approval": true,
+     "reason": "Benign write; still requires human sign-off before executing."
+    },
+    "step_id": "req-012:permission_check:1",
+    "seq": 16,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-012",
+    "ts": 1790696426.198811,
+    "node": "permission_check",
+    "event_type": "check_result",
+    "content_mode": "redacted",
+    "data": {
+     "name": "permission",
+     "passed": true,
+     "state": "passed",
+     "detail": "Allowed. A person still has to approve it.",
+     "kind": "permission"
+    },
+    "step_id": "req-012:permission_check:1",
+    "seq": 17,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-012",
+    "ts": 1790696426.198888,
+    "node": "permission_check",
+    "event_type": "step_finished",
+    "content_mode": "redacted",
+    "data": {
+     "status": "ok",
+     "latency_ms": 0.2
+    },
+    "step_id": "req-012:permission_check:1",
+    "seq": 18,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-012",
+    "ts": 1790696426.199235,
+    "node": "approval_gate",
+    "event_type": "step_started",
+    "content_mode": "redacted",
+    "data": {},
+    "step_id": "req-012:approval_gate:1",
+    "seq": 19,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-012",
+    "ts": 1790696426.19938,
+    "node": "approval_gate",
+    "event_type": "gate_waiting",
+    "content_mode": "redacted",
+    "data": {
+     "proposed": {
+      "proposed_action": {
+       "action_type": "create_ticket",
+       "title": "Software License Request: JetBrains IDE",
+       "description": "Requester Greg Talvert (operator) is requesting a JetBrains license (e.g. IntelliJ IDEA or similar) to replace VS Code for backend development work, citing the need for more advanced debugging capabilities.",
+       "target_system": "JetBrains IDE",
+       "system_as_written": "a jetbrains license",
+       "target_tier": null,
+       "assignee": null
+      },
+      "permission_verdict": {
+       "allowed": true,
+       "forbidden": false,
+       "requires_approval": true,
+       "reason": "Benign write; still requires human sign-off before executing."
+      },
+      "action_digest": "bcb9108f0ace6126808017f95cef77c0e3e9c6eaf9b65c84e53e53b0f0197a68"
+     }
+    },
+    "step_id": "req-012:approval_gate:1",
+    "seq": 20,
+    "session_id": "recording"
+   }
+  ],
+  "tails": {
+   "approved": [
+    {
+     "v": "bench/0",
+     "run_id": "req-012",
+     "ts": 1790696426.200377,
+     "node": "approval_gate",
+     "event_type": "gate_resolved",
+     "content_mode": "redacted",
+     "data": {
+      "approved": true,
+      "by": "You (demo)"
+     },
+     "step_id": "req-012:approval_gate:1",
+     "seq": 21,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-012",
+     "ts": 1790696426.20046,
+     "node": "approval_gate",
+     "event_type": "step_finished",
+     "content_mode": "redacted",
+     "data": {
+      "status": "ok",
+      "latency_ms": 0.4
+     },
+     "step_id": "req-012:approval_gate:1",
+     "seq": 22,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-012",
+     "ts": 1790696426.200747,
+     "node": "execute_action",
+     "event_type": "step_started",
+     "content_mode": "redacted",
+     "data": {},
+     "step_id": "req-012:execute_action:1",
+     "seq": 23,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-012",
+     "ts": 1790696426.200961,
+     "node": "execute_action",
+     "event_type": "tool_call",
+     "content_mode": "redacted",
+     "data": {
+      "tool": "board",
+      "transport": "local",
+      "ticket": {
+       "id": "REQ-e9e8a3",
+       "title": "Software License Request: JetBrains IDE",
+       "description": "Requester Greg Talvert (operator) is requesting a JetBrains license (e.g. IntelliJ IDEA or similar) to replace VS Code for backend development work, citing the need for more advanced debugging capabilities.\n\nApproved by You (demo) at 10:40 AM (action sha256:bcb9108f0ace).",
+       "status": "open",
+       "assignee": null,
+       "labels": "",
+       "created_by": "Greg Talvert",
+       "created_at": 1791078195.547767
+      }
+     },
+     "step_id": "req-012:execute_action:1",
+     "seq": 24,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-012",
+     "ts": 1790696426.200977,
+     "node": "execute_action",
+     "event_type": "step_finished",
+     "content_mode": "redacted",
+     "data": {
+      "status": "ok",
+      "latency_ms": 0.2
+     },
+     "step_id": "req-012:execute_action:1",
+     "seq": 25,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-012",
+     "ts": 1790696426.201151,
+     "node": "respond",
+     "event_type": "step_started",
+     "content_mode": "redacted",
+     "data": {},
+     "step_id": "req-012:respond:1",
+     "seq": 26,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-012",
+     "ts": 1790696426.201196,
+     "node": "respond",
+     "event_type": "step_finished",
+     "content_mode": "redacted",
+     "data": {
+      "status": "ok",
+      "latency_ms": 0.0
+     },
+     "step_id": "req-012:respond:1",
+     "seq": 27,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-012",
+     "ts": 1790696426.202652,
+     "node": "_run",
+     "event_type": "run_finished",
+     "content_mode": "redacted",
+     "data": {
+      "status": "ok",
+      "latency_ms": 7760.8,
+      "outcome": "executed",
+      "output": {
+       "run_id": "rec-req-012",
+       "request_id": "req-012",
+       "requester_name": "Greg Talvert",
+       "requester_role": "operator",
+       "requester_id": null,
+       "channel": "helpdesk-requests",
+       "thread_ts": "0",
+       "message": "can i get a jetbrains license? i'm doing a lot more backend work lately and vs code just isn't cutting it for the debugging i need to do",
+       "auto_approve": false,
+       "retrieved": [
+        {
+         "chunk_id": "sec-5",
+         "section": "5. Software License Requests",
+         "text": "## 5. Software License Requests\nStandard software (listed in the Waypoint software catalog — includes common design, development, and productivity tools) can be requested by any employee through a Waypoint \"Software License Request\" ticket, specifying the tool and a brief business justification.\n\n- Requests for tools already in the catalog with an available seat are typically approved same-day by the requester's manager (auto-routed) and provisioned by IT within 1 business day, but still require a logged ticket — provisioning is not automatic without one.\n- Requests for tools not in the catalog, or requests that would require a new vendor contract, are routed to the IT Operations lead for review and may take 1-2 weeks.\n- License requests do not require Operator or Admin tier — any Viewer may request standard software for their own use.\n- IT does not purchase or provision software outside of the Waypoint catalog process, including personal reimbursement for software bought directly by an employee, except as described in Section 15.",
+         "score": 0.0328,
+         "bm25": 3.21
+        },
+        {
+         "chunk_id": "sec-15",
+         "section": "15. Expense and Reimbursement for Hardware Purchases",
+         "text": "## 15. Expense and Reimbursement for Hardware Purchases\nStandard equipment should be requested through IT (Section 6) rather than purchased personally, since IT-issued equipment is asset-tagged, covered under warranty/insurance, and pre-configured with required security software.\n\n**When personal reimbursement is allowed:**\n- Home-office ergonomic equipment (a second monitor, keyboard, chair, desk accessory) up to $300/year, submitted through the standard Expense system (not Waypoint) with a receipt, and does not require pre-approval below that threshold.\n- Emergency hardware replacement while traveling, where waiting for IT-issued equipment isn't practical — requires a brief note to your manager but can be purchased first and expensed after, up to $500, with a receipt.\n- Above these thresholds, or for anything that isn't ergonomic/replacement in nature (e.g., a personal software subscription, a phone upgrade), submit a Waypoint Hardware Request (Section 6) or Software License Request (Section 5) first rather than purchasing personally — IT cannot guarantee reimbursement for out-of-process purchases above the thresholds above.\n\nReimbursement itself is processed through the Expense system, not through IT/Ops — the helpdesk can point an employee to the right process and threshold but does not process reimbursements directly.",
+         "score": 0.0323,
+         "bm25": 6.52
+        },
+        {
+         "chunk_id": "sec-12",
+         "section": "12. Onboarding and Offboarding Equipment & Access Procedure",
+         "text": "## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists — it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) — no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling.",
+         "score": 0.0318,
+         "bm25": 2.28
+        },
+        {
+         "chunk_id": "sec-6",
+         "section": "6. Hardware and Equipment Requests",
+         "text": "## 6. Hardware and Equipment Requests\nStandard hardware for a new hire (Section 12) is bundled into onboarding automatically. This section covers hardware requests outside of onboarding: replacements, upgrades, peripherals, and equipment for an existing employee or a contractor whose onboarding ticket hasn't been filed yet.\n\n**Requesting hardware:**\n1. Open a Waypoint \"Hardware Request\" ticket specifying the item, quantity, and business reason (e.g., replacement for a failed device, a second monitor, a peripheral needed for a new role).\n2. Standard catalog items (listed in the Waypoint hardware catalog: standard laptop models, monitors, docks, keyboards/mice, headsets) are typically approved by the requester's manager same-day and fulfilled within 3-5 business days.\n3. Non-catalog or higher-cost items (specialized equipment, non-standard laptop configurations) require IT Operations lead review in addition to manager approval and may take longer.\n4. For a contractor who hasn't had an onboarding ticket filed yet, the sponsoring manager should be named on the Hardware Request ticket so IT can provision equipment ahead of or alongside the formal onboarding record.\n\n**Broken or malfunctioning hardware:**\n1. For a broken company-issued device, open a Waypoint \"Hardware Request\" ticket tagged as a repair/replacement, describing the symptom.\n2. Loaner equipment is available for pickup at the IT desk while a repair or replacement is processed, for employees at any access tier.\n3. This handbook does not diagnose specific hardware failures (e.g., a laptop that won't power on, a cracked screen) beyond basic troubleshooting already covered for printers and network issues (Section 14) — open a ticket rather than attempting a repair yourself.\n\nHardware requests are independent of a person's Viewer/Operator/Admin access tier — any employee can request standard hardware for their own use through the process above.",
+         "score": 0.0315,
+         "bm25": 1.78
+        }
+       ],
+       "category": "needs_write",
+       "original_category": "needs_write",
+       "rationale": "The requester wants a JetBrains software license, which is a Software License Request per Section 5 requiring a logged Waypoint ticket with business justification, regardless of whether JetBrains is in the standard catalog.",
+       "confidence": 0.9,
+       "rationale_cites_unretrieved": [],
+       "proposed_action": {
+        "action_type": "create_ticket",
+        "title": "Software License Request: JetBrains IDE",
+        "description": "Requester Greg Talvert (operator) is requesting a JetBrains license (e.g. IntelliJ IDEA or similar) to replace VS Code for backend development work, citing the need for more advanced debugging capabilities.",
+        "target_system": "JetBrains IDE",
+        "system_as_written": "a jetbrains license",
+        "target_tier": null,
+        "assignee": null
+       },
+       "permission_verdict": {
+        "allowed": true,
+        "forbidden": false,
+        "requires_approval": true,
+        "reason": "Benign write; still requires human sign-off before executing."
+       },
+       "approved": true,
+       "approved_by": "You (demo)",
+       "approved_at": "10:40 AM",
+       "approval": {
+        "decision": "approved",
+        "by": "You (demo)",
+        "approver": {
+         "id": "demo-visitor",
+         "name": "You (demo)",
+         "role": "admin",
+         "via": "web"
+        },
+        "at": "2026-09-29T10:40:26-05:00",
+        "mode": "human",
+        "action_digest": "bcb9108f0ace6126808017f95cef77c0e3e9c6eaf9b65c84e53e53b0f0197a68",
+        "presented_digest": "bcb9108f0ace6126808017f95cef77c0e3e9c6eaf9b65c84e53e53b0f0197a68",
+        "reason": null,
+        "action": {
+         "action_type": "create_ticket",
+         "title": "Software License Request: JetBrains IDE",
+         "description": "Requester Greg Talvert (operator) is requesting a JetBrains license (e.g. IntelliJ IDEA or similar) to replace VS Code for backend development work, citing the need for more advanced debugging capabilities.",
+         "target_system": "JetBrains IDE",
+         "system_as_written": "a jetbrains license",
+         "target_tier": null,
+         "assignee": null
+        }
+       },
+       "ticket": {
+        "id": "REQ-e9e8a3",
+        "title": "Software License Request: JetBrains IDE",
+        "description": "Requester Greg Talvert (operator) is requesting a JetBrains license (e.g. IntelliJ IDEA or similar) to replace VS Code for backend development work, citing the need for more advanced debugging capabilities.\n\nApproved by You (demo) at 10:40 AM (action sha256:bcb9108f0ace).",
+        "status": "open",
+        "assignee": null,
+        "labels": "",
+        "created_by": "Greg Talvert",
+        "created_at": 1791078195.547767
+       },
+       "action_summary": "Opened REQ-e9e8a3: Software License Request: JetBrains IDE. IT/Ops will take it from here. Approved by You (demo) at 10:40 AM.",
+       "handoff_reason": null,
+       "final_outcome": "executed",
+       "final_response": "Opened REQ-e9e8a3: Software License Request: JetBrains IDE. IT/Ops will take it from here. Approved by You (demo) at 10:40 AM."
+      },
+      "baseline": "answer: ~3–5 min · ticket: ~10–15 min · hand-off: human judgment required"
+     },
+     "seq": 28,
+     "session_id": "recording"
+    }
+   ],
+   "denied": [
+    {
+     "v": "bench/0",
+     "run_id": "req-012",
+     "ts": 1790696426.195025,
+     "node": "approval_gate",
+     "event_type": "gate_resolved",
+     "content_mode": "redacted",
+     "data": {
+      "approved": false,
+      "by": "You (demo)",
+      "reason": "You (demo) denied the proposed action, so nothing was executed."
+     },
+     "step_id": "req-012:approval_gate:1",
+     "seq": 21,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-012",
+     "ts": 1790696426.195143,
+     "node": "approval_gate",
+     "event_type": "step_finished",
+     "content_mode": "redacted",
+     "data": {
+      "status": "ok",
+      "latency_ms": 0.3
+     },
+     "step_id": "req-012:approval_gate:1",
+     "seq": 22,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-012",
+     "ts": 1790696426.195486,
+     "node": "handoff",
+     "event_type": "step_started",
+     "content_mode": "redacted",
+     "data": {},
+     "step_id": "req-012:handoff:1",
+     "seq": 23,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-012",
+     "ts": 1790696426.195526,
+     "node": "handoff",
+     "event_type": "step_finished",
+     "content_mode": "redacted",
+     "data": {
+      "status": "ok",
+      "latency_ms": 0.0
+     },
+     "step_id": "req-012:handoff:1",
+     "seq": 24,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-012",
+     "ts": 1790696426.195735,
+     "node": "respond",
+     "event_type": "step_started",
+     "content_mode": "redacted",
+     "data": {},
+     "step_id": "req-012:respond:1",
+     "seq": 25,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-012",
+     "ts": 1790696426.19576,
+     "node": "respond",
+     "event_type": "step_finished",
+     "content_mode": "redacted",
+     "data": {
+      "status": "ok",
+      "latency_ms": 0.0
+     },
+     "step_id": "req-012:respond:1",
+     "seq": 26,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-012",
+     "ts": 1790696426.197136,
+     "node": "_run",
+     "event_type": "run_finished",
+     "content_mode": "redacted",
+     "data": {
+      "status": "ok",
+      "latency_ms": 7755.3,
+      "outcome": "escalated",
+      "output": {
+       "run_id": "rec-req-012",
+       "request_id": "req-012",
+       "requester_name": "Greg Talvert",
+       "requester_role": "operator",
+       "requester_id": null,
+       "channel": "helpdesk-requests",
+       "thread_ts": "0",
+       "message": "can i get a jetbrains license? i'm doing a lot more backend work lately and vs code just isn't cutting it for the debugging i need to do",
+       "auto_approve": false,
+       "retrieved": [
+        {
+         "chunk_id": "sec-5",
+         "section": "5. Software License Requests",
+         "text": "## 5. Software License Requests\nStandard software (listed in the Waypoint software catalog — includes common design, development, and productivity tools) can be requested by any employee through a Waypoint \"Software License Request\" ticket, specifying the tool and a brief business justification.\n\n- Requests for tools already in the catalog with an available seat are typically approved same-day by the requester's manager (auto-routed) and provisioned by IT within 1 business day, but still require a logged ticket — provisioning is not automatic without one.\n- Requests for tools not in the catalog, or requests that would require a new vendor contract, are routed to the IT Operations lead for review and may take 1-2 weeks.\n- License requests do not require Operator or Admin tier — any Viewer may request standard software for their own use.\n- IT does not purchase or provision software outside of the Waypoint catalog process, including personal reimbursement for software bought directly by an employee, except as described in Section 15.",
+         "score": 0.0328,
+         "bm25": 3.21
+        },
+        {
+         "chunk_id": "sec-15",
+         "section": "15. Expense and Reimbursement for Hardware Purchases",
+         "text": "## 15. Expense and Reimbursement for Hardware Purchases\nStandard equipment should be requested through IT (Section 6) rather than purchased personally, since IT-issued equipment is asset-tagged, covered under warranty/insurance, and pre-configured with required security software.\n\n**When personal reimbursement is allowed:**\n- Home-office ergonomic equipment (a second monitor, keyboard, chair, desk accessory) up to $300/year, submitted through the standard Expense system (not Waypoint) with a receipt, and does not require pre-approval below that threshold.\n- Emergency hardware replacement while traveling, where waiting for IT-issued equipment isn't practical — requires a brief note to your manager but can be purchased first and expensed after, up to $500, with a receipt.\n- Above these thresholds, or for anything that isn't ergonomic/replacement in nature (e.g., a personal software subscription, a phone upgrade), submit a Waypoint Hardware Request (Section 6) or Software License Request (Section 5) first rather than purchasing personally — IT cannot guarantee reimbursement for out-of-process purchases above the thresholds above.\n\nReimbursement itself is processed through the Expense system, not through IT/Ops — the helpdesk can point an employee to the right process and threshold but does not process reimbursements directly.",
+         "score": 0.0323,
+         "bm25": 6.52
+        },
+        {
+         "chunk_id": "sec-12",
+         "section": "12. Onboarding and Offboarding Equipment & Access Procedure",
+         "text": "## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists — it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) — no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling.",
+         "score": 0.0318,
+         "bm25": 2.28
+        },
+        {
+         "chunk_id": "sec-6",
+         "section": "6. Hardware and Equipment Requests",
+         "text": "## 6. Hardware and Equipment Requests\nStandard hardware for a new hire (Section 12) is bundled into onboarding automatically. This section covers hardware requests outside of onboarding: replacements, upgrades, peripherals, and equipment for an existing employee or a contractor whose onboarding ticket hasn't been filed yet.\n\n**Requesting hardware:**\n1. Open a Waypoint \"Hardware Request\" ticket specifying the item, quantity, and business reason (e.g., replacement for a failed device, a second monitor, a peripheral needed for a new role).\n2. Standard catalog items (listed in the Waypoint hardware catalog: standard laptop models, monitors, docks, keyboards/mice, headsets) are typically approved by the requester's manager same-day and fulfilled within 3-5 business days.\n3. Non-catalog or higher-cost items (specialized equipment, non-standard laptop configurations) require IT Operations lead review in addition to manager approval and may take longer.\n4. For a contractor who hasn't had an onboarding ticket filed yet, the sponsoring manager should be named on the Hardware Request ticket so IT can provision equipment ahead of or alongside the formal onboarding record.\n\n**Broken or malfunctioning hardware:**\n1. For a broken company-issued device, open a Waypoint \"Hardware Request\" ticket tagged as a repair/replacement, describing the symptom.\n2. Loaner equipment is available for pickup at the IT desk while a repair or replacement is processed, for employees at any access tier.\n3. This handbook does not diagnose specific hardware failures (e.g., a laptop that won't power on, a cracked screen) beyond basic troubleshooting already covered for printers and network issues (Section 14) — open a ticket rather than attempting a repair yourself.\n\nHardware requests are independent of a person's Viewer/Operator/Admin access tier — any employee can request standard hardware for their own use through the process above.",
+         "score": 0.0315,
+         "bm25": 1.78
+        }
+       ],
+       "category": "needs_write",
+       "original_category": "needs_write",
+       "rationale": "The requester wants a JetBrains software license, which is a Software License Request per Section 5 requiring a logged Waypoint ticket with business justification, regardless of whether JetBrains is in the standard catalog.",
+       "confidence": 0.9,
+       "rationale_cites_unretrieved": [],
+       "proposed_action": {
+        "action_type": "create_ticket",
+        "title": "Software License Request: JetBrains IDE",
+        "description": "Requester Greg Talvert (operator) is requesting a JetBrains license (e.g. IntelliJ IDEA or similar) to replace VS Code for backend development work, citing the need for more advanced debugging capabilities.",
+        "target_system": "JetBrains IDE",
+        "system_as_written": "a jetbrains license",
+        "target_tier": null,
+        "assignee": null
+       },
+       "permission_verdict": {
+        "allowed": true,
+        "forbidden": false,
+        "requires_approval": true,
+        "reason": "Benign write; still requires human sign-off before executing."
+       },
+       "approved": false,
+       "approved_by": "You (demo)",
+       "approved_at": "10:40 AM",
+       "approval": {
+        "decision": "denied",
+        "by": "You (demo)",
+        "approver": {
+         "id": "demo-visitor",
+         "name": "You (demo)",
+         "role": "admin",
+         "via": "web"
+        },
+        "at": "2026-09-29T10:40:26-05:00",
+        "mode": "human",
+        "action_digest": "bcb9108f0ace6126808017f95cef77c0e3e9c6eaf9b65c84e53e53b0f0197a68",
+        "presented_digest": "bcb9108f0ace6126808017f95cef77c0e3e9c6eaf9b65c84e53e53b0f0197a68",
+        "reason": "You (demo) denied the proposed action, so nothing was executed.",
+        "action": {
+         "action_type": "create_ticket",
+         "title": "Software License Request: JetBrains IDE",
+         "description": "Requester Greg Talvert (operator) is requesting a JetBrains license (e.g. IntelliJ IDEA or similar) to replace VS Code for backend development work, citing the need for more advanced debugging capabilities.",
+         "target_system": "JetBrains IDE",
+         "system_as_written": "a jetbrains license",
+         "target_tier": null,
+         "assignee": null
+        }
+       },
+       "handoff_reason": "You (demo) denied the proposed action, so nothing was executed.",
+       "final_outcome": "escalated",
+       "final_response": "I've flagged this for a human on the IT/Ops team rather than acting on it myself — You (demo) denied the proposed action, so nothing was executed."
+      },
+      "baseline": "answer: ~3–5 min · ticket: ~10–15 min · hand-off: human judgment required"
+     },
+     "seq": 27,
+     "session_id": "recording"
+    }
+   ]
   }
  }
 }

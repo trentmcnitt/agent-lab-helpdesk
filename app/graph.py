@@ -11,19 +11,22 @@ import hashlib
 import json
 import re
 from datetime import datetime
-from typing import Literal, TypedDict
+from typing import Callable, Literal, TypedDict
 
+import agentlab as lab
+from agentlab.langgraph import instrument
 from langchain_anthropic import ChatAnthropic
 from langchain_core.messages import HumanMessage, SystemMessage
 from langgraph.graph import END, START, StateGraph
-from langgraph.types import Command, interrupt
+from langgraph.types import interrupt
 from pydantic import BaseModel, Field
 
 from . import config, permissions
-from .board_adapter import BoardAdapter
+from .agent_lab import APP, STORY
+from .board_adapter import CREATE_TICKET, BoardAdapter
 from .events import EventBus
 from .langfuse_sink import get_langfuse_handler
-from .retrieval import STOPWORDS as _STOPWORDS, HandbookIndex, _tokenize
+from .retrieval import CORPUS_ID, STOPWORDS as _STOPWORDS, HandbookIndex, _tokenize
 
 
 class ClassifyResult(BaseModel):
@@ -207,14 +210,54 @@ def _bound_digest(state: dict, action: dict) -> str:
                          state.get("requester_id") or state.get("requester_name"))
 
 
-def build_graph(bus: EventBus, index: HandbookIndex, board: BoardAdapter, checkpointer=None, llm=None):
+def _in_words(chunk_ids: list[str]) -> str:
+    """Cited chunk ids in plain words, for a check's detail: ': section 4 and section 9'."""
+    names = [f"section {c[4:]}" if c.startswith("sec-") else "the opening note" if c == "preamble" else c
+             for c in chunk_ids]
+    if not names:
+        return ""
+    return ": " + (names[0] if len(names) == 1 else ", ".join(names[:-1]) + " and " + names[-1])
+
+
+def _or(words: list[str]) -> str:
+    """Roles in plain words: ['admin'] -> 'an admin'; ['admin', 'operator'] -> 'an admin or an operator'."""
+    each = [("an " if w[:1] in "aeiou" else "a ") + w for w in words]
+    return " or ".join(each)
+
+
+def prompt_parts(sent) -> tuple[str | None, list[dict]]:
+    """A prompt as plain parts: the system text (None without one) and the other messages as
+    {role, content}. Content blocks keep their text and drop cache_control. The live view's Model
+    I/O and the demo's replay model (app/demo/replay_model.py) both read prompts through this."""
+    msgs = sent if isinstance(sent, list) else [HumanMessage(content=sent)]
+    system, messages = None, []
+    for m in msgs:
+        if m is None:
+            continue
+        content = m.content
+        if isinstance(content, list):
+            content = "\n".join(b.get("text", "") for b in content if isinstance(b, dict))
+        if isinstance(m, SystemMessage):
+            system = content
+        else:
+            messages.append({"role": "user" if isinstance(m, HumanMessage) else m.type, "content": content})
+    return system, messages
+
+
+def build_graph(bus: EventBus, index: HandbookIndex, board: BoardAdapter, checkpointer=None, llm=None,
+                clock: Callable[[], datetime] = datetime.now):
     # `llm` is injectable so tests can force a model decision (e.g. propose a
-    # forbidden action) and prove the code-level gate holds regardless.
+    # forbidden action) and prove the code-level gate holds regardless. `clock` is the time the
+    # approval is stamped with ("Approved by ... at 10:40 AM"); scripts/regen_demo.py passes the
+    # recording's own clock, so the reply and the recorded approval tell the same time.
     llm = llm or ChatAnthropic(model=config.MODEL_ID, max_tokens=1024, anthropic_api_key=config.ANTHROPIC_API_KEY)
     langfuse_handler = get_langfuse_handler()
 
     def _lf_config(state: RequestState, node: str) -> dict:
-        cfg: dict = {
+        # No `callbacks` here: a callbacks list on an in-node call replaces the run's own, which would
+        # hide this call from every handler on the graph (Agent Lab's included). Langfuse's handler
+        # is on the graph itself (end of build_graph), so it sees this call through the run.
+        return {
             "run_name": f"{node}:{state.get('request_id')}",
             "metadata": {
                 "run_id": state.get("run_id"),
@@ -223,26 +266,12 @@ def build_graph(bus: EventBus, index: HandbookIndex, board: BoardAdapter, checkp
                 **{f"sampling_{k}": v for k, v in SAMPLING.items()},
             },
         }
-        if langfuse_handler is not None:
-            cfg["callbacks"] = [langfuse_handler]
-        return cfg
 
     def _io_fields(sent, raw_message, schema) -> dict:
-        """What the model was given and what it returned, for the bench's Model I/O view: the
+        """What the model was given and what it returned, for the live view's Model I/O: the
         system block (full-handbook mode), the user prompt, the structured-output schema it was
         held to, and its raw reply. Masked by the bus like everything else it publishes."""
-        msgs = sent if isinstance(sent, list) else [HumanMessage(content=sent)]
-        system, messages = None, []
-        for m in msgs:
-            if m is None:
-                continue
-            content = m.content
-            if isinstance(content, list):  # content blocks: keep the text, drop cache_control
-                content = "\n".join(b.get("text", "") for b in content if isinstance(b, dict))
-            if isinstance(m, SystemMessage):
-                system = content
-            else:
-                messages.append({"role": "user" if isinstance(m, HumanMessage) else m.type, "content": content})
+        system, messages = prompt_parts(sent)
         out = getattr(raw_message, "content", None)
         if isinstance(out, list):
             out = "\n".join(b.get("text", "") if isinstance(b, dict) else str(b) for b in out)
@@ -305,24 +334,57 @@ def build_graph(bus: EventBus, index: HandbookIndex, board: BoardAdapter, checkp
         raw = result["raw"]
         _llm_call_event(node, raw, sent=messages, schema=schema)
         if result["parsed"] is None:
-            bus.publish(
-                node=node,
-                event_type="model_output_error",
-                stop_reason=(getattr(raw, "response_metadata", None) or {}).get("stop_reason"),
-                parsing_error=str(result.get("parsing_error"))[:500],
-            )
+            stop_reason = (getattr(raw, "response_metadata", None) or {}).get("stop_reason")
+            parsing_error = str(result.get("parsing_error"))[:500]
+            bus.publish(node=node, event_type="model_output_error", stop_reason=stop_reason, parsing_error=parsing_error)
+            lab.event("error", {"message": parsing_error, "type": "model_output_error", "stop_reason": stop_reason,
+                                "retryable": True})
         return result["parsed"]
 
+    k = config.RETRIEVAL_TOP_K
+    search_words = {
+        "hybrid": (f"A search, not the AI, picks the {k} parts of the handbook that best match the message, by "
+                   f"matching both its words and its meaning. The AI only ever sees those {k}, never the whole handbook."),
+        "bm25": (f"A keyword search, not the AI, picks the {k} parts of the handbook that best match the message's "
+                 f"words. The AI only ever sees those {k}, never the whole handbook."),
+        "full": "No search here: the AI is given the whole handbook with every request.",
+    }
+    mode = getattr(index, "mode", None) or "hybrid"
+    what_it_reads = "the whole handbook" if full_handbook else f"the {k} handbook sections"
+
+    @lab.step("Message arrives", actor="app",
+              says="A request comes in from Slack, with who sent it and their access level (viewer, operator or admin).")
     def ingest(state: RequestState) -> dict:
+        """Records the incoming message on the event bus. The request itself (who, their role, the
+        message) is the run's input; nothing is changed here."""
         bus.publish(node="ingest", event_type="node_enter", message=state["message"])
         return {}
 
+    @lab.step("Look up the handbook", actor="app", kind="retrieval", says=search_words.get(mode, search_words["hybrid"]))
     def retrieve(state: RequestState) -> dict:
+        """HandbookIndex.retrieve over the message: BM25 fused with bge-small embeddings by reciprocal
+        rank fusion (RETRIEVAL_MODE=hybrid), top RETRIEVAL_TOP_K sections, best first. Plain code."""
         hits = index.retrieve(state["message"])
         bus.publish(node="retrieve", event_type="retrieval_hits", hits=hits)
+        lab.retrieved(CORPUS_ID, [{"id": h["chunk_id"], "title": h["section"], "score": h["score"], "text": h["text"],
+                                   "bm25": h["bm25"]} for h in hits], query=state["message"])
         return {"retrieved": hits}
 
+    @lab.step("Decide what kind of request", actor="ai", moment=True,
+              says=(f"The AI reads the message, {what_it_reads} and the person's access level, and picks one of three "
+                    "paths: answer it, open a ticket, or hand it to a person. It has to give a reason. As a backstop, if "
+                    f"its own confidence score is below {config.CONFIDENCE_THRESHOLD}, the request goes to a person "
+                    "whatever it picked."),
+              paths={"answerable": lab.path("can answer it", says="It decided the handbook already answers this."),
+                     "needs_write": lab.path("needs a change",
+                                             says="It decided this needs something changed, which means a ticket."),
+                     "escalate": lab.path("a person must decide",
+                                          says="It decided this must go to a person. The AI won't act on it.")})
     def classify(state: RequestState) -> dict:
+        """One structured call (ClassifyResult: category, rationale, confidence). A confidence under
+        CONFIDENCE_THRESHOLD overrides any category but escalate to escalate; output that doesn't
+        parse escalates too. Records which handbook sections the rationale cites and which of
+        those retrieval never surfaced (audit only, not routed on)."""
         context = _handbook_context(state)
         prompt = (
             "You are the triage step of an internal IT/Ops helpdesk agent for Northwire "
@@ -353,6 +415,8 @@ def build_graph(bus: EventBus, index: HandbookIndex, board: BoardAdapter, checkp
             reason = "The triage model's output couldn't be read; routed to a human rather than guessed."
             bus.publish(node="classify", event_type="decision", category="escalate", original_category=None,
                         rationale=reason, confidence=0.0)
+            lab.decision(reason)
+            lab.event("triage", {"picked": None, "routed": "escalate", "unseen": []})
             return {"category": "escalate", "original_category": None, "rationale": reason,
                     "confidence": 0.0, "handoff_reason": reason}
 
@@ -376,6 +440,15 @@ def build_graph(bus: EventBus, index: HandbookIndex, board: BoardAdapter, checkp
             rationale_cites=cites,
             rationale_cites_unretrieved=unseen,
         )
+        # The handbook's chunk ids (retrieval.py names sections sec-<n>), so the bench can match them to the corpus.
+        cited_ids = [f"sec-{n}" for n in cites if n not in unseen]
+        unseen_ids = [f"sec-{n}" for n in unseen]
+        lab.decision(parsed.rationale, cited=cited_ids, confidence=parsed.confidence)
+        lab.check("confidence_check", category == parsed.category, kind="confidence",
+                  detail=("The AI was sure enough of its choice." if category == parsed.category
+                          else "The AI wasn't confident enough in its choice, so it went to a person."),
+                  words={"passed": "Passed", "failed": "Not sure enough: sent to a person"})
+        lab.event("triage", {"picked": parsed.category, "routed": category, "unseen": unseen_ids})
         return {
             "category": category,
             "original_category": parsed.category,
@@ -385,7 +458,14 @@ def build_graph(bus: EventBus, index: HandbookIndex, board: BoardAdapter, checkp
             "rationale_cites_unretrieved": unseen,
         }
 
+    def route_after_classify(state: RequestState) -> Literal["answerable", "needs_write", "escalate"]:
+        return state["category"]
+
+    @lab.step("Write the answer", actor="ai",
+              says="The AI writes a reply using only the handbook sections it was given, and names the ones it used.")
     def draft_answer(state: RequestState) -> dict:
+        """One structured call (DraftAnswer: answer, cited_chunk_ids). Output that doesn't parse
+        leaves an empty answer, which grounding_check then fails."""
         context = _handbook_context(state)
         prompt = (
             "Answer this Northwire Technologies helpdesk request using ONLY the handbook "
@@ -399,14 +479,38 @@ def build_graph(bus: EventBus, index: HandbookIndex, board: BoardAdapter, checkp
                     "handoff_reason": "The drafted answer couldn't be read; routed to a human rather than sent."}
         return {"answer": parsed.answer, "cited_chunk_ids": parsed.cited_chunk_ids}
 
+    @lab.step("Check the answer", actor="rule", moment=True,
+              says=("Before an answer is sent, code (not the AI) checks three things: that it cites only sections it "
+                    "was actually given, that its wording comes from those sections, and that no other section fits "
+                    "it better. This catches answers that wander off the handbook. It can't tell whether an answer "
+                    "that uses the handbook's own words is still wrong."),
+              not_needed="Not needed this time: the AI didn't write an answer.",
+              paths={"grounded": lab.path("holds up", says="The answer held up against its sources, so it's sent."),
+                     "not_grounded": lab.path("doesn't hold up", says=("The answer didn't hold up against its sources, "
+                                                                       "so a person gets it instead."))})
     def grounding_check(state: RequestState) -> dict:
-        ok, reason, overlap = _grounding_ok(state["answer"], state.get("cited_chunk_ids", []), state["retrieved"],
-                                            index.chunks)
+        """_grounding_ok: the cited chunks must have been retrieved, the answer's content words must
+        overlap them by at least GROUNDING_MIN_OVERLAP, and no uncited section may match the answer
+        better by more than GROUNDING_TOLERANCE. Lexical, not semantic entailment."""
+        cited = state.get("cited_chunk_ids", [])
+        ok, reason, overlap = _grounding_ok(state["answer"], cited, state["retrieved"], index.chunks)
         bus.publish(node="grounding_check", event_type="decision", grounded=ok, reason=reason,
-                    overlap=round(overlap, 2), cited=state.get("cited_chunk_ids", []))
+                    overlap=round(overlap, 2), cited=cited)
+        lab.check("grounded", ok, kind="grounding", evidence=cited if ok else (),
+                  detail=(f"The answer's wording matches the handbook sections it cites{_in_words(cited)}." if ok else
+                          f"Didn't pass: {reason} A person gets it instead of the answer being sent."))
         return {"grounded": ok, "grounding_reason": reason}
 
+    def route_after_grounding(state: RequestState) -> Literal["grounded", "not_grounded"]:
+        return "grounded" if state["grounded"] else "not_grounded"
+
+    @lab.step("Fill in a ticket", actor="ai",
+              says=("The AI drafts a ticket: what kind, which system, a title and a description. It sees the message "
+                    "and who's asking, not the handbook. Nothing is created yet."))
     def propose_action(state: RequestState) -> dict:
+        """One structured call (ProposedAction). It is told to name the action honestly even when
+        policy may forbid it; output that doesn't parse becomes an unrecognized action type, which
+        permission_check refuses."""
         prompt = (
             "The requester wants a system change. Propose the concrete action, naming what they "
             "are actually asking for honestly (see the action_type field description) -- even if "
@@ -419,7 +523,18 @@ def build_graph(bus: EventBus, index: HandbookIndex, board: BoardAdapter, checkp
             return {"proposed_action": {"action_type": "unparseable_model_output", "title": "", "description": ""}}
         return {"proposed_action": parsed.model_dump()}
 
+    @lab.step("Check the rules", actor="rule", moment=True,
+              says=("Fixed rules, not the AI, decide whether this ticket may go ahead. What it can never do is never "
+                    "allowed, whoever asks; the rules also screen the ticket's own wording for those, though a keyword "
+                    "screen can be worded around. A request to grant access directly is refused (access only comes "
+                    "through a ticket), and an access ticket must name a system the person actually wrote."),
+              not_needed="Not needed this time: nothing was going to be changed.",
+              paths={"allowed": lab.path("allowed", says="The rules allow it, and a person still has to approve."),
+                     "forbidden": lab.path("refused", says="The rules refuse this, so a person gets it instead.")})
     def permission_check(state: RequestState) -> dict:
+        """permissions.permission_check on the proposed action, the requester's role and the action's
+        own wording (forbidden types and forbidden intents never pass). An allowed access ticket
+        must also quote a system name that appears in the requester's message. No LLM."""
         action = state["proposed_action"]
         verdict = permissions.permission_check(
             action["action_type"], state["requester_role"], target_tier=action.get("target_tier"),
@@ -434,16 +549,37 @@ def build_graph(bus: EventBus, index: HandbookIndex, board: BoardAdapter, checkp
                            "reason": ("The request doesn't say which system the access is for, so it's gone to "
                                       "a human to ask rather than guess (handbook section 11).")}
         bus.publish(node="permission_check", event_type="permission_verdict", action_type=action["action_type"], **verdict)
+        # The plain words for what was asked for come from where the action is defined (the one
+        # action the app can take, or the never list), so the story doesn't keep its own copy.
+        asked_for = (CREATE_TICKET.title if action["action_type"] == CREATE_TICKET.id
+                     else permissions.NEVER.words.get(action["action_type"]))
+        lab.event("permission_verdict", {"action_type": action["action_type"], "asked_for": asked_for, **verdict})
+        lab.check("permission", verdict["allowed"], kind="permission",
+                  detail=(("Allowed. A person still has to approve it." if verdict.get("requires_approval", True)
+                           else "Allowed.") if verdict["allowed"] else f"Not allowed: {verdict['reason']}"))
         out: dict = {"permission_verdict": verdict}
         if not verdict["allowed"]:
             out["handoff_reason"] = verdict["reason"]
         return out
 
+    def route_after_permission(state: RequestState) -> Literal["allowed", "forbidden"]:
+        return "allowed" if state["permission_verdict"]["allowed"] else "forbidden"
+
+    @lab.step("A person approves", actor="person", moment=True,
+              says=(f"A person sees the exact ticket and approves or denies it. Only {_or(sorted(config.APPROVER_ROLES))} "
+                    "can approve, and never their own request. If anything in the ticket changed after they looked, "
+                    "the approval doesn't count."),
+              paths={"approved": lab.path("approved", says="A person approved this exact ticket."),
+                     "denied": lab.path("said no", says="A person said no, so nothing was created.")})
     def approval_gate(state: RequestState) -> dict:
+        """interrupt() with the proposed action, the verdict and the action's digest (bound to the
+        run, request and requester). The resume must carry the same digest, from an approver role,
+        and not from the requester; anything else counts as denied. auto_approve skips the pause
+        for non-interactive runs."""
         verdict = state["permission_verdict"]
         action = state["proposed_action"]
         digest = _bound_digest(state, action)
-        now = datetime.now()
+        now = clock()
         at = now.strftime("%-I:%M %p")
 
         def _record(decision: str, approver: dict, mode: str, presented: str | None, reason: str | None = None) -> dict:
@@ -458,6 +594,7 @@ def build_graph(bus: EventBus, index: HandbookIndex, board: BoardAdapter, checkp
         if state.get("auto_approve"):
             auto = {"name": "auto (non-interactive run)", "role": "admin", "via": "auto"}
             bus.publish(node="approval_gate", event_type="approval_result", approved=True, mode="auto", action_digest=digest)
+            lab.gate_resolved(True, by=auto)
             return {"approved": True, "approved_by": auto["name"], "approved_at": at,
                     "approval": _record("approved", auto, "auto", digest)}
 
@@ -486,10 +623,19 @@ def build_graph(bus: EventBus, index: HandbookIndex, board: BoardAdapter, checkp
         bus.publish(node="approval_gate", event_type="approval_result", approved=approved,
                     approved_by=approver.get("name"), approver_via=approver.get("via"), mode="human",
                     action_digest=digest, digest_match=presented == digest, reason=reason)
+        lab.gate_resolved(approved, by=approver or None, reason=reason)
         return {**out, "approved": approved, "approved_by": approver.get("name", "unknown"), "approved_at": at,
                 "approval": _record("approved" if approved else "denied", approver, "human", presented, reason)}
 
+    def route_after_approval(state: RequestState) -> Literal["approved", "denied"]:
+        return "approved" if state["approved"] else "denied"
+
+    @lab.step("Open the ticket", actor="app", kind="tool",
+              says="The app opens the ticket exactly as it was approved. Opening a ticket is the only change it can make.")
     def execute_action(state: RequestState) -> dict:
+        """Creates the ticket on the board with the exact approved arguments, keyed by the run id
+        (a retried or replayed call returns the ticket that already exists). Refuses if the action's
+        digest no longer matches the approval."""
         action = state["proposed_action"]
         actor = state["requester_name"]
         approval = state.get("approval") or {}
@@ -519,10 +665,17 @@ def build_graph(bus: EventBus, index: HandbookIndex, board: BoardAdapter, checkp
         else:
             ticket = board.create_ticket(action["title"], description, created_by=actor, labels=[], idempotency_key=key)
             summary = f"Opened {ticket['id']}: {ticket['title']}. IT/Ops will take it from here. {approved}"
-        bus.publish(node="execute_action", event_type="tool_call", tool="board", transport=getattr(board, "transport", "local"), ticket=ticket)
+        transport = getattr(board, "transport", "local")
+        bus.publish(node="execute_action", event_type="tool_call", tool="board", transport=transport, ticket=ticket)
+        lab.event("tool_call", {"tool": "board", "transport": transport, "ticket": ticket})
         return {"ticket": ticket, "action_summary": summary}
 
+    @lab.step("Hand to a person", actor="app", moment=True,
+              says=("The AI stops here and takes no action. It replies in the person's Slack thread itself: someone "
+                    "on the IT/Ops team will take it from here."))
     def handoff(state: RequestState) -> dict:
+        """Writes the hand-off reply from the first reason on record (the handoff reason, else the
+        grounding reason) and marks the run escalated."""
         reason = state.get("handoff_reason") or state.get("grounding_reason") or "Escalated for human review."
         bus.publish(node="handoff", event_type="handoff", reason=reason)
         return {
@@ -533,8 +686,15 @@ def build_graph(bus: EventBus, index: HandbookIndex, board: BoardAdapter, checkp
             ),
         }
 
+    @lab.step("Reply in Slack", moment=True,  # its kind (terminal: every exit ends the run) is derived
+              says=("The person who asked gets the reply in their Slack thread: the answer, or the ticket that was "
+                    "opened. (After a hand-off, the hand-off step has already replied.)"))
     def respond(state: RequestState) -> dict:
+        """Sets the run's outcome and reply: a grounded answer is 'answered', an opened ticket
+        'executed', anything else 'escalated'. A run that already has an outcome (a hand-off)
+        keeps it."""
         if state.get("final_outcome"):
+            lab.outcome(state["final_outcome"])
             return {}
         if state["category"] == "answerable" and state.get("grounded"):
             resp = state["answer"]
@@ -546,6 +706,7 @@ def build_graph(bus: EventBus, index: HandbookIndex, board: BoardAdapter, checkp
             resp = "I wasn't able to complete this."
             outcome = "escalated"
         bus.publish(node="respond", event_type="respond", outcome=outcome, response=resp)
+        lab.outcome(outcome)
         return {"final_outcome": outcome, "final_response": resp}
 
     graph = StateGraph(RequestState)
@@ -569,28 +730,33 @@ def build_graph(bus: EventBus, index: HandbookIndex, board: BoardAdapter, checkp
     graph.add_edge("retrieve", "classify")
 
     graph.add_conditional_edges(
-        "classify",
-        lambda s: s["category"],
+        "classify", route_after_classify,
         {"answerable": "draft_answer", "needs_write": "propose_action", "escalate": "handoff"},
     )
     graph.add_edge("draft_answer", "grounding_check")
-    graph.add_conditional_edges(
-        "grounding_check", lambda s: "respond" if s["grounded"] else "handoff", {"respond": "respond", "handoff": "handoff"}
-    )
+    graph.add_conditional_edges("grounding_check", route_after_grounding, {"grounded": "respond", "not_grounded": "handoff"})
 
     graph.add_edge("propose_action", "permission_check")
-    graph.add_conditional_edges(
-        "permission_check",
-        lambda s: "approval_gate" if s["permission_verdict"]["allowed"] else "handoff",
-        {"approval_gate": "approval_gate", "handoff": "handoff"},
-    )
-    graph.add_conditional_edges(
-        "approval_gate",
-        lambda s: "execute_action" if s["approved"] else "handoff",
-        {"execute_action": "execute_action", "handoff": "handoff"},
-    )
+    graph.add_conditional_edges("permission_check", route_after_permission, {"allowed": "approval_gate", "forbidden": "handoff"})
+    graph.add_conditional_edges("approval_gate", route_after_approval, {"approved": "execute_action", "denied": "handoff"})
     graph.add_edge("execute_action", "respond")
     graph.add_edge("handoff", "respond")
     graph.add_edge("respond", END)
 
-    return graph.compile(checkpointer=checkpointer)
+    compiled = graph.compile(checkpointer=checkpointer)
+    if langfuse_handler is not None:  # on the graph, so it sees every call inside it (see _lf_config)
+        compiled = compiled.with_config(callbacks=[langfuse_handler])
+    # Agent Lab: the map (steps, branches, the words above) is read from this graph, and every run
+    # carries it. `lab.verify(lab_graph())` in tests/test_agent_lab.py keeps the words honest.
+    return instrument(compiled, app=APP, story=STORY, lock="agentlab.lock.json")
+
+
+def lab_graph():
+    """The graph with stand-in parts, for Agent Lab's tooling (`python -m agentlab verify|lock
+    app.graph:lab_graph`) and tests: nothing in it is ever invoked."""
+    from pathlib import Path
+
+    from .demo.replay_model import ReplayModel
+
+    return build_graph(EventBus(run_id="agent-lab"), HandbookIndex(mode="bm25"), BoardAdapter(Path(":memory:")),
+                       llm=ReplayModel(cassette={"calls": []}))

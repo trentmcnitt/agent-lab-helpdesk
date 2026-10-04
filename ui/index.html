@@ -55,12 +55,19 @@
   }
   .seedbtn:hover { border-color: var(--accent); }
   .seedhead { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-weight: 600; }
+  .seedhead .sid { flex: none; white-space: nowrap; }   /* the id never breaks; the hint beside it wraps */
   .seedbtn .preview { color: var(--text); font-weight: 400; margin-top: 4px; line-height: 1.35; white-space: normal; }
   .seedbtn .manual { color: var(--muted); font-size: 10.5px; margin-top: 4px; font-style: italic; }
   .tag { font-size: 9.5px; text-transform: uppercase; letter-spacing: .04em; padding: 2px 6px; border-radius: 10px; border: 1px solid var(--border); color: var(--muted); }
   .tag-answerable { color: var(--good); border-color: var(--good); }
   .tag-needswrite { color: var(--accent-2); border-color: var(--accent-2); }
   .tag-escalate { color: var(--bad); border-color: var(--bad); }
+  .seedgroup { color: var(--muted); font-size: 11.5px; font-weight: 600; margin: 10px 0 5px; }
+  .seedgroup:first-child { margin-top: 0; }
+  .seedbtn .hint { color: var(--warn); font-size: 11px; font-weight: 400; }
+  .seedbtn.chosen { border-color: var(--accent); box-shadow: inset 3px 0 0 var(--accent); }
+  .seednote { color: var(--muted); font-size: 11.5px; margin: 6px 0 2px; }
+  #costmeter:empty { display: none; }
 
   #composer { display: flex; flex-direction: column; gap: 6px; margin-bottom: 4px; }
   #composer textarea { background: var(--panel-2); border: 1px solid var(--border); color: var(--text); border-radius: 6px; padding: 8px; font-size: 12.5px; resize: vertical; min-height: 60px; }
@@ -134,7 +141,7 @@
   <span class="badge" id="modelBadge">model: …</span>
   <span class="badge" id="lfBadge">langfuse: …</span>
   <span class="badge" id="slackBadge">slack: …</span>
-  <div id="costmeter">$0.0000</div>
+  <div id="costmeter"></div>
   <button id="peekToggle">peek behind the curtain</button>
 </header>
 <div id="notice" style="display:none; padding:8px 20px; background:rgba(251,191,36,.12); border-bottom:1px solid var(--warn); font-size:12.5px;"></div>
@@ -227,7 +234,7 @@ async function opPost(url, body) {
   }
   const data = await r.json();
   // The public demo says when it shows a recorded run instead of a live one, and why.
-  notice(data && data.mode === 'replay' ? 'Recorded run, played back with no model calls' + (data.mode_reason ? ': ' + data.mode_reason + '.' : '.') : (state.banner || ''));
+  notice(data && data.mode === 'replay' && !ON_BENCH ? 'Recorded run, played back with no model calls' + (data.mode_reason ? ': ' + data.mode_reason + '.' : '.') : (state.banner || ''));
   return data;
 }
 
@@ -251,7 +258,8 @@ async function loadStatus() {
     document.getElementById('composerTitle').style.display = s.free_text ? '' : 'none';
     state.banner = s.mode === 'live'
       ? 'Public demo: live runs on the real agent, in your own sandbox. You approve its writes.'
-      : 'Public demo: recorded runs played back with no model calls' + (s.mode_reason ? ' (' + s.mode_reason + ')' : '') + (ON_BENCH ? '. The bench on the right shows the real trace.' : '. The peek view shows the real trace.');
+      : (ON_BENCH ? 'This demo replays real runs that were recorded earlier, so nothing here costs anything or changes anything. The right side shows exactly what the AI did.'
+                  : 'Public demo: recorded runs played back with no model calls' + (s.mode_reason ? ' (' + s.mode_reason + ')' : '') + '. The peek view shows the real trace.');
     notice(state.banner);
     return;
   }
@@ -259,16 +267,32 @@ async function loadStatus() {
 }
 
 const CATEGORY_TAG_CLASS = { answerable: 'tag-answerable', needs_write: 'tag-needswrite', escalate: 'tag-escalate' };
+// The featured requests, grouped the way a visitor thinks about them, so the tricky ones (the
+// demo's strongest moment) are findable without guessing. No per-card verdict: the run shows it.
+const SEED_GROUPS = [
+  ['Requests that need a change', ['req-012', 'req-011']],
+  ['Tricky ones: people trying to get around the rules', ['req-020', 'req-024', 'req-021']],
+  ['Hard calls', ['req-019']],
+  ['Everyday questions', ['req-005', 'req-009']],
+];
+const SEED_HINTS = {
+  'req-020': 'pretends to be from Security', 'req-024': "claims a manager already OK'd it",
+  'req-021': "hides 'ignore your instructions' inside a normal request", 'req-019': 'asks to switch off two-factor sign-in',
+};
 
 function seedBtn(meta) {
   const btn = document.createElement('button');
   btn.className = 'seedbtn';
-  const tagClass = CATEGORY_TAG_CLASS[meta.expected_category] || '';
+  btn.dataset.seed = meta.id;
+  const hint = SEED_HINTS[meta.id];
   btn.innerHTML = `
-    <div class="seedhead">${esc(meta.id)} <span class="tag ${tagClass}">${esc(meta.expected_category)}</span></div>
+    <div class="seedhead"><span class="sid">${esc(meta.id)}</span>${hint ? ` <span class="hint">${esc(hint)}</span>` : ''}</div>
     <div class="preview">${esc(meta.preview)}</div>
-    <div class="manual">${esc(meta.manual_estimate)}</div>`;
+    <div class="manual">${esc(String(meta.manual_estimate || '').replace(/^manual:\s*/i, 'by hand today: '))}</div>`;
   btn.onclick = () => {
+    // The chosen request stays marked, so a list that moves under the pointer can't mislead.
+    document.querySelectorAll('.seedbtn.chosen').forEach(b => b.classList.remove('chosen'));
+    btn.classList.add('chosen');
     startSeed(meta.id);
     // One column on a phone: take the visitor to the conversation they just started.
     if (window.innerWidth <= 900) document.getElementById('stage').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -438,16 +462,25 @@ document.getElementById('sendBtn').onclick = sendCustom;
   await loadStatus();
   const allMeta = await (await fetch('/api/seed_requests')).json();
   const byId = Object.fromEntries(allMeta.map(m => [m.id, m]));
-  const featured = ['req-012','req-011','req-019','req-020','req-021','req-024'];
   const list = document.getElementById('seedList');
-  for (const id of featured.filter(id => byId[id])) list.appendChild(seedBtn(byId[id]));
-  const rest = allMeta.filter(m => !featured.includes(m.id));
+  const heading = (text) => { const h = document.createElement('div'); h.className = 'seedgroup'; h.textContent = text; list.appendChild(h); };
+  const placed = new Set();
+  for (const [title, ids] of SEED_GROUPS) {
+    const here = ids.filter(id => byId[id]);
+    if (!here.length) continue;
+    heading(title);
+    here.forEach(id => { list.appendChild(seedBtn(byId[id])); placed.add(id); });
+  }
+  const rest = allMeta.filter(m => !placed.has(m.id));
   if (rest.length) {
-    const label = document.createElement('div');
-    label.style.cssText = 'color:var(--muted); font-size:11px; margin:8px 0 4px;';
-    label.textContent = 'all seeded requests:';
-    list.appendChild(label);
+    heading('More requests');
     rest.forEach(m => list.appendChild(seedBtn(m)));
+  }
+  if (state.banner && !document.getElementById('composer').offsetParent) {
+    const n = document.createElement('div');
+    n.className = 'seednote';
+    n.textContent = 'These are recorded runs, so you pick one rather than typing. In a live install you type your own.';
+    list.appendChild(n);
   }
   refreshBoard();
   connectStream();

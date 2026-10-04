@@ -71,24 +71,24 @@
     });
   }
   StaticEventSource.prototype.close = function () { this.readyState = 2; this.onmessage = null; };
-  /* Inside the Agent Lab Bench shell (?bench_session=...), every run also goes to the bench
-     beside this page, converted by bench-adapter.js and posted through the shell (the bench
-     spec's section 3a). Outside the shell, none of this runs. */
+  /* Inside the Agent Lab Bench shell (?bench_session=...), every run also plays on the bench
+     beside this page, posted through the shell (the bench spec's section 3a). Nothing is converted
+     here: each recording carries Agent Lab's own events of the same run (scripts/regen_demo.py
+     made both from one run of the real graph), and data.json carries the map and story those runs
+     were recorded with. The engine plays them on the run's own clock. Outside the shell, none of
+     this runs. */
   var params = new URLSearchParams(location.search);
   var benchSession = params.get('bench_session');
-  if (benchSession && window.self !== window.top && window.Scenario1Bench) {
+  if (benchSession && window.self !== window.top) {
     var target = params.get('bench_origin') || (document.referrer ? new URL(document.referrer).origin : location.origin);
-    var adapters = {};
     var post = function (msg) { window.parent.postMessage(msg, target); };
     ready.then(function (e) {
       var d = loaded || {};
       if (d.bench) post({ type: 'bench:register', app_id: d.bench.topology.app.id, topology: d.bench.topology, story: d.bench.story });
-      e.subscribe(function (ev) {
-        if (!ev || !ev.run_id) return;
-        var a = adapters[ev.run_id] || (adapters[ev.run_id] = new window.Scenario1Bench.Adapter(benchSession, 'redacted'));
-        var out = a.feed(ev);  // the engine stamps events as shown, so waits read as they happened
-        if (out.length) post({ type: 'bench:events', events: out });
-        if (a.finished) delete adapters[ev.run_id];
+      e.subscribeBench(function (ev) {
+        var out = {}; for (var k in ev) out[k] = ev[k];
+        out.session_id = benchSession;
+        post({ type: 'bench:events', events: [out] });
       });
     });
   }

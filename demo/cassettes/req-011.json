@@ -1,0 +1,59 @@
+{
+ "v": "agentlab-cassette/0",
+ "scenario": "req-011",
+ "title": "I need read access to the Compass analytics dashboard",
+ "group": "It opens a ticket (a person approves)",
+ "recorded": "09-29-26",
+ "t0": 1790696431.2759,
+ "latency_basis": "the gap before each call's llm_call event in the original recording",
+ "input": {
+  "run_id": "rec-req-011",
+  "request_id": "req-011",
+  "requester_name": "Nadia Volkov",
+  "requester_role": "viewer",
+  "requester_id": null,
+  "channel": "helpdesk-requests",
+  "thread_ts": "0",
+  "message": "hey, i'm working on the Q3 marketing performance report and need read access to the Compass analytics dashboard to pull some campaign numbers myself instead of bugging the data team every time. my manager knows i'm doing this project, just haven't looped in IT yet - can you get that set up?",
+  "auto_approve": false
+ },
+ "run_id": "rec-req-011",
+ "resumes": {
+  "approved": {
+   "approved": true
+  },
+  "denied": {
+   "approved": false
+  }
+ },
+ "calls": [
+  {
+   "node": "classify",
+   "key": "5e9f230021ff32f04ea3a7952c579b7d8d51f51262f958752c8514eedb734348",
+   "model": "claude-sonnet-5",
+   "output": "\n{\"category\":\"needs_write\",\"rationale\":\"The requester is asking IT to grant them read access to the Compass analytics dashboard, a named data system, for a specific business reason (Q3 report). This requires opening a Waypoint Data Access Request ticket naming the system/dataset and business reason, with approval from the data owner or the requester's manager per Section 8 — verbal manager awareness isn't sufficient on its own to grant it.\",\"confidence\":0.93}",
+   "usage": {
+    "input_tokens": 3911,
+    "output_tokens": 296,
+    "cache_read": 0,
+    "cache_write": 0
+   },
+   "latency_ms": 4012.1,
+   "finish_reason": null
+  },
+  {
+   "node": "propose_action",
+   "key": "992e8f0e7ac7e5bf1b0704f5f59408a5b71b9f0de5af24dff73460a30db22f97",
+   "model": "claude-sonnet-5",
+   "output": "{\"action_type\":\"create_ticket\",\"title\":\"Data Access Request: Compass analytics dashboard\",\"description\":\"Requester Nadia Volkov (viewer) is working on the Q3 marketing performance report and needs read access to the Compass analytics dashboard to pull campaign numbers directly instead of routing requests through the data team. Requester states her manager is aware of this project, though IT has not yet been formally looped in. Requesting viewer-tier read access be reviewed and granted by the Compass system admins per the Data Access Request process.\",\"target_system\":\"Compass analytics dashboard\",\"system_as_written\":\"the Compass analytics dashboard\",\"target_tier\":\"viewer\",\"assignee\":null}",
+   "usage": {
+    "input_tokens": 1282,
+    "output_tokens": 227,
+    "cache_read": 0,
+    "cache_write": 0
+   },
+   "latency_ms": 3234.4,
+   "finish_reason": null
+  }
+ ]
+}

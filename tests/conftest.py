@@ -1,5 +1,10 @@
+import os
 import sys
 from pathlib import Path
+
+# Tests never send to a bench someone happens to be running on this machine; the ones about
+# Agent Lab capture spans in memory (agentlab.testing.capture).
+os.environ.setdefault("AGENT_LAB_URL", "off")
 
 import pytest
 from langchain_core.messages import AIMessage

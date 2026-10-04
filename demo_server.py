@@ -17,15 +17,15 @@ import asyncio
 import json
 import os
 import queue
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import Cookie, FastAPI, HTTPException, Request, Response
 from fastapi.responses import FileResponse, StreamingResponse
 from pydantic import BaseModel, Field
 
-from app import config
-from app.bench import client as bench_client
-from app.demo.engine import CHANNEL, LiveRunner, ReplayLibrary, Sandboxes
+from app import agent_lab, config
+from app.demo.engine import CHANNEL, LiveRunner, ReplayLibrary, Sandboxes, valid_session
 from app.demo.limits import RateLimiter, SpendCap
 from app.retrieval import HandbookIndex
 from cli import load_seed_requests
@@ -53,11 +53,6 @@ _live_runner: LiveRunner | None = None
 
 _all_requests = {r["id"]: r for r in load_seed_requests()}
 REQUESTS = {sid: _all_requests[sid] for sid in SCENARIOS if sid in _all_requests}
-MANUAL_ESTIMATE = {
-    "answerable": "manual: ~3–5 min, self-service or a quick lookup",
-    "needs_write": "manual: ~10–15 min, handbook + Waypoint ticket + wait for provisioning",
-    "escalate": "manual: human judgment required, no fixed time",
-}
 
 
 def _runner() -> LiveRunner:
@@ -92,9 +87,15 @@ def _box(response: Response | None, demo_sid: str | None):
     return box
 
 
-app = FastAPI(title="Northwire Helpdesk Agent: public demo", docs_url=None, redoc_url=None, openapi_url=None)
-# If a bench is configured, hand it this app's map and story (a no-op otherwise).
-bench_client.register()
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    # Live runs go to Agent Lab's bench (AGENT_LAB_URL, default the local one); a silent no-op without one.
+    agent_lab.init()
+    yield
+
+
+app = FastAPI(title="Northwire Helpdesk Agent: public demo", docs_url=None, redoc_url=None, openapi_url=None,
+              lifespan=lifespan)
 
 
 class CustomRequest(BaseModel):
@@ -110,8 +111,8 @@ class ApproveBody(BaseModel):
 def index(response: Response, demo_sid: str | None = Cookie(default=None), bench_session: str | None = None):
     resp = FileResponse(config.REPO_ROOT / "ui" / "index.html")
     box = SANDBOXES.get(demo_sid)
-    # Opened inside the bench's side-by-side shell: this visitor's runs also go to the bench.
-    if bench_client.enabled() and bench_client.valid_session(bench_session):
+    # Opened inside Agent Lab's side-by-side shell: this visitor's live runs are filed under its session.
+    if valid_session(bench_session):
         box.bench_session = bench_session
     if box.sid != demo_sid:
         resp.set_cookie("demo_sid", box.sid, httponly=True, samesite="lax", secure=SECURE_COOKIE, max_age=3600)
@@ -150,7 +151,7 @@ def seed_requests() -> list[dict]:
         preview = r["message"].strip().replace("\n", " ")
         out.append({"id": r["id"], "preview": preview[:97] + "..." if len(preview) > 100 else preview,
                     "expected_category": r["expected_category"],
-                    "manual_estimate": MANUAL_ESTIMATE.get(r["expected_category"], "")})
+                    "manual_estimate": config.MANUAL_ESTIMATE.get(r["expected_category"], "")})
     return out
 
 

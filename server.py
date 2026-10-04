@@ -34,7 +34,7 @@ from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.types import Command
 from pydantic import BaseModel, Field
 
-from app import config
+from app import agent_lab, config
 from app.boards import make_board
 from app.events import Event, EventBus
 from app.graph import build_graph
@@ -85,6 +85,7 @@ async def lifespan(_app: FastAPI):
     global _slack_handler
     port = os.environ.get("HELPDESK_PORT", "8731")  # the link only; uvicorn's --port picks the real port
     print(f"Operator link (approve/submit from the web view): http://127.0.0.1:{port}/#token={OPERATOR_TOKEN}", flush=True)
+    agent_lab.init()  # every run, live, on Agent Lab when its bench runs (AGENT_LAB_URL); a silent no-op otherwise
     if SLACK_MODE == "live":
         import logging
 
@@ -136,11 +137,6 @@ class ApproveBody(BaseModel):
     action_digest: str | None = None  # must match what the approver was shown
 
 
-MANUAL_ESTIMATE = {
-    "answerable": "manual: ~3–5 min, self-service or a quick lookup",
-    "needs_write": "manual: ~10–15 min, handbook + Waypoint ticket + wait for provisioning",
-    "escalate": "manual: human judgment required, no fixed time",
-}
 
 
 def _approval_blocks(run_id: str, action: dict, verdict: dict, digest: str) -> list[dict]:
@@ -409,7 +405,7 @@ def seed_requests() -> list[dict]:
             "id": r["id"],
             "preview": preview,
             "expected_category": r["expected_category"],
-            "manual_estimate": MANUAL_ESTIMATE.get(r["expected_category"], ""),
+            "manual_estimate": config.MANUAL_ESTIMATE.get(r["expected_category"], ""),
         })
     return out
 

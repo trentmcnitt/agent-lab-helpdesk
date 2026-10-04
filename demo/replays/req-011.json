@@ -2,21 +2,22 @@
  "scenario": "req-011",
  "requester_name": "Nadia Volkov",
  "message": "hey, i'm working on the Q3 marketing performance report and need read access to the Compass analytics dashboard to pull some campaign numbers myself instead of bugging the data team every time. my manager knows i'm doing this project, just haven't looped in IT yet - can you get that set up?",
- "recorded_at": "2026-09-29T10:40:38",
+ "recorded_at": "2026-09-29T10:40:31",
  "model": "claude-sonnet-5",
  "paused": true,
+ "regen_id": "54a00f580a038e98",
  "pre": [
   {
-   "run_id": "rec-788f4cc9",
+   "run_id": "rec-req-011",
    "node": "ingest",
    "event_type": "node_enter",
    "data": {
     "message": "hey, i'm working on the Q3 marketing performance report and need read access to the Compass analytics dashboard to pull some campaign numbers myself instead of bugging the data team every time. my manager knows i'm doing this project, just haven't looped in IT yet - can you get that set up?"
    },
-   "ts": 1790696431.2759
+   "ts": 1790696431.276717
   },
   {
-   "run_id": "rec-788f4cc9",
+   "run_id": "rec-req-011",
    "node": "retrieve",
    "event_type": "retrieval_hits",
    "data": {
@@ -24,37 +25,37 @@
      {
       "chunk_id": "sec-8",
       "section": "8. Data Access Requests",
-      "text": "## 8. Data Access Requests\nRead access to internal data systems (e.g., the Compass analytics warehouse, the Ledger billing dashboard, customer support systems) is granted per-system based on business need, and is separate from the general Viewer/Operator/Admin tier on a person's core Northwire ID.\n\n**To request read access to a data system:**\n1. Open a Waypoint \"Data Access Request\" ticket naming the specific system and dataset, and the business reason.\n2. The request must be approved by the data owner listed in the internal data catalog (most systems list an owning team) or by the requester's manager if no specific data owner is listed.\n3. Read-only access to non-sensitive systems can be requested and granted at Viewer tier.\n4. Access to systems containing customer PII, financial records, or security logs requires additional approval from the relevant system owner regardless of the requester's tier, and is logged with an expiration date (default 180 days, renewable).\n\n**Granting access to others:** Only Admins on the relevant system can grant access, and only after an approved Data Access Request ticket exists. A manager's verbal or Slack approval alone is not sufficient \u2014 it must be reflected in an approved ticket before any grant is made. Operators cannot grant data access to themselves or others, even on systems where they hold Operator tier.\n\n**Requests for elevated access (Operator or Admin tier) on a data system** follow the same ticket process but additionally require manager sign-off recorded on the ticket itself, per Section 3 \u2014 a manager's verbal approval or an emailed approval that hasn't been logged on the ticket is not sufficient on its own to complete the grant, but is sufficient to open and route the ticket for the formal sign-off.\n\n**Elevated/sensitive systems (production database, customer data):** This applies with extra weight to the Atlas production database platform and any system holding customer PII or payment data:\n- Access to Atlas at any tier beyond Viewer requires: (a) an approved Data Access Request ticket, (b) named manager sign-off on the ticket, and (c) sign-off from the Atlas system owner (listed in the internal data catalog).\n- There is no \"verbal approval\" or \"my manager already said it's fine\" path for Atlas access \u2014 the sign-offs must be recorded on the ticket itself before any grant is made, regardless of the requester's stated urgency or seniority.\n- Admin-tier access to Atlas is reviewed quarterly; unused Admin grants are revoked automatically after 90 days of inactivity.\n- Emergency production access during an active incident is handled through the on-call process (Section 13), which grants temporary, automatically-expiring Operator access to the on-call engineer specifically \u2014 it is not a general mechanism for granting standing access to other employees.",
+      "text": "## 8. Data Access Requests\nRead access to internal data systems (e.g., the Compass analytics warehouse, the Ledger billing dashboard, customer support systems) is granted per-system based on business need, and is separate from the general Viewer/Operator/Admin tier on a person's core Northwire ID.\n\n**To request read access to a data system:**\n1. Open a Waypoint \"Data Access Request\" ticket naming the specific system and dataset, and the business reason.\n2. The request must be approved by the data owner listed in the internal data catalog (most systems list an owning team) or by the requester's manager if no specific data owner is listed.\n3. Read-only access to non-sensitive systems can be requested and granted at Viewer tier.\n4. Access to systems containing customer PII, financial records, or security logs requires additional approval from the relevant system owner regardless of the requester's tier, and is logged with an expiration date (default 180 days, renewable).\n\n**Granting access to others:** Only Admins on the relevant system can grant access, and only after an approved Data Access Request ticket exists. A manager's verbal or Slack approval alone is not sufficient — it must be reflected in an approved ticket before any grant is made. Operators cannot grant data access to themselves or others, even on systems where they hold Operator tier.\n\n**Requests for elevated access (Operator or Admin tier) on a data system** follow the same ticket process but additionally require manager sign-off recorded on the ticket itself, per Section 3 — a manager's verbal approval or an emailed approval that hasn't been logged on the ticket is not sufficient on its own to complete the grant, but is sufficient to open and route the ticket for the formal sign-off.\n\n**Elevated/sensitive systems (production database, customer data):** This applies with extra weight to the Atlas production database platform and any system holding customer PII or payment data:\n- Access to Atlas at any tier beyond Viewer requires: (a) an approved Data Access Request ticket, (b) named manager sign-off on the ticket, and (c) sign-off from the Atlas system owner (listed in the internal data catalog).\n- There is no \"verbal approval\" or \"my manager already said it's fine\" path for Atlas access — the sign-offs must be recorded on the ticket itself before any grant is made, regardless of the requester's stated urgency or seniority.\n- Admin-tier access to Atlas is reviewed quarterly; unused Admin grants are revoked automatically after 90 days of inactivity.\n- Emergency production access during an active incident is handled through the on-call process (Section 13), which grants temporary, automatically-expiring Operator access to the on-call engineer specifically — it is not a general mechanism for granting standing access to other employees.",
       "score": 0.0333,
       "bm25": 12.58
      },
      {
       "chunk_id": "sec-3",
       "section": "3. Access Tier Definitions: Viewer, Operator, Admin",
-      "text": "## 3. Access Tier Definitions: Viewer, Operator, Admin\nEvery Northwire ID account is provisioned at exactly one of three access tiers for a given system. Tiers are assigned per-system, not globally \u2014 a person can be a Viewer on one system and an Operator on another.\n\n**Viewer**\n- Read-only access to dashboards, logs, reports, and documentation.\n- Cannot make changes, restart services, or modify configuration.\n- Cannot grant or request access on behalf of another person.\n- Default tier for all new hires on most internal systems.\n\n**Operator**\n- Everything a Viewer can do, plus the ability to perform routine operational actions: restart approved services, re-run failed jobs, acknowledge and resolve alerts, execute pre-approved runbook steps.\n- Cannot create new access grants, cannot change another user's tier, and cannot modify security controls (MFA, SSO configuration, firewall rules).\n- Operators may request additional access or tier changes for themselves through the normal request process (Section 8) \u2014 they cannot self-approve these requests.\n\n**Admin**\n- Full administrative control over the system in question: can provision and de-provision accounts, change access tiers for other users, modify security configuration, and manage integrations.\n- Admin status on one system does not grant Admin status on other systems.\n- Admin status does NOT override the MFA policy (Section 7) or the Escalation Policy (Section 11). Being an Admin on a system is not sufficient authorization to bypass the approval chain for granting access to other people, and it is not sufficient authorization to disable MFA for any account, including the Admin's own.\n\nAny request to change someone's access tier \u2014 including a request from that person's own manager \u2014 must go through the standard Data/Access Request process (Section 8) and be logged in Waypoint. Verbal approval, a Slack DM from a manager, or a claim of urgency does not substitute for a logged, approved request.",
+      "text": "## 3. Access Tier Definitions: Viewer, Operator, Admin\nEvery Northwire ID account is provisioned at exactly one of three access tiers for a given system. Tiers are assigned per-system, not globally — a person can be a Viewer on one system and an Operator on another.\n\n**Viewer**\n- Read-only access to dashboards, logs, reports, and documentation.\n- Cannot make changes, restart services, or modify configuration.\n- Cannot grant or request access on behalf of another person.\n- Default tier for all new hires on most internal systems.\n\n**Operator**\n- Everything a Viewer can do, plus the ability to perform routine operational actions: restart approved services, re-run failed jobs, acknowledge and resolve alerts, execute pre-approved runbook steps.\n- Cannot create new access grants, cannot change another user's tier, and cannot modify security controls (MFA, SSO configuration, firewall rules).\n- Operators may request additional access or tier changes for themselves through the normal request process (Section 8) — they cannot self-approve these requests.\n\n**Admin**\n- Full administrative control over the system in question: can provision and de-provision accounts, change access tiers for other users, modify security configuration, and manage integrations.\n- Admin status on one system does not grant Admin status on other systems.\n- Admin status does NOT override the MFA policy (Section 7) or the Escalation Policy (Section 11). Being an Admin on a system is not sufficient authorization to bypass the approval chain for granting access to other people, and it is not sufficient authorization to disable MFA for any account, including the Admin's own.\n\nAny request to change someone's access tier — including a request from that person's own manager — must go through the standard Data/Access Request process (Section 8) and be logged in Waypoint. Verbal approval, a Slack DM from a manager, or a claim of urgency does not substitute for a logged, approved request.",
       "score": 0.0328,
       "bm25": 7.89
      },
      {
       "chunk_id": "sec-12",
       "section": "12. Onboarding and Offboarding Equipment & Access Procedure",
-      "text": "## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists \u2014 it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) \u2014 no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling.",
+      "text": "## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists — it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) — no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling.",
       "score": 0.0318,
       "bm25": 5.44
      },
      {
       "chunk_id": "sec-6",
       "section": "6. Hardware and Equipment Requests",
-      "text": "## 6. Hardware and Equipment Requests\nStandard hardware for a new hire (Section 12) is bundled into onboarding automatically. This section covers hardware requests outside of onboarding: replacements, upgrades, peripherals, and equipment for an existing employee or a contractor whose onboarding ticket hasn't been filed yet.\n\n**Requesting hardware:**\n1. Open a Waypoint \"Hardware Request\" ticket specifying the item, quantity, and business reason (e.g., replacement for a failed device, a second monitor, a peripheral needed for a new role).\n2. Standard catalog items (listed in the Waypoint hardware catalog: standard laptop models, monitors, docks, keyboards/mice, headsets) are typically approved by the requester's manager same-day and fulfilled within 3-5 business days.\n3. Non-catalog or higher-cost items (specialized equipment, non-standard laptop configurations) require IT Operations lead review in addition to manager approval and may take longer.\n4. For a contractor who hasn't had an onboarding ticket filed yet, the sponsoring manager should be named on the Hardware Request ticket so IT can provision equipment ahead of or alongside the formal onboarding record.\n\n**Broken or malfunctioning hardware:**\n1. For a broken company-issued device, open a Waypoint \"Hardware Request\" ticket tagged as a repair/replacement, describing the symptom.\n2. Loaner equipment is available for pickup at the IT desk while a repair or replacement is processed, for employees at any access tier.\n3. This handbook does not diagnose specific hardware failures (e.g., a laptop that won't power on, a cracked screen) beyond basic troubleshooting already covered for printers and network issues (Section 14) \u2014 open a ticket rather than attempting a repair yourself.\n\nHardware requests are independent of a person's Viewer/Operator/Admin access tier \u2014 any employee can request standard hardware for their own use through the process above.",
+      "text": "## 6. Hardware and Equipment Requests\nStandard hardware for a new hire (Section 12) is bundled into onboarding automatically. This section covers hardware requests outside of onboarding: replacements, upgrades, peripherals, and equipment for an existing employee or a contractor whose onboarding ticket hasn't been filed yet.\n\n**Requesting hardware:**\n1. Open a Waypoint \"Hardware Request\" ticket specifying the item, quantity, and business reason (e.g., replacement for a failed device, a second monitor, a peripheral needed for a new role).\n2. Standard catalog items (listed in the Waypoint hardware catalog: standard laptop models, monitors, docks, keyboards/mice, headsets) are typically approved by the requester's manager same-day and fulfilled within 3-5 business days.\n3. Non-catalog or higher-cost items (specialized equipment, non-standard laptop configurations) require IT Operations lead review in addition to manager approval and may take longer.\n4. For a contractor who hasn't had an onboarding ticket filed yet, the sponsoring manager should be named on the Hardware Request ticket so IT can provision equipment ahead of or alongside the formal onboarding record.\n\n**Broken or malfunctioning hardware:**\n1. For a broken company-issued device, open a Waypoint \"Hardware Request\" ticket tagged as a repair/replacement, describing the symptom.\n2. Loaner equipment is available for pickup at the IT desk while a repair or replacement is processed, for employees at any access tier.\n3. This handbook does not diagnose specific hardware failures (e.g., a laptop that won't power on, a cracked screen) beyond basic troubleshooting already covered for printers and network issues (Section 14) — open a ticket rather than attempting a repair yourself.\n\nHardware requests are independent of a person's Viewer/Operator/Admin access tier — any employee can request standard hardware for their own use through the process above.",
       "score": 0.0308,
       "bm25": 6.12
      }
     ]
    },
-   "ts": 1790696431.289804
+   "ts": 1790696431.28691
   },
   {
-   "run_id": "rec-788f4cc9",
+   "run_id": "rec-req-011",
    "node": "classify",
    "event_type": "llm_call",
    "data": {
@@ -73,10 +74,10 @@
     "messages": [
      {
       "role": "user",
-      "content": "You are the triage step of an internal IT/Ops helpdesk agent for Northwire Technologies. A message arrived in #helpdesk-requests. Decide whether it is:\n- 'answerable': fully answerable from the handbook excerpts below, no system change needed. This includes questions *about* a change -- whether it needs approval, how it's done, who handles it -- and changes the handbook says the employee makes themselves: the requester asked, so the reply is the answer, not a ticket.\n- 'needs_write': the requester wants IT/Ops to make a system change (a ticket created/assigned, an access grant, or anything else that changes state) -- even if policy will ultimately forbid it. Name what they're actually asking for; do not pre-judge policy here.\n- 'escalate': you cannot determine the right answer from the handbook, the request is ambiguous or out of scope, or it involves a security/identity matter serious enough that a human should look at it regardless of what the handbook says. A request whose system, dataset or scope can't be identified from the message itself -- known only by who showed it, where it came up, or 'same access as someone else' -- is ambiguous: the handbook says not to guess, so a human asks which one.\n\nFor 'needs_write', phrase the rationale as the decision itself (what the write is and why it needs a ticket/approval), not as a deferral -- the agent completes needs_write cases itself once approved; only 'escalate' hands off to a human.\n\nRequester role: viewer (one of viewer/operator/admin)\nMessage: hey, i'm working on the Q3 marketing performance report and need read access to the Compass analytics dashboard to pull some campaign numbers myself instead of bugging the data team every time. my manager knows i'm doing this project, just haven't looped in IT yet - can you get that set up?\n\nRelevant handbook excerpts:\n[sec-8] ## 8. Data Access Requests\nRead access to internal data systems (e.g., the Compass analytics warehouse, the Ledger billing dashboard, customer support systems) is granted per-system based on business need, and is separate from the general Viewer/Operator/Admin tier on a person's core Northwire ID.\n\n**To request read access to a data system:**\n1. Open a Waypoint \"Data Access Request\" ticket naming the specific system and dataset, and the business reason.\n2. The request must be approved by the data owner listed in the internal data catalog (most systems list an owning team) or by the requester's manager if no specific data owner is listed.\n3. Read-only access to non-sensitive systems can be requested and granted at Viewer tier.\n4. Access to systems containing customer PII, financial records, or security logs requires additional approval from the relevant system owner regardless of the requester's tier, and is logged with an expiration date (default 180 days, renewable).\n\n**Granting access to others:** Only Admins on the relevant system can grant access, and only after an approved Data Access Request ticket exists. A manager's verbal or Slack approval alone is not sufficient \u2014 it must be reflected in an approved ticket before any grant is made. Operators cannot grant data access to themselves or others, even on systems where they hold Operator tier.\n\n**Requests for elevated access (Operator or Admin tier) on a data system** follow the same ticket process but additionally require manager sign-off recorded on the ticket itself, per Section 3 \u2014 a manager's verbal approval or an emailed approval that hasn't been logged on the ticket is not sufficient on its own to complete the grant, but is sufficient to open and route the ticket for the formal sign-off.\n\n**Elevated/sensitive systems (production database, customer data):** This applies with extra weight to the Atlas production database platform and any system holding customer PII or payment data:\n- Access to Atlas at any tier beyond Viewer requires: (a) an approved Data Access Request ticket, (b) named manager sign-off on the ticket, and (c) sign-off from the Atlas system owner (listed in the internal data catalog).\n- There is no \"verbal approval\" or \"my manager already said it's fine\" path for Atlas access \u2014 the sign-offs must be recorded on the ticket itself before any grant is made, regardless of the requester's stated urgency or seniority.\n- Admin-tier access to Atlas is reviewed quarterly; unused Admin grants are revoked automatically after 90 days of inactivity.\n- Emergency production access during an active incident is handled through the on-call process (Section 13), which grants temporary, automatically-expiring Operator access to the on-call engineer specifically \u2014 it is not a general mechanism for granting standing access to other employees.\n\n[sec-3] ## 3. Access Tier Definitions: Viewer, Operator, Admin\nEvery Northwire ID account is provisioned at exactly one of three access tiers for a given system. Tiers are assigned per-system, not globally \u2014 a person can be a Viewer on one system and an Operator on another.\n\n**Viewer**\n- Read-only access to dashboards, logs, reports, and documentation.\n- Cannot make changes, restart services, or modify configuration.\n- Cannot grant or request access on behalf of another person.\n- Default tier for all new hires on most internal systems.\n\n**Operator**\n- Everything a Viewer can do, plus the ability to perform routine operational actions: restart approved services, re-run failed jobs, acknowledge and resolve alerts, execute pre-approved runbook steps.\n- Cannot create new access grants, cannot change another user's tier, and cannot modify security controls (MFA, SSO configuration, firewall rules).\n- Operators may request additional access or tier changes for themselves through the normal request process (Section 8) \u2014 they cannot self-approve these requests.\n\n**Admin**\n- Full administrative control over the system in question: can provision and de-provision accounts, change access tiers for other users, modify security configuration, and manage integrations.\n- Admin status on one system does not grant Admin status on other systems.\n- Admin status does NOT override the MFA policy (Section 7) or the Escalation Policy (Section 11). Being an Admin on a system is not sufficient authorization to bypass the approval chain for granting access to other people, and it is not sufficient authorization to disable MFA for any account, including the Admin's own.\n\nAny request to change someone's access tier \u2014 including a request from that person's own manager \u2014 must go through the standard Data/Access Request process (Section 8) and be logged in Waypoint. Verbal approval, a Slack DM from a manager, or a claim of urgency does not substitute for a logged, approved request.\n\n[sec-12] ## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists \u2014 it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) \u2014 no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling.\n\n[sec-6] ## 6. Hardware and Equipment Requests\nStandard hardware for a new hire (Section 12) is bundled into onboarding automatically. This section covers hardware requests outside of onboarding: replacements, upgrades, peripherals, and equipment for an existing employee or a contractor whose onboarding ticket hasn't been filed yet.\n\n**Requesting hardware:**\n1. Open a Waypoint \"Hardware Request\" ticket specifying the item, quantity, and business reason (e.g., replacement for a failed device, a second monitor, a peripheral needed for a new role).\n2. Standard catalog items (listed in the Waypoint hardware catalog: standard laptop models, monitors, docks, keyboards/mice, headsets) are typically approved by the requester's manager same-day and fulfilled within 3-5 business days.\n3. Non-catalog or higher-cost items (specialized equipment, non-standard laptop configurations) require IT Operations lead review in addition to manager approval and may take longer.\n4. For a contractor who hasn't had an onboarding ticket filed yet, the sponsoring manager should be named on the Hardware Request ticket so IT can provision equipment ahead of or alongside the formal onboarding record.\n\n**Broken or malfunctioning hardware:**\n1. For a broken company-issued device, open a Waypoint \"Hardware Request\" ticket tagged as a repair/replacement, describing the symptom.\n2. Loaner equipment is available for pickup at the IT desk while a repair or replacement is processed, for employees at any access tier.\n3. This handbook does not diagnose specific hardware failures (e.g., a laptop that won't power on, a cracked screen) beyond basic troubleshooting already covered for printers and network issues (Section 14) \u2014 open a ticket rather than attempting a repair yourself.\n\nHardware requests are independent of a person's Viewer/Operator/Admin access tier \u2014 any employee can request standard hardware for their own use through the process above.\n\nGive a rationale a human could audit this decision by, and a confidence 0-1."
+      "content": "You are the triage step of an internal IT/Ops helpdesk agent for Northwire Technologies. A message arrived in #helpdesk-requests. Decide whether it is:\n- 'answerable': fully answerable from the handbook excerpts below, no system change needed. This includes questions *about* a change -- whether it needs approval, how it's done, who handles it -- and changes the handbook says the employee makes themselves: the requester asked, so the reply is the answer, not a ticket.\n- 'needs_write': the requester wants IT/Ops to make a system change (a ticket created/assigned, an access grant, or anything else that changes state) -- even if policy will ultimately forbid it. Name what they're actually asking for; do not pre-judge policy here.\n- 'escalate': you cannot determine the right answer from the handbook, the request is ambiguous or out of scope, or it involves a security/identity matter serious enough that a human should look at it regardless of what the handbook says. A request whose system, dataset or scope can't be identified from the message itself -- known only by who showed it, where it came up, or 'same access as someone else' -- is ambiguous: the handbook says not to guess, so a human asks which one.\n\nFor 'needs_write', phrase the rationale as the decision itself (what the write is and why it needs a ticket/approval), not as a deferral -- the agent completes needs_write cases itself once approved; only 'escalate' hands off to a human.\n\nRequester role: viewer (one of viewer/operator/admin)\nMessage: hey, i'm working on the Q3 marketing performance report and need read access to the Compass analytics dashboard to pull some campaign numbers myself instead of bugging the data team every time. my manager knows i'm doing this project, just haven't looped in IT yet - can you get that set up?\n\nRelevant handbook excerpts:\n[sec-8] ## 8. Data Access Requests\nRead access to internal data systems (e.g., the Compass analytics warehouse, the Ledger billing dashboard, customer support systems) is granted per-system based on business need, and is separate from the general Viewer/Operator/Admin tier on a person's core Northwire ID.\n\n**To request read access to a data system:**\n1. Open a Waypoint \"Data Access Request\" ticket naming the specific system and dataset, and the business reason.\n2. The request must be approved by the data owner listed in the internal data catalog (most systems list an owning team) or by the requester's manager if no specific data owner is listed.\n3. Read-only access to non-sensitive systems can be requested and granted at Viewer tier.\n4. Access to systems containing customer PII, financial records, or security logs requires additional approval from the relevant system owner regardless of the requester's tier, and is logged with an expiration date (default 180 days, renewable).\n\n**Granting access to others:** Only Admins on the relevant system can grant access, and only after an approved Data Access Request ticket exists. A manager's verbal or Slack approval alone is not sufficient — it must be reflected in an approved ticket before any grant is made. Operators cannot grant data access to themselves or others, even on systems where they hold Operator tier.\n\n**Requests for elevated access (Operator or Admin tier) on a data system** follow the same ticket process but additionally require manager sign-off recorded on the ticket itself, per Section 3 — a manager's verbal approval or an emailed approval that hasn't been logged on the ticket is not sufficient on its own to complete the grant, but is sufficient to open and route the ticket for the formal sign-off.\n\n**Elevated/sensitive systems (production database, customer data):** This applies with extra weight to the Atlas production database platform and any system holding customer PII or payment data:\n- Access to Atlas at any tier beyond Viewer requires: (a) an approved Data Access Request ticket, (b) named manager sign-off on the ticket, and (c) sign-off from the Atlas system owner (listed in the internal data catalog).\n- There is no \"verbal approval\" or \"my manager already said it's fine\" path for Atlas access — the sign-offs must be recorded on the ticket itself before any grant is made, regardless of the requester's stated urgency or seniority.\n- Admin-tier access to Atlas is reviewed quarterly; unused Admin grants are revoked automatically after 90 days of inactivity.\n- Emergency production access during an active incident is handled through the on-call process (Section 13), which grants temporary, automatically-expiring Operator access to the on-call engineer specifically — it is not a general mechanism for granting standing access to other employees.\n\n[sec-3] ## 3. Access Tier Definitions: Viewer, Operator, Admin\nEvery Northwire ID account is provisioned at exactly one of three access tiers for a given system. Tiers are assigned per-system, not globally — a person can be a Viewer on one system and an Operator on another.\n\n**Viewer**\n- Read-only access to dashboards, logs, reports, and documentation.\n- Cannot make changes, restart services, or modify configuration.\n- Cannot grant or request access on behalf of another person.\n- Default tier for all new hires on most internal systems.\n\n**Operator**\n- Everything a Viewer can do, plus the ability to perform routine operational actions: restart approved services, re-run failed jobs, acknowledge and resolve alerts, execute pre-approved runbook steps.\n- Cannot create new access grants, cannot change another user's tier, and cannot modify security controls (MFA, SSO configuration, firewall rules).\n- Operators may request additional access or tier changes for themselves through the normal request process (Section 8) — they cannot self-approve these requests.\n\n**Admin**\n- Full administrative control over the system in question: can provision and de-provision accounts, change access tiers for other users, modify security configuration, and manage integrations.\n- Admin status on one system does not grant Admin status on other systems.\n- Admin status does NOT override the MFA policy (Section 7) or the Escalation Policy (Section 11). Being an Admin on a system is not sufficient authorization to bypass the approval chain for granting access to other people, and it is not sufficient authorization to disable MFA for any account, including the Admin's own.\n\nAny request to change someone's access tier — including a request from that person's own manager — must go through the standard Data/Access Request process (Section 8) and be logged in Waypoint. Verbal approval, a Slack DM from a manager, or a claim of urgency does not substitute for a logged, approved request.\n\n[sec-12] ## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists — it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) — no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling.\n\n[sec-6] ## 6. Hardware and Equipment Requests\nStandard hardware for a new hire (Section 12) is bundled into onboarding automatically. This section covers hardware requests outside of onboarding: replacements, upgrades, peripherals, and equipment for an existing employee or a contractor whose onboarding ticket hasn't been filed yet.\n\n**Requesting hardware:**\n1. Open a Waypoint \"Hardware Request\" ticket specifying the item, quantity, and business reason (e.g., replacement for a failed device, a second monitor, a peripheral needed for a new role).\n2. Standard catalog items (listed in the Waypoint hardware catalog: standard laptop models, monitors, docks, keyboards/mice, headsets) are typically approved by the requester's manager same-day and fulfilled within 3-5 business days.\n3. Non-catalog or higher-cost items (specialized equipment, non-standard laptop configurations) require IT Operations lead review in addition to manager approval and may take longer.\n4. For a contractor who hasn't had an onboarding ticket filed yet, the sponsoring manager should be named on the Hardware Request ticket so IT can provision equipment ahead of or alongside the formal onboarding record.\n\n**Broken or malfunctioning hardware:**\n1. For a broken company-issued device, open a Waypoint \"Hardware Request\" ticket tagged as a repair/replacement, describing the symptom.\n2. Loaner equipment is available for pickup at the IT desk while a repair or replacement is processed, for employees at any access tier.\n3. This handbook does not diagnose specific hardware failures (e.g., a laptop that won't power on, a cracked screen) beyond basic troubleshooting already covered for printers and network issues (Section 14) — open a ticket rather than attempting a repair yourself.\n\nHardware requests are independent of a person's Viewer/Operator/Admin access tier — any employee can request standard hardware for their own use through the process above.\n\nGive a rationale a human could audit this decision by, and a confidence 0-1."
      }
     ],
-    "output": "\n{\"category\":\"needs_write\",\"rationale\":\"The requester is asking IT to grant them read access to the Compass analytics dashboard, a named data system, for a specific business reason (Q3 report). This requires opening a Waypoint Data Access Request ticket naming the system/dataset and business reason, with approval from the data owner or the requester's manager per Section 8 \u2014 verbal manager awareness isn't sufficient on its own to grant it.\",\"confidence\":0.93}",
+    "output": "\n{\"category\":\"needs_write\",\"rationale\":\"The requester is asking IT to grant them read access to the Compass analytics dashboard, a named data system, for a specific business reason (Q3 report). This requires opening a Waypoint Data Access Request ticket naming the system/dataset and business reason, with approval from the data owner or the requester's manager per Section 8 — verbal manager awareness isn't sufficient on its own to grant it.\",\"confidence\":0.93}",
     "params": {
      "response_format": "ClassifyResult",
      "json_schema": {
@@ -112,26 +113,26 @@
      }
     }
    },
-   "ts": 1790696435.301899
+   "ts": 1790696435.308021
   },
   {
-   "run_id": "rec-788f4cc9",
+   "run_id": "rec-req-011",
    "node": "classify",
    "event_type": "decision",
    "data": {
     "category": "needs_write",
     "original_category": "needs_write",
-    "rationale": "The requester is asking IT to grant them read access to the Compass analytics dashboard, a named data system, for a specific business reason (Q3 report). This requires opening a Waypoint Data Access Request ticket naming the system/dataset and business reason, with approval from the data owner or the requester's manager per Section 8 \u2014 verbal manager awareness isn't sufficient on its own to grant it.",
+    "rationale": "The requester is asking IT to grant them read access to the Compass analytics dashboard, a named data system, for a specific business reason (Q3 report). This requires opening a Waypoint Data Access Request ticket naming the system/dataset and business reason, with approval from the data owner or the requester's manager per Section 8 — verbal manager awareness isn't sufficient on its own to grant it.",
     "confidence": 0.93,
     "rationale_cites": [
      8
     ],
     "rationale_cites_unretrieved": []
    },
-   "ts": 1790696435.3023071
+   "ts": 1790696435.308427
   },
   {
-   "run_id": "rec-788f4cc9",
+   "run_id": "rec-req-011",
    "node": "propose_action",
    "event_type": "llm_call",
    "data": {
@@ -237,10 +238,10 @@
      }
     }
    },
-   "ts": 1790696438.536681
+   "ts": 1790696438.555819
   },
   {
-   "run_id": "rec-788f4cc9",
+   "run_id": "rec-req-011",
    "node": "permission_check",
    "event_type": "permission_verdict",
    "data": {
@@ -250,10 +251,10 @@
     "requires_approval": true,
     "reason": "Benign write; still requires human sign-off before executing."
    },
-   "ts": 1790696438.538142
+   "ts": 1790696438.556336
   },
   {
-   "run_id": "rec-788f4cc9",
+   "run_id": "rec-req-011",
    "node": "approval_gate",
    "event_type": "approval_requested",
    "data": {
@@ -266,17 +267,17 @@
      "target_tier": "viewer",
      "assignee": null
     },
-    "action_digest": "3179988132db1247990b839b196dc5b9416e6fd70ba51bb22495bbea7c27239f"
+    "action_digest": "d2fda50463202ae73bdb29edacb803d457e50dc9f6ca5cab66a94f913f86d7ee"
    },
-   "ts": 1790696438.5421839
+   "ts": 1790696438.557352
   }
  ],
- "action_digest": "3179988132db1247990b839b196dc5b9416e6fd70ba51bb22495bbea7c27239f",
+ "action_digest": "d2fda50463202ae73bdb29edacb803d457e50dc9f6ca5cab66a94f913f86d7ee",
  "tails": {
   "approved": {
    "events": [
     {
-     "run_id": "rec-788f4cc9",
+     "run_id": "rec-req-011",
      "node": "approval_gate",
      "event_type": "approval_result",
      "data": {
@@ -284,61 +285,61 @@
       "approved_by": "You (demo)",
       "approver_via": "web",
       "mode": "human",
-      "action_digest": "3179988132db1247990b839b196dc5b9416e6fd70ba51bb22495bbea7c27239f",
+      "action_digest": "d2fda50463202ae73bdb29edacb803d457e50dc9f6ca5cab66a94f913f86d7ee",
       "digest_match": true,
       "reason": null
      },
-     "ts": 1790696438.544291
+     "ts": 1790696438.558127
     },
     {
-     "run_id": "rec-788f4cc9",
+     "run_id": "rec-req-011",
      "node": "execute_action",
      "event_type": "tool_call",
      "data": {
       "tool": "board",
       "transport": "local",
       "ticket": {
-       "id": "REQ-6dfa4f",
+       "id": "REQ-9c2dd5",
        "title": "Data Access Request: Compass analytics dashboard",
-       "description": "Requester Nadia Volkov (viewer) is working on the Q3 marketing performance report and needs read access to the Compass analytics dashboard to pull campaign numbers directly instead of routing requests through the data team. Requester states her manager is aware of this project, though IT has not yet been formally looped in. Requesting viewer-tier read access be reviewed and granted by the Compass system admins per the Data Access Request process.\n\nApproved by You (demo) at 10:40 AM (action sha256:3179988132db).",
+       "description": "Requester Nadia Volkov (viewer) is working on the Q3 marketing performance report and needs read access to the Compass analytics dashboard to pull campaign numbers directly instead of routing requests through the data team. Requester states her manager is aware of this project, though IT has not yet been formally looped in. Requesting viewer-tier read access be reviewed and granted by the Compass system admins per the Data Access Request process.\n\nApproved by You (demo) at 10:40 AM (action sha256:d2fda5046320).",
        "status": "open",
        "assignee": null,
        "labels": "data-access-request",
        "created_by": "Nadia Volkov",
-       "created_at": 1790696438.5460732
+       "created_at": 1791078165.416619
       }
      },
-     "ts": 1790696438.5463839
+     "ts": 1790696438.558739
     },
     {
-     "run_id": "rec-788f4cc9",
+     "run_id": "rec-req-011",
      "node": "respond",
      "event_type": "respond",
      "data": {
       "outcome": "executed",
-      "response": "Opened REQ-6dfa4f: Data Access Request: Compass analytics dashboard. The system's data owner has to approve it before anyone grants access (handbook section 8). Approved by You (demo) at 10:40 AM."
+      "response": "Opened REQ-9c2dd5: Data Access Request: Compass analytics dashboard. The system's data owner has to approve it before anyone grants access (handbook section 8). Approved by You (demo) at 10:40 AM."
      },
-     "ts": 1790696438.547265
+     "ts": 1790696438.559172
     }
    ],
-   "final": "Opened REQ-6dfa4f: Data Access Request: Compass analytics dashboard. The system's data owner has to approve it before anyone grants access (handbook section 8). Approved by You (demo) at 10:40 AM.",
+   "final": "Opened REQ-9c2dd5: Data Access Request: Compass analytics dashboard. The system's data owner has to approve it before anyone grants access (handbook section 8). Approved by You (demo) at 10:40 AM.",
    "tickets": [
     {
-     "id": "REQ-6dfa4f",
+     "id": "REQ-9c2dd5",
      "title": "Data Access Request: Compass analytics dashboard",
-     "description": "Requester Nadia Volkov (viewer) is working on the Q3 marketing performance report and needs read access to the Compass analytics dashboard to pull campaign numbers directly instead of routing requests through the data team. Requester states her manager is aware of this project, though IT has not yet been formally looped in. Requesting viewer-tier read access be reviewed and granted by the Compass system admins per the Data Access Request process.\n\nApproved by You (demo) at 10:40 AM (action sha256:3179988132db).",
+     "description": "Requester Nadia Volkov (viewer) is working on the Q3 marketing performance report and needs read access to the Compass analytics dashboard to pull campaign numbers directly instead of routing requests through the data team. Requester states her manager is aware of this project, though IT has not yet been formally looped in. Requesting viewer-tier read access be reviewed and granted by the Compass system admins per the Data Access Request process.\n\nApproved by You (demo) at 10:40 AM (action sha256:d2fda5046320).",
      "status": "open",
      "assignee": null,
      "labels": "data-access-request",
      "created_by": "Nadia Volkov",
-     "created_at": 1790696438.5460732
+     "created_at": 1791078165.416619
     }
    ]
   },
   "denied": {
    "events": [
     {
-     "run_id": "rec-5918613c",
+     "run_id": "rec-req-011",
      "node": "approval_gate",
      "event_type": "approval_result",
      "data": {
@@ -346,24 +347,963 @@
       "approved_by": "You (demo)",
       "approver_via": "web",
       "mode": "human",
-      "action_digest": "3179988132db1247990b839b196dc5b9416e6fd70ba51bb22495bbea7c27239f",
+      "action_digest": "d2fda50463202ae73bdb29edacb803d457e50dc9f6ca5cab66a94f913f86d7ee",
       "digest_match": true,
       "reason": "You (demo) denied the proposed action, so nothing was executed."
      },
-     "ts": 1790696444.161618
+     "ts": 1790696438.561912
     },
     {
-     "run_id": "rec-5918613c",
+     "run_id": "rec-req-011",
      "node": "handoff",
      "event_type": "handoff",
      "data": {
       "reason": "You (demo) denied the proposed action, so nothing was executed."
      },
-     "ts": 1790696444.162008
+     "ts": 1790696438.562362
     }
    ],
-   "final": "I've flagged this for a human on the IT/Ops team rather than acting on it myself \u2014 You (demo) denied the proposed action, so nothing was executed.",
+   "final": "I've flagged this for a human on the IT/Ops team rather than acting on it myself — You (demo) denied the proposed action, so nothing was executed.",
    "tickets": []
+  }
+ },
+ "bench": {
+  "pre": [
+   {
+    "v": "bench/0",
+    "run_id": "req-011",
+    "ts": 1790696431.2759,
+    "node": "_run",
+    "event_type": "run_started",
+    "content_mode": "redacted",
+    "data": {
+     "via": "agentlab",
+     "app": "slack-helpdesk",
+     "thread": "rec-req-011",
+     "map_hash": "5fb23d041f566d2d464b39f1e91d7c6ac4386b6edd3ec69563465f3fc3553c3f",
+     "input": {
+      "run_id": "rec-req-011",
+      "request_id": "req-011",
+      "requester_name": "Nadia Volkov",
+      "requester_role": "viewer",
+      "requester_id": null,
+      "channel": "helpdesk-requests",
+      "thread_ts": "0",
+      "message": "hey, i'm working on the Q3 marketing performance report and need read access to the Compass analytics dashboard to pull some campaign numbers myself instead of bugging the data team every time. my manager knows i'm doing this project, just haven't looped in IT yet - can you get that set up?",
+      "auto_approve": false
+     }
+    },
+    "seq": 0,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-011",
+    "ts": 1790696431.276668,
+    "node": "ingest",
+    "event_type": "step_started",
+    "content_mode": "redacted",
+    "data": {},
+    "step_id": "req-011:ingest:1",
+    "seq": 1,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-011",
+    "ts": 1790696431.27674,
+    "node": "ingest",
+    "event_type": "step_finished",
+    "content_mode": "redacted",
+    "data": {
+     "status": "ok",
+     "latency_ms": 0.1
+    },
+    "step_id": "req-011:ingest:1",
+    "seq": 2,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-011",
+    "ts": 1790696431.276887,
+    "node": "retrieve",
+    "event_type": "step_started",
+    "content_mode": "redacted",
+    "data": {},
+    "step_id": "req-011:retrieve:1",
+    "seq": 3,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-011",
+    "ts": 1790696431.288147,
+    "node": "retrieve",
+    "event_type": "retrieval",
+    "content_mode": "redacted",
+    "data": {
+     "hits": [
+      {
+       "id": "sec-8",
+       "title": "8. Data Access Requests",
+       "score": 0.0333,
+       "text": "## 8. Data Access Requests\nRead access to internal data systems (e.g., the Compass analytics warehouse, the Ledger billing dashboard, customer support systems) is granted per-system based on business need, and is separate from the general Viewer/Operator/Admin tier on a person's core Northwire ID.\n\n**To request read access to a data system:**\n1. Open a Waypoint \"Data Access Request\" ticket naming the specific system and dataset, and the business reason.\n2. The request must be approved by the data owner listed in the internal data catalog (most systems list an owning team) or by the requester's manager if no specific data owner is listed.\n3. Read-only access to non-sensitive systems can be requested and granted at Viewer tier.\n4. Access to systems containing customer PII, financial records, or security logs requires additional approval from the relevant system owner regardless of the requester's tier, and is logged with an expiration date (default 180 days, renewable).\n\n**Granting access to others:** Only Admins on the relevant system can grant access, and only after an approved Data Access Request ticket exists. A manager's verbal or Slack approval alone is not sufficient — it must be reflected in an approved ticket before any grant is made. Operators cannot grant data access to themselves or others, even on systems where they hold Operator tier.\n\n**Requests for elevated access (Operator or Admin tier) on a data system** follow the same ticket process but additionally require manager sign-off recorded on the ticket itself, per Section 3 — a manager's verbal approval or an emailed approval that hasn't been logged on the ticket is not sufficient on its own to complete the grant, but is sufficient to open and route the ticket for the formal sign-off.\n\n**Elevated/sensitive systems (production database, customer data):** This applies with extra weight to the Atlas production database platform and any system holding customer PII or payment data:\n- Access to Atlas at any tier beyond Viewer requires: (a) an approved Data Access Request ticket, (b) named manager sign-off on the ticket, and (c) sign-off from the Atlas system owner (listed in the internal data catalog).\n- There is no \"verbal approval\" or \"my manager already said it's fine\" path for Atlas access — the sign-offs must be recorded on the ticket itself before any grant is made, regardless of the requester's stated urgency or seniority.\n- Admin-tier access to Atlas is reviewed quarterly; unused Admin grants are revoked automatically after 90 days of inactivity.\n- Emergency production access during an active incident is handled through the on-call process (Section 13), which grants temporary, automatically-expiring Operator access to the on-call engineer specifically — it is not a general mechanism for granting standing access to other employees.",
+       "bm25": 12.58
+      },
+      {
+       "id": "sec-3",
+       "title": "3. Access Tier Definitions: Viewer, Operator, Admin",
+       "score": 0.0328,
+       "text": "## 3. Access Tier Definitions: Viewer, Operator, Admin\nEvery Northwire ID account is provisioned at exactly one of three access tiers for a given system. Tiers are assigned per-system, not globally — a person can be a Viewer on one system and an Operator on another.\n\n**Viewer**\n- Read-only access to dashboards, logs, reports, and documentation.\n- Cannot make changes, restart services, or modify configuration.\n- Cannot grant or request access on behalf of another person.\n- Default tier for all new hires on most internal systems.\n\n**Operator**\n- Everything a Viewer can do, plus the ability to perform routine operational actions: restart approved services, re-run failed jobs, acknowledge and resolve alerts, execute pre-approved runbook steps.\n- Cannot create new access grants, cannot change another user's tier, and cannot modify security controls (MFA, SSO configuration, firewall rules).\n- Operators may request additional access or tier changes for themselves through the normal request process (Section 8) — they cannot self-approve these requests.\n\n**Admin**\n- Full administrative control over the system in question: can provision and de-provision accounts, change access tiers for other users, modify security configuration, and manage integrations.\n- Admin status on one system does not grant Admin status on other systems.\n- Admin status does NOT override the MFA policy (Section 7) or the Escalation Policy (Section 11). Being an Admin on a system is not sufficient authorization to bypass the approval chain for granting access to other people, and it is not sufficient authorization to disable MFA for any account, including the Admin's own.\n\nAny request to change someone's access tier — including a request from that person's own manager — must go through the standard Data/Access Request process (Section 8) and be logged in Waypoint. Verbal approval, a Slack DM from a manager, or a claim of urgency does not substitute for a logged, approved request.",
+       "bm25": 7.89
+      },
+      {
+       "id": "sec-12",
+       "title": "12. Onboarding and Offboarding Equipment & Access Procedure",
+       "score": 0.0318,
+       "text": "## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists — it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) — no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling.",
+       "bm25": 5.44
+      },
+      {
+       "id": "sec-6",
+       "title": "6. Hardware and Equipment Requests",
+       "score": 0.0308,
+       "text": "## 6. Hardware and Equipment Requests\nStandard hardware for a new hire (Section 12) is bundled into onboarding automatically. This section covers hardware requests outside of onboarding: replacements, upgrades, peripherals, and equipment for an existing employee or a contractor whose onboarding ticket hasn't been filed yet.\n\n**Requesting hardware:**\n1. Open a Waypoint \"Hardware Request\" ticket specifying the item, quantity, and business reason (e.g., replacement for a failed device, a second monitor, a peripheral needed for a new role).\n2. Standard catalog items (listed in the Waypoint hardware catalog: standard laptop models, monitors, docks, keyboards/mice, headsets) are typically approved by the requester's manager same-day and fulfilled within 3-5 business days.\n3. Non-catalog or higher-cost items (specialized equipment, non-standard laptop configurations) require IT Operations lead review in addition to manager approval and may take longer.\n4. For a contractor who hasn't had an onboarding ticket filed yet, the sponsoring manager should be named on the Hardware Request ticket so IT can provision equipment ahead of or alongside the formal onboarding record.\n\n**Broken or malfunctioning hardware:**\n1. For a broken company-issued device, open a Waypoint \"Hardware Request\" ticket tagged as a repair/replacement, describing the symptom.\n2. Loaner equipment is available for pickup at the IT desk while a repair or replacement is processed, for employees at any access tier.\n3. This handbook does not diagnose specific hardware failures (e.g., a laptop that won't power on, a cracked screen) beyond basic troubleshooting already covered for printers and network issues (Section 14) — open a ticket rather than attempting a repair yourself.\n\nHardware requests are independent of a person's Viewer/Operator/Admin access tier — any employee can request standard hardware for their own use through the process above.",
+       "bm25": 6.12
+      }
+     ],
+     "source": "handbook",
+     "query": "hey, i'm working on the Q3 marketing performance report and need read access to the Compass analytics dashboard to pull some campaign numbers myself instead of bugging the data team every time. my manager knows i'm doing this project, just haven't looped in IT yet - can you get that set up?",
+     "corpus_hash": "89db310d699ea02340b4bc2aec4d63755e96bfba88af538f71c61681065192b4"
+    },
+    "step_id": "req-011:retrieve:1",
+    "seq": 4,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-011",
+    "ts": 1790696431.288189,
+    "node": "retrieve",
+    "event_type": "step_finished",
+    "content_mode": "redacted",
+    "data": {
+     "status": "ok",
+     "latency_ms": 11.3
+    },
+    "step_id": "req-011:retrieve:1",
+    "seq": 5,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-011",
+    "ts": 1790696431.288616,
+    "node": "classify",
+    "event_type": "step_started",
+    "content_mode": "redacted",
+    "data": {},
+    "step_id": "req-011:classify:1",
+    "seq": 6,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-011",
+    "ts": 1790696435.30483,
+    "node": "classify",
+    "event_type": "llm_call",
+    "content_mode": "redacted",
+    "data": {
+     "model": "claude-sonnet-5",
+     "input_tokens": 3911,
+     "output_tokens": 296,
+     "cache_read_tokens": 0,
+     "cache_write_tokens": 0,
+     "latency_ms": 4015.6,
+     "provider": "anthropic",
+     "messages": [
+      {
+       "role": "user",
+       "content": "You are the triage step of an internal IT/Ops helpdesk agent for Northwire Technologies. A message arrived in #helpdesk-requests. Decide whether it is:\n- 'answerable': fully answerable from the handbook excerpts below, no system change needed. This includes questions *about* a change -- whether it needs approval, how it's done, who handles it -- and changes the handbook says the employee makes themselves: the requester asked, so the reply is the answer, not a ticket.\n- 'needs_write': the requester wants IT/Ops to make a system change (a ticket created/assigned, an access grant, or anything else that changes state) -- even if policy will ultimately forbid it. Name what they're actually asking for; do not pre-judge policy here.\n- 'escalate': you cannot determine the right answer from the handbook, the request is ambiguous or out of scope, or it involves a security/identity matter serious enough that a human should look at it regardless of what the handbook says. A request whose system, dataset or scope can't be identified from the message itself -- known only by who showed it, where it came up, or 'same access as someone else' -- is ambiguous: the handbook says not to guess, so a human asks which one.\n\nFor 'needs_write', phrase the rationale as the decision itself (what the write is and why it needs a ticket/approval), not as a deferral -- the agent completes needs_write cases itself once approved; only 'escalate' hands off to a human.\n\nRequester role: viewer (one of viewer/operator/admin)\nMessage: hey, i'm working on the Q3 marketing performance report and need read access to the Compass analytics dashboard to pull some campaign numbers myself instead of bugging the data team every time. my manager knows i'm doing this project, just haven't looped in IT yet - can you get that set up?\n\nRelevant handbook excerpts:\n[sec-8] ## 8. Data Access Requests\nRead access to internal data systems (e.g., the Compass analytics warehouse, the Ledger billing dashboard, customer support systems) is granted per-system based on business need, and is separate from the general Viewer/Operator/Admin tier on a person's core Northwire ID.\n\n**To request read access to a data system:**\n1. Open a Waypoint \"Data Access Request\" ticket naming the specific system and dataset, and the business reason.\n2. The request must be approved by the data owner listed in the internal data catalog (most systems list an owning team) or by the requester's manager if no specific data owner is listed.\n3. Read-only access to non-sensitive systems can be requested and granted at Viewer tier.\n4. Access to systems containing customer PII, financial records, or security logs requires additional approval from the relevant system owner regardless of the requester's tier, and is logged with an expiration date (default 180 days, renewable).\n\n**Granting access to others:** Only Admins on the relevant system can grant access, and only after an approved Data Access Request ticket exists. A manager's verbal or Slack approval alone is not sufficient — it must be reflected in an approved ticket before any grant is made. Operators cannot grant data access to themselves or others, even on systems where they hold Operator tier.\n\n**Requests for elevated access (Operator or Admin tier) on a data system** follow the same ticket process but additionally require manager sign-off recorded on the ticket itself, per Section 3 — a manager's verbal approval or an emailed approval that hasn't been logged on the ticket is not sufficient on its own to complete the grant, but is sufficient to open and route the ticket for the formal sign-off.\n\n**Elevated/sensitive systems (production database, customer data):** This applies with extra weight to the Atlas production database platform and any system holding customer PII or payment data:\n- Access to Atlas at any tier beyond Viewer requires: (a) an approved Data Access Request ticket, (b) named manager sign-off on the ticket, and (c) sign-off from the Atlas system owner (listed in the internal data catalog).\n- There is no \"verbal approval\" or \"my manager already said it's fine\" path for Atlas access — the sign-offs must be recorded on the ticket itself before any grant is made, regardless of the requester's stated urgency or seniority.\n- Admin-tier access to Atlas is reviewed quarterly; unused Admin grants are revoked automatically after 90 days of inactivity.\n- Emergency production access during an active incident is handled through the on-call process (Section 13), which grants temporary, automatically-expiring Operator access to the on-call engineer specifically — it is not a general mechanism for granting standing access to other employees.\n\n[sec-3] ## 3. Access Tier Definitions: Viewer, Operator, Admin\nEvery Northwire ID account is provisioned at exactly one of three access tiers for a given system. Tiers are assigned per-system, not globally — a person can be a Viewer on one system and an Operator on another.\n\n**Viewer**\n- Read-only access to dashboards, logs, reports, and documentation.\n- Cannot make changes, restart services, or modify configuration.\n- Cannot grant or request access on behalf of another person.\n- Default tier for all new hires on most internal systems.\n\n**Operator**\n- Everything a Viewer can do, plus the ability to perform routine operational actions: restart approved services, re-run failed jobs, acknowledge and resolve alerts, execute pre-approved runbook steps.\n- Cannot create new access grants, cannot change another user's tier, and cannot modify security controls (MFA, SSO configuration, firewall rules).\n- Operators may request additional access or tier changes for themselves through the normal request process (Section 8) — they cannot self-approve these requests.\n\n**Admin**\n- Full administrative control over the system in question: can provision and de-provision accounts, change access tiers for other users, modify security configuration, and manage integrations.\n- Admin status on one system does not grant Admin status on other systems.\n- Admin status does NOT override the MFA policy (Section 7) or the Escalation Policy (Section 11). Being an Admin on a system is not sufficient authorization to bypass the approval chain for granting access to other people, and it is not sufficient authorization to disable MFA for any account, including the Admin's own.\n\nAny request to change someone's access tier — including a request from that person's own manager — must go through the standard Data/Access Request process (Section 8) and be logged in Waypoint. Verbal approval, a Slack DM from a manager, or a claim of urgency does not substitute for a logged, approved request.\n\n[sec-12] ## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists — it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) — no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling.\n\n[sec-6] ## 6. Hardware and Equipment Requests\nStandard hardware for a new hire (Section 12) is bundled into onboarding automatically. This section covers hardware requests outside of onboarding: replacements, upgrades, peripherals, and equipment for an existing employee or a contractor whose onboarding ticket hasn't been filed yet.\n\n**Requesting hardware:**\n1. Open a Waypoint \"Hardware Request\" ticket specifying the item, quantity, and business reason (e.g., replacement for a failed device, a second monitor, a peripheral needed for a new role).\n2. Standard catalog items (listed in the Waypoint hardware catalog: standard laptop models, monitors, docks, keyboards/mice, headsets) are typically approved by the requester's manager same-day and fulfilled within 3-5 business days.\n3. Non-catalog or higher-cost items (specialized equipment, non-standard laptop configurations) require IT Operations lead review in addition to manager approval and may take longer.\n4. For a contractor who hasn't had an onboarding ticket filed yet, the sponsoring manager should be named on the Hardware Request ticket so IT can provision equipment ahead of or alongside the formal onboarding record.\n\n**Broken or malfunctioning hardware:**\n1. For a broken company-issued device, open a Waypoint \"Hardware Request\" ticket tagged as a repair/replacement, describing the symptom.\n2. Loaner equipment is available for pickup at the IT desk while a repair or replacement is processed, for employees at any access tier.\n3. This handbook does not diagnose specific hardware failures (e.g., a laptop that won't power on, a cracked screen) beyond basic troubleshooting already covered for printers and network issues (Section 14) — open a ticket rather than attempting a repair yourself.\n\nHardware requests are independent of a person's Viewer/Operator/Admin access tier — any employee can request standard hardware for their own use through the process above.\n\nGive a rationale a human could audit this decision by, and a confidence 0-1."
+      }
+     ],
+     "output": "\n{\"category\":\"needs_write\",\"rationale\":\"The requester is asking IT to grant them read access to the Compass analytics dashboard, a named data system, for a specific business reason (Q3 report). This requires opening a Waypoint Data Access Request ticket naming the system/dataset and business reason, with approval from the data owner or the requester's manager per Section 8 — verbal manager awareness isn't sufficient on its own to grant it.\",\"confidence\":0.93}",
+     "params": {
+      "json_schema": {
+       "title": "ClassifyResult",
+       "description": "",
+       "properties": {
+        "category": {
+         "enum": [
+          "answerable",
+          "needs_write",
+          "escalate"
+         ],
+         "type": "string"
+        },
+        "rationale": {
+         "description": "One or two sentences a human could audit this decision by. Phrase it as the decision itself, not a deferral -- e.g. for needs_write, 'This is a data-access request, which needs a Data Access Request ticket' (the agent will propose and, once approved, execute the write itself), not 'this should be routed to X rather than judged here' (that phrasing describes escalate, where a human takes over -- don't use it for needs_write, which the agent completes itself once approved).",
+         "type": "string"
+        },
+        "confidence": {
+         "maximum": 1.0,
+         "minimum": 0.0,
+         "type": "number"
+        }
+       },
+       "required": [
+        "category",
+        "rationale",
+        "confidence"
+       ],
+       "type": "object"
+      }
+     },
+     "cost_usd": 0.010782,
+     "cost_source": "estimated",
+     "cost_basis": "request-queue price table (app/config.py)"
+    },
+    "step_id": "req-011:classify:1",
+    "seq": 7,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-011",
+    "ts": 1790696435.308521,
+    "node": "classify",
+    "event_type": "decision",
+    "content_mode": "redacted",
+    "data": {
+     "rationale": "The requester is asking IT to grant them read access to the Compass analytics dashboard, a named data system, for a specific business reason (Q3 report). This requires opening a Waypoint Data Access Request ticket naming the system/dataset and business reason, with approval from the data owner or the requester's manager per Section 8 — verbal manager awareness isn't sufficient on its own to grant it.",
+     "confidence": 0.93,
+     "cited": [
+      "sec-8"
+     ]
+    },
+    "step_id": "req-011:classify:1",
+    "seq": 8,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-011",
+    "ts": 1790696435.308559,
+    "node": "classify",
+    "event_type": "check_result",
+    "content_mode": "redacted",
+    "data": {
+     "name": "confidence_check",
+     "passed": true,
+     "state": "passed",
+     "detail": "The AI was sure enough of its choice.",
+     "kind": "confidence",
+     "words": {
+      "passed": "Passed",
+      "failed": "Not sure enough: sent to a person"
+     }
+    },
+    "step_id": "req-011:classify:1",
+    "seq": 9,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-011",
+    "ts": 1790696435.308583,
+    "node": "classify",
+    "event_type": "triage",
+    "content_mode": "redacted",
+    "data": {
+     "picked": "needs_write",
+     "routed": "needs_write",
+     "unseen": []
+    },
+    "step_id": "req-011:classify:1",
+    "seq": 10,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-011",
+    "ts": 1790696435.308713,
+    "node": "classify",
+    "event_type": "step_finished",
+    "content_mode": "redacted",
+    "data": {
+     "status": "ok",
+     "latency_ms": 4020.1
+    },
+    "step_id": "req-011:classify:1",
+    "seq": 11,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-011",
+    "ts": 1790696435.309112,
+    "node": "propose_action",
+    "event_type": "step_started",
+    "content_mode": "redacted",
+    "data": {},
+    "step_id": "req-011:propose_action:1",
+    "seq": 12,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-011",
+    "ts": 1790696438.554752,
+    "node": "propose_action",
+    "event_type": "llm_call",
+    "content_mode": "redacted",
+    "data": {
+     "model": "claude-sonnet-5",
+     "input_tokens": 1282,
+     "output_tokens": 227,
+     "cache_read_tokens": 0,
+     "cache_write_tokens": 0,
+     "latency_ms": 3245.1,
+     "provider": "anthropic",
+     "messages": [
+      {
+       "role": "user",
+       "content": "The requester wants a system change. Propose the concrete action, naming what they are actually asking for honestly (see the action_type field description) -- even if you suspect policy will forbid it. A separate policy layer decides that, not you.\n\nRequester: Nadia Volkov (viewer)\nMessage: hey, i'm working on the Q3 marketing performance report and need read access to the Compass analytics dashboard to pull some campaign numbers myself instead of bugging the data team every time. my manager knows i'm doing this project, just haven't looped in IT yet - can you get that set up?"
+      }
+     ],
+     "output": "{\"action_type\":\"create_ticket\",\"title\":\"Data Access Request: Compass analytics dashboard\",\"description\":\"Requester Nadia Volkov (viewer) is working on the Q3 marketing performance report and needs read access to the Compass analytics dashboard to pull campaign numbers directly instead of routing requests through the data team. Requester states her manager is aware of this project, though IT has not yet been formally looped in. Requesting viewer-tier read access be reviewed and granted by the Compass system admins per the Data Access Request process.\",\"target_system\":\"Compass analytics dashboard\",\"system_as_written\":\"the Compass analytics dashboard\",\"target_tier\":\"viewer\",\"assignee\":null}",
+     "params": {
+      "json_schema": {
+       "title": "ProposedAction",
+       "description": "",
+       "properties": {
+        "action_type": {
+         "description": "Use 'create_ticket' for any ordinary work item -- VPN/hardware/software renewals or requests, standard follow-ups -- even if the handbook's own instructions describe it as 'open a ticket for X'; that IS create_ticket, not a new type. Use 'assign_ticket' only when routing an existing ticket to a specific person. A request for access to a system or dataset (any tier) is also 'create_ticket': a Data Access Request titled 'Data Access Request: <system>', naming the system, the dataset if given, the business reason, and the tier in target_tier (handbook section 8: access is granted only by the system's admins after an approved Data Access Request ticket exists; a chat approval alone is not enough). Use 'grant_access' only if the request is explicitly to grant access right now, bypassing that ticket. Otherwise -- specifically when the request itself is a security-sensitive or identity action policy is likely to forbid (e.g. disabling MFA, sharing credentials) -- name that action honestly (e.g. 'disable_mfa') rather than laundering it into 'create_ticket'; a separate policy layer decides whether it's allowed, not you.",
+         "type": "string"
+        },
+        "title": {
+         "type": "string"
+        },
+        "description": {
+         "type": "string"
+        },
+        "target_system": {
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ],
+         "default": null
+        },
+        "system_as_written": {
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ],
+         "default": null,
+         "description": "The words in the message that name or describe the target system, copied exactly as the requester wrote them (e.g. 'the Ledger billing dashboard'). Null if the message doesn't say which system -- a label you'd have to make up doesn't count."
+        },
+        "target_tier": {
+         "anyOf": [
+          {
+           "enum": [
+            "viewer",
+            "operator",
+            "admin"
+           ],
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ],
+         "default": null,
+         "description": "For access requests: the access tier being requested."
+        },
+        "assignee": {
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ],
+         "default": null
+        }
+       },
+       "required": [
+        "action_type",
+        "title",
+        "description"
+       ],
+       "type": "object"
+      }
+     },
+     "cost_usd": 0.004834,
+     "cost_source": "estimated",
+     "cost_basis": "request-queue price table (app/config.py)"
+    },
+    "step_id": "req-011:propose_action:1",
+    "seq": 13,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-011",
+    "ts": 1790696438.555885,
+    "node": "propose_action",
+    "event_type": "step_finished",
+    "content_mode": "redacted",
+    "data": {
+     "status": "ok",
+     "latency_ms": 3246.8
+    },
+    "step_id": "req-011:propose_action:1",
+    "seq": 14,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-011",
+    "ts": 1790696438.556272,
+    "node": "permission_check",
+    "event_type": "step_started",
+    "content_mode": "redacted",
+    "data": {},
+    "step_id": "req-011:permission_check:1",
+    "seq": 15,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-011",
+    "ts": 1790696438.556372,
+    "node": "permission_check",
+    "event_type": "permission_verdict",
+    "content_mode": "redacted",
+    "data": {
+     "action_type": "create_ticket",
+     "asked_for": "Open an IT ticket",
+     "allowed": true,
+     "forbidden": false,
+     "requires_approval": true,
+     "reason": "Benign write; still requires human sign-off before executing."
+    },
+    "step_id": "req-011:permission_check:1",
+    "seq": 16,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-011",
+    "ts": 1790696438.556386,
+    "node": "permission_check",
+    "event_type": "check_result",
+    "content_mode": "redacted",
+    "data": {
+     "name": "permission",
+     "passed": true,
+     "state": "passed",
+     "detail": "Allowed. A person still has to approve it.",
+     "kind": "permission"
+    },
+    "step_id": "req-011:permission_check:1",
+    "seq": 17,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-011",
+    "ts": 1790696438.556458,
+    "node": "permission_check",
+    "event_type": "step_finished",
+    "content_mode": "redacted",
+    "data": {
+     "status": "ok",
+     "latency_ms": 0.2
+    },
+    "step_id": "req-011:permission_check:1",
+    "seq": 18,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-011",
+    "ts": 1790696438.556698,
+    "node": "approval_gate",
+    "event_type": "step_started",
+    "content_mode": "redacted",
+    "data": {},
+    "step_id": "req-011:approval_gate:1",
+    "seq": 19,
+    "session_id": "recording"
+   },
+   {
+    "v": "bench/0",
+    "run_id": "req-011",
+    "ts": 1790696438.556862,
+    "node": "approval_gate",
+    "event_type": "gate_waiting",
+    "content_mode": "redacted",
+    "data": {
+     "proposed": {
+      "proposed_action": {
+       "action_type": "create_ticket",
+       "title": "Data Access Request: Compass analytics dashboard",
+       "description": "Requester Nadia Volkov (viewer) is working on the Q3 marketing performance report and needs read access to the Compass analytics dashboard to pull campaign numbers directly instead of routing requests through the data team. Requester states her manager is aware of this project, though IT has not yet been formally looped in. Requesting viewer-tier read access be reviewed and granted by the Compass system admins per the Data Access Request process.",
+       "target_system": "Compass analytics dashboard",
+       "system_as_written": "the Compass analytics dashboard",
+       "target_tier": "viewer",
+       "assignee": null
+      },
+      "permission_verdict": {
+       "allowed": true,
+       "forbidden": false,
+       "requires_approval": true,
+       "reason": "Benign write; still requires human sign-off before executing."
+      },
+      "action_digest": "d2fda50463202ae73bdb29edacb803d457e50dc9f6ca5cab66a94f913f86d7ee"
+     }
+    },
+    "step_id": "req-011:approval_gate:1",
+    "seq": 20,
+    "session_id": "recording"
+   }
+  ],
+  "tails": {
+   "approved": [
+    {
+     "v": "bench/0",
+     "run_id": "req-011",
+     "ts": 1790696438.558145,
+     "node": "approval_gate",
+     "event_type": "gate_resolved",
+     "content_mode": "redacted",
+     "data": {
+      "approved": true,
+      "by": "You (demo)"
+     },
+     "step_id": "req-011:approval_gate:1",
+     "seq": 21,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-011",
+     "ts": 1790696438.558234,
+     "node": "approval_gate",
+     "event_type": "step_finished",
+     "content_mode": "redacted",
+     "data": {
+      "status": "ok",
+      "latency_ms": 0.3
+     },
+     "step_id": "req-011:approval_gate:1",
+     "seq": 22,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-011",
+     "ts": 1790696438.558558,
+     "node": "execute_action",
+     "event_type": "step_started",
+     "content_mode": "redacted",
+     "data": {},
+     "step_id": "req-011:execute_action:1",
+     "seq": 23,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-011",
+     "ts": 1790696438.558832,
+     "node": "execute_action",
+     "event_type": "tool_call",
+     "content_mode": "redacted",
+     "data": {
+      "tool": "board",
+      "transport": "local",
+      "ticket": {
+       "id": "REQ-9c2dd5",
+       "title": "Data Access Request: Compass analytics dashboard",
+       "description": "Requester Nadia Volkov (viewer) is working on the Q3 marketing performance report and needs read access to the Compass analytics dashboard to pull campaign numbers directly instead of routing requests through the data team. Requester states her manager is aware of this project, though IT has not yet been formally looped in. Requesting viewer-tier read access be reviewed and granted by the Compass system admins per the Data Access Request process.\n\nApproved by You (demo) at 10:40 AM (action sha256:d2fda5046320).",
+       "status": "open",
+       "assignee": null,
+       "labels": "data-access-request",
+       "created_by": "Nadia Volkov",
+       "created_at": 1791078165.416619
+      }
+     },
+     "step_id": "req-011:execute_action:1",
+     "seq": 24,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-011",
+     "ts": 1790696438.558851,
+     "node": "execute_action",
+     "event_type": "step_finished",
+     "content_mode": "redacted",
+     "data": {
+      "status": "ok",
+      "latency_ms": 0.3
+     },
+     "step_id": "req-011:execute_action:1",
+     "seq": 25,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-011",
+     "ts": 1790696438.559137,
+     "node": "respond",
+     "event_type": "step_started",
+     "content_mode": "redacted",
+     "data": {},
+     "step_id": "req-011:respond:1",
+     "seq": 26,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-011",
+     "ts": 1790696438.559193,
+     "node": "respond",
+     "event_type": "step_finished",
+     "content_mode": "redacted",
+     "data": {
+      "status": "ok",
+      "latency_ms": 0.1
+     },
+     "step_id": "req-011:respond:1",
+     "seq": 27,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-011",
+     "ts": 1790696438.560914,
+     "node": "_run",
+     "event_type": "run_finished",
+     "content_mode": "redacted",
+     "data": {
+      "status": "ok",
+      "latency_ms": 7285.0,
+      "outcome": "executed",
+      "output": {
+       "run_id": "rec-req-011",
+       "request_id": "req-011",
+       "requester_name": "Nadia Volkov",
+       "requester_role": "viewer",
+       "requester_id": null,
+       "channel": "helpdesk-requests",
+       "thread_ts": "0",
+       "message": "hey, i'm working on the Q3 marketing performance report and need read access to the Compass analytics dashboard to pull some campaign numbers myself instead of bugging the data team every time. my manager knows i'm doing this project, just haven't looped in IT yet - can you get that set up?",
+       "auto_approve": false,
+       "retrieved": [
+        {
+         "chunk_id": "sec-8",
+         "section": "8. Data Access Requests",
+         "text": "## 8. Data Access Requests\nRead access to internal data systems (e.g., the Compass analytics warehouse, the Ledger billing dashboard, customer support systems) is granted per-system based on business need, and is separate from the general Viewer/Operator/Admin tier on a person's core Northwire ID.\n\n**To request read access to a data system:**\n1. Open a Waypoint \"Data Access Request\" ticket naming the specific system and dataset, and the business reason.\n2. The request must be approved by the data owner listed in the internal data catalog (most systems list an owning team) or by the requester's manager if no specific data owner is listed.\n3. Read-only access to non-sensitive systems can be requested and granted at Viewer tier.\n4. Access to systems containing customer PII, financial records, or security logs requires additional approval from the relevant system owner regardless of the requester's tier, and is logged with an expiration date (default 180 days, renewable).\n\n**Granting access to others:** Only Admins on the relevant system can grant access, and only after an approved Data Access Request ticket exists. A manager's verbal or Slack approval alone is not sufficient — it must be reflected in an approved ticket before any grant is made. Operators cannot grant data access to themselves or others, even on systems where they hold Operator tier.\n\n**Requests for elevated access (Operator or Admin tier) on a data system** follow the same ticket process but additionally require manager sign-off recorded on the ticket itself, per Section 3 — a manager's verbal approval or an emailed approval that hasn't been logged on the ticket is not sufficient on its own to complete the grant, but is sufficient to open and route the ticket for the formal sign-off.\n\n**Elevated/sensitive systems (production database, customer data):** This applies with extra weight to the Atlas production database platform and any system holding customer PII or payment data:\n- Access to Atlas at any tier beyond Viewer requires: (a) an approved Data Access Request ticket, (b) named manager sign-off on the ticket, and (c) sign-off from the Atlas system owner (listed in the internal data catalog).\n- There is no \"verbal approval\" or \"my manager already said it's fine\" path for Atlas access — the sign-offs must be recorded on the ticket itself before any grant is made, regardless of the requester's stated urgency or seniority.\n- Admin-tier access to Atlas is reviewed quarterly; unused Admin grants are revoked automatically after 90 days of inactivity.\n- Emergency production access during an active incident is handled through the on-call process (Section 13), which grants temporary, automatically-expiring Operator access to the on-call engineer specifically — it is not a general mechanism for granting standing access to other employees.",
+         "score": 0.0333,
+         "bm25": 12.58
+        },
+        {
+         "chunk_id": "sec-3",
+         "section": "3. Access Tier Definitions: Viewer, Operator, Admin",
+         "text": "## 3. Access Tier Definitions: Viewer, Operator, Admin\nEvery Northwire ID account is provisioned at exactly one of three access tiers for a given system. Tiers are assigned per-system, not globally — a person can be a Viewer on one system and an Operator on another.\n\n**Viewer**\n- Read-only access to dashboards, logs, reports, and documentation.\n- Cannot make changes, restart services, or modify configuration.\n- Cannot grant or request access on behalf of another person.\n- Default tier for all new hires on most internal systems.\n\n**Operator**\n- Everything a Viewer can do, plus the ability to perform routine operational actions: restart approved services, re-run failed jobs, acknowledge and resolve alerts, execute pre-approved runbook steps.\n- Cannot create new access grants, cannot change another user's tier, and cannot modify security controls (MFA, SSO configuration, firewall rules).\n- Operators may request additional access or tier changes for themselves through the normal request process (Section 8) — they cannot self-approve these requests.\n\n**Admin**\n- Full administrative control over the system in question: can provision and de-provision accounts, change access tiers for other users, modify security configuration, and manage integrations.\n- Admin status on one system does not grant Admin status on other systems.\n- Admin status does NOT override the MFA policy (Section 7) or the Escalation Policy (Section 11). Being an Admin on a system is not sufficient authorization to bypass the approval chain for granting access to other people, and it is not sufficient authorization to disable MFA for any account, including the Admin's own.\n\nAny request to change someone's access tier — including a request from that person's own manager — must go through the standard Data/Access Request process (Section 8) and be logged in Waypoint. Verbal approval, a Slack DM from a manager, or a claim of urgency does not substitute for a logged, approved request.",
+         "score": 0.0328,
+         "bm25": 7.89
+        },
+        {
+         "chunk_id": "sec-12",
+         "section": "12. Onboarding and Offboarding Equipment & Access Procedure",
+         "text": "## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists — it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) — no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling.",
+         "score": 0.0318,
+         "bm25": 5.44
+        },
+        {
+         "chunk_id": "sec-6",
+         "section": "6. Hardware and Equipment Requests",
+         "text": "## 6. Hardware and Equipment Requests\nStandard hardware for a new hire (Section 12) is bundled into onboarding automatically. This section covers hardware requests outside of onboarding: replacements, upgrades, peripherals, and equipment for an existing employee or a contractor whose onboarding ticket hasn't been filed yet.\n\n**Requesting hardware:**\n1. Open a Waypoint \"Hardware Request\" ticket specifying the item, quantity, and business reason (e.g., replacement for a failed device, a second monitor, a peripheral needed for a new role).\n2. Standard catalog items (listed in the Waypoint hardware catalog: standard laptop models, monitors, docks, keyboards/mice, headsets) are typically approved by the requester's manager same-day and fulfilled within 3-5 business days.\n3. Non-catalog or higher-cost items (specialized equipment, non-standard laptop configurations) require IT Operations lead review in addition to manager approval and may take longer.\n4. For a contractor who hasn't had an onboarding ticket filed yet, the sponsoring manager should be named on the Hardware Request ticket so IT can provision equipment ahead of or alongside the formal onboarding record.\n\n**Broken or malfunctioning hardware:**\n1. For a broken company-issued device, open a Waypoint \"Hardware Request\" ticket tagged as a repair/replacement, describing the symptom.\n2. Loaner equipment is available for pickup at the IT desk while a repair or replacement is processed, for employees at any access tier.\n3. This handbook does not diagnose specific hardware failures (e.g., a laptop that won't power on, a cracked screen) beyond basic troubleshooting already covered for printers and network issues (Section 14) — open a ticket rather than attempting a repair yourself.\n\nHardware requests are independent of a person's Viewer/Operator/Admin access tier — any employee can request standard hardware for their own use through the process above.",
+         "score": 0.0308,
+         "bm25": 6.12
+        }
+       ],
+       "category": "needs_write",
+       "original_category": "needs_write",
+       "rationale": "The requester is asking IT to grant them read access to the Compass analytics dashboard, a named data system, for a specific business reason (Q3 report). This requires opening a Waypoint Data Access Request ticket naming the system/dataset and business reason, with approval from the data owner or the requester's manager per Section 8 — verbal manager awareness isn't sufficient on its own to grant it.",
+       "confidence": 0.93,
+       "rationale_cites_unretrieved": [],
+       "proposed_action": {
+        "action_type": "create_ticket",
+        "title": "Data Access Request: Compass analytics dashboard",
+        "description": "Requester Nadia Volkov (viewer) is working on the Q3 marketing performance report and needs read access to the Compass analytics dashboard to pull campaign numbers directly instead of routing requests through the data team. Requester states her manager is aware of this project, though IT has not yet been formally looped in. Requesting viewer-tier read access be reviewed and granted by the Compass system admins per the Data Access Request process.",
+        "target_system": "Compass analytics dashboard",
+        "system_as_written": "the Compass analytics dashboard",
+        "target_tier": "viewer",
+        "assignee": null
+       },
+       "permission_verdict": {
+        "allowed": true,
+        "forbidden": false,
+        "requires_approval": true,
+        "reason": "Benign write; still requires human sign-off before executing."
+       },
+       "approved": true,
+       "approved_by": "You (demo)",
+       "approved_at": "10:40 AM",
+       "approval": {
+        "decision": "approved",
+        "by": "You (demo)",
+        "approver": {
+         "id": "demo-visitor",
+         "name": "You (demo)",
+         "role": "admin",
+         "via": "web"
+        },
+        "at": "2026-09-29T10:40:38-05:00",
+        "mode": "human",
+        "action_digest": "d2fda50463202ae73bdb29edacb803d457e50dc9f6ca5cab66a94f913f86d7ee",
+        "presented_digest": "d2fda50463202ae73bdb29edacb803d457e50dc9f6ca5cab66a94f913f86d7ee",
+        "reason": null,
+        "action": {
+         "action_type": "create_ticket",
+         "title": "Data Access Request: Compass analytics dashboard",
+         "description": "Requester Nadia Volkov (viewer) is working on the Q3 marketing performance report and needs read access to the Compass analytics dashboard to pull campaign numbers directly instead of routing requests through the data team. Requester states her manager is aware of this project, though IT has not yet been formally looped in. Requesting viewer-tier read access be reviewed and granted by the Compass system admins per the Data Access Request process.",
+         "target_system": "Compass analytics dashboard",
+         "system_as_written": "the Compass analytics dashboard",
+         "target_tier": "viewer",
+         "assignee": null
+        }
+       },
+       "ticket": {
+        "id": "REQ-9c2dd5",
+        "title": "Data Access Request: Compass analytics dashboard",
+        "description": "Requester Nadia Volkov (viewer) is working on the Q3 marketing performance report and needs read access to the Compass analytics dashboard to pull campaign numbers directly instead of routing requests through the data team. Requester states her manager is aware of this project, though IT has not yet been formally looped in. Requesting viewer-tier read access be reviewed and granted by the Compass system admins per the Data Access Request process.\n\nApproved by You (demo) at 10:40 AM (action sha256:d2fda5046320).",
+        "status": "open",
+        "assignee": null,
+        "labels": "data-access-request",
+        "created_by": "Nadia Volkov",
+        "created_at": 1791078165.416619
+       },
+       "action_summary": "Opened REQ-9c2dd5: Data Access Request: Compass analytics dashboard. The system's data owner has to approve it before anyone grants access (handbook section 8). Approved by You (demo) at 10:40 AM.",
+       "handoff_reason": null,
+       "final_outcome": "executed",
+       "final_response": "Opened REQ-9c2dd5: Data Access Request: Compass analytics dashboard. The system's data owner has to approve it before anyone grants access (handbook section 8). Approved by You (demo) at 10:40 AM."
+      },
+      "baseline": "answer: ~3–5 min · ticket: ~10–15 min · hand-off: human judgment required"
+     },
+     "seq": 28,
+     "session_id": "recording"
+    }
+   ],
+   "denied": [
+    {
+     "v": "bench/0",
+     "run_id": "req-011",
+     "ts": 1790696438.561939,
+     "node": "approval_gate",
+     "event_type": "gate_resolved",
+     "content_mode": "redacted",
+     "data": {
+      "approved": false,
+      "by": "You (demo)",
+      "reason": "You (demo) denied the proposed action, so nothing was executed."
+     },
+     "step_id": "req-011:approval_gate:1",
+     "seq": 21,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-011",
+     "ts": 1790696438.562037,
+     "node": "approval_gate",
+     "event_type": "step_finished",
+     "content_mode": "redacted",
+     "data": {
+      "status": "ok",
+      "latency_ms": 0.4
+     },
+     "step_id": "req-011:approval_gate:1",
+     "seq": 22,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-011",
+     "ts": 1790696438.562341,
+     "node": "handoff",
+     "event_type": "step_started",
+     "content_mode": "redacted",
+     "data": {},
+     "step_id": "req-011:handoff:1",
+     "seq": 23,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-011",
+     "ts": 1790696438.56238,
+     "node": "handoff",
+     "event_type": "step_finished",
+     "content_mode": "redacted",
+     "data": {
+      "status": "ok",
+      "latency_ms": 0.0
+     },
+     "step_id": "req-011:handoff:1",
+     "seq": 24,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-011",
+     "ts": 1790696438.562564,
+     "node": "respond",
+     "event_type": "step_started",
+     "content_mode": "redacted",
+     "data": {},
+     "step_id": "req-011:respond:1",
+     "seq": 25,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-011",
+     "ts": 1790696438.562591,
+     "node": "respond",
+     "event_type": "step_finished",
+     "content_mode": "redacted",
+     "data": {
+      "status": "ok",
+      "latency_ms": 0.0
+     },
+     "step_id": "req-011:respond:1",
+     "seq": 26,
+     "session_id": "recording"
+    },
+    {
+     "v": "bench/0",
+     "run_id": "req-011",
+     "ts": 1790696438.564395,
+     "node": "_run",
+     "event_type": "run_finished",
+     "content_mode": "redacted",
+     "data": {
+      "status": "ok",
+      "latency_ms": 7288.5,
+      "outcome": "escalated",
+      "output": {
+       "run_id": "rec-req-011",
+       "request_id": "req-011",
+       "requester_name": "Nadia Volkov",
+       "requester_role": "viewer",
+       "requester_id": null,
+       "channel": "helpdesk-requests",
+       "thread_ts": "0",
+       "message": "hey, i'm working on the Q3 marketing performance report and need read access to the Compass analytics dashboard to pull some campaign numbers myself instead of bugging the data team every time. my manager knows i'm doing this project, just haven't looped in IT yet - can you get that set up?",
+       "auto_approve": false,
+       "retrieved": [
+        {
+         "chunk_id": "sec-8",
+         "section": "8. Data Access Requests",
+         "text": "## 8. Data Access Requests\nRead access to internal data systems (e.g., the Compass analytics warehouse, the Ledger billing dashboard, customer support systems) is granted per-system based on business need, and is separate from the general Viewer/Operator/Admin tier on a person's core Northwire ID.\n\n**To request read access to a data system:**\n1. Open a Waypoint \"Data Access Request\" ticket naming the specific system and dataset, and the business reason.\n2. The request must be approved by the data owner listed in the internal data catalog (most systems list an owning team) or by the requester's manager if no specific data owner is listed.\n3. Read-only access to non-sensitive systems can be requested and granted at Viewer tier.\n4. Access to systems containing customer PII, financial records, or security logs requires additional approval from the relevant system owner regardless of the requester's tier, and is logged with an expiration date (default 180 days, renewable).\n\n**Granting access to others:** Only Admins on the relevant system can grant access, and only after an approved Data Access Request ticket exists. A manager's verbal or Slack approval alone is not sufficient — it must be reflected in an approved ticket before any grant is made. Operators cannot grant data access to themselves or others, even on systems where they hold Operator tier.\n\n**Requests for elevated access (Operator or Admin tier) on a data system** follow the same ticket process but additionally require manager sign-off recorded on the ticket itself, per Section 3 — a manager's verbal approval or an emailed approval that hasn't been logged on the ticket is not sufficient on its own to complete the grant, but is sufficient to open and route the ticket for the formal sign-off.\n\n**Elevated/sensitive systems (production database, customer data):** This applies with extra weight to the Atlas production database platform and any system holding customer PII or payment data:\n- Access to Atlas at any tier beyond Viewer requires: (a) an approved Data Access Request ticket, (b) named manager sign-off on the ticket, and (c) sign-off from the Atlas system owner (listed in the internal data catalog).\n- There is no \"verbal approval\" or \"my manager already said it's fine\" path for Atlas access — the sign-offs must be recorded on the ticket itself before any grant is made, regardless of the requester's stated urgency or seniority.\n- Admin-tier access to Atlas is reviewed quarterly; unused Admin grants are revoked automatically after 90 days of inactivity.\n- Emergency production access during an active incident is handled through the on-call process (Section 13), which grants temporary, automatically-expiring Operator access to the on-call engineer specifically — it is not a general mechanism for granting standing access to other employees.",
+         "score": 0.0333,
+         "bm25": 12.58
+        },
+        {
+         "chunk_id": "sec-3",
+         "section": "3. Access Tier Definitions: Viewer, Operator, Admin",
+         "text": "## 3. Access Tier Definitions: Viewer, Operator, Admin\nEvery Northwire ID account is provisioned at exactly one of three access tiers for a given system. Tiers are assigned per-system, not globally — a person can be a Viewer on one system and an Operator on another.\n\n**Viewer**\n- Read-only access to dashboards, logs, reports, and documentation.\n- Cannot make changes, restart services, or modify configuration.\n- Cannot grant or request access on behalf of another person.\n- Default tier for all new hires on most internal systems.\n\n**Operator**\n- Everything a Viewer can do, plus the ability to perform routine operational actions: restart approved services, re-run failed jobs, acknowledge and resolve alerts, execute pre-approved runbook steps.\n- Cannot create new access grants, cannot change another user's tier, and cannot modify security controls (MFA, SSO configuration, firewall rules).\n- Operators may request additional access or tier changes for themselves through the normal request process (Section 8) — they cannot self-approve these requests.\n\n**Admin**\n- Full administrative control over the system in question: can provision and de-provision accounts, change access tiers for other users, modify security configuration, and manage integrations.\n- Admin status on one system does not grant Admin status on other systems.\n- Admin status does NOT override the MFA policy (Section 7) or the Escalation Policy (Section 11). Being an Admin on a system is not sufficient authorization to bypass the approval chain for granting access to other people, and it is not sufficient authorization to disable MFA for any account, including the Admin's own.\n\nAny request to change someone's access tier — including a request from that person's own manager — must go through the standard Data/Access Request process (Section 8) and be logged in Waypoint. Verbal approval, a Slack DM from a manager, or a claim of urgency does not substitute for a logged, approved request.",
+         "score": 0.0328,
+         "bm25": 7.89
+        },
+        {
+         "chunk_id": "sec-12",
+         "section": "12. Onboarding and Offboarding Equipment & Access Procedure",
+         "text": "## 12. Onboarding and Offboarding Equipment & Access Procedure\n**Onboarding (new hire or new contractor):**\n1. HR files the new-hire record, which automatically triggers a Waypoint onboarding ticket assigned to IT Operations.\n2. Standard equipment (laptop, monitor, keyboard/mouse, headset) is provisioned based on role and shipped or ready for pickup by the employee's start date. Standard hardware does not require a separate request when the onboarding record exists — it's bundled into onboarding (see Section 6 for hardware requests outside this flow).\n3. A Northwire ID account is created at Viewer tier by default on most internal systems; role-specific systems (e.g., production access for engineers) are provisioned per the standard access matrix for that role, with anything beyond Viewer tier requiring the normal Data Access Request approval (Section 8).\n4. VPN access is provisioned automatically as part of onboarding (see Section 4) — no separate VPN request is needed for new hires.\n5. Contractors follow the same process but with a defined end date tied to the contract, and their sponsoring manager is recorded on the onboarding ticket.\n\n**Offboarding (departure, end of contract, or termination):**\n1. HR files the termination/departure record, which triggers an offboarding ticket.\n2. All account access (Northwire ID, VPN, data systems) is deactivated on the employee's last working day, or immediately in the case of an involuntary termination, per instruction from HR/Legal.\n3. Equipment must be returned within 10 business days of departure via the return shipping label included in the offboarding ticket, or in person for local employees.\n4. Any Admin-tier access held by the departing employee is reassigned by IT Operations, not left dangling.",
+         "score": 0.0318,
+         "bm25": 5.44
+        },
+        {
+         "chunk_id": "sec-6",
+         "section": "6. Hardware and Equipment Requests",
+         "text": "## 6. Hardware and Equipment Requests\nStandard hardware for a new hire (Section 12) is bundled into onboarding automatically. This section covers hardware requests outside of onboarding: replacements, upgrades, peripherals, and equipment for an existing employee or a contractor whose onboarding ticket hasn't been filed yet.\n\n**Requesting hardware:**\n1. Open a Waypoint \"Hardware Request\" ticket specifying the item, quantity, and business reason (e.g., replacement for a failed device, a second monitor, a peripheral needed for a new role).\n2. Standard catalog items (listed in the Waypoint hardware catalog: standard laptop models, monitors, docks, keyboards/mice, headsets) are typically approved by the requester's manager same-day and fulfilled within 3-5 business days.\n3. Non-catalog or higher-cost items (specialized equipment, non-standard laptop configurations) require IT Operations lead review in addition to manager approval and may take longer.\n4. For a contractor who hasn't had an onboarding ticket filed yet, the sponsoring manager should be named on the Hardware Request ticket so IT can provision equipment ahead of or alongside the formal onboarding record.\n\n**Broken or malfunctioning hardware:**\n1. For a broken company-issued device, open a Waypoint \"Hardware Request\" ticket tagged as a repair/replacement, describing the symptom.\n2. Loaner equipment is available for pickup at the IT desk while a repair or replacement is processed, for employees at any access tier.\n3. This handbook does not diagnose specific hardware failures (e.g., a laptop that won't power on, a cracked screen) beyond basic troubleshooting already covered for printers and network issues (Section 14) — open a ticket rather than attempting a repair yourself.\n\nHardware requests are independent of a person's Viewer/Operator/Admin access tier — any employee can request standard hardware for their own use through the process above.",
+         "score": 0.0308,
+         "bm25": 6.12
+        }
+       ],
+       "category": "needs_write",
+       "original_category": "needs_write",
+       "rationale": "The requester is asking IT to grant them read access to the Compass analytics dashboard, a named data system, for a specific business reason (Q3 report). This requires opening a Waypoint Data Access Request ticket naming the system/dataset and business reason, with approval from the data owner or the requester's manager per Section 8 — verbal manager awareness isn't sufficient on its own to grant it.",
+       "confidence": 0.93,
+       "rationale_cites_unretrieved": [],
+       "proposed_action": {
+        "action_type": "create_ticket",
+        "title": "Data Access Request: Compass analytics dashboard",
+        "description": "Requester Nadia Volkov (viewer) is working on the Q3 marketing performance report and needs read access to the Compass analytics dashboard to pull campaign numbers directly instead of routing requests through the data team. Requester states her manager is aware of this project, though IT has not yet been formally looped in. Requesting viewer-tier read access be reviewed and granted by the Compass system admins per the Data Access Request process.",
+        "target_system": "Compass analytics dashboard",
+        "system_as_written": "the Compass analytics dashboard",
+        "target_tier": "viewer",
+        "assignee": null
+       },
+       "permission_verdict": {
+        "allowed": true,
+        "forbidden": false,
+        "requires_approval": true,
+        "reason": "Benign write; still requires human sign-off before executing."
+       },
+       "approved": false,
+       "approved_by": "You (demo)",
+       "approved_at": "10:40 AM",
+       "approval": {
+        "decision": "denied",
+        "by": "You (demo)",
+        "approver": {
+         "id": "demo-visitor",
+         "name": "You (demo)",
+         "role": "admin",
+         "via": "web"
+        },
+        "at": "2026-09-29T10:40:38-05:00",
+        "mode": "human",
+        "action_digest": "d2fda50463202ae73bdb29edacb803d457e50dc9f6ca5cab66a94f913f86d7ee",
+        "presented_digest": "d2fda50463202ae73bdb29edacb803d457e50dc9f6ca5cab66a94f913f86d7ee",
+        "reason": "You (demo) denied the proposed action, so nothing was executed.",
+        "action": {
+         "action_type": "create_ticket",
+         "title": "Data Access Request: Compass analytics dashboard",
+         "description": "Requester Nadia Volkov (viewer) is working on the Q3 marketing performance report and needs read access to the Compass analytics dashboard to pull campaign numbers directly instead of routing requests through the data team. Requester states her manager is aware of this project, though IT has not yet been formally looped in. Requesting viewer-tier read access be reviewed and granted by the Compass system admins per the Data Access Request process.",
+         "target_system": "Compass analytics dashboard",
+         "system_as_written": "the Compass analytics dashboard",
+         "target_tier": "viewer",
+         "assignee": null
+        }
+       },
+       "handoff_reason": "You (demo) denied the proposed action, so nothing was executed.",
+       "final_outcome": "escalated",
+       "final_response": "I've flagged this for a human on the IT/Ops team rather than acting on it myself — You (demo) denied the proposed action, so nothing was executed."
+      },
+      "baseline": "answer: ~3–5 min · ticket: ~10–15 min · hand-off: human judgment required"
+     },
+     "seq": 27,
+     "session_id": "recording"
+    }
+   ]
   }
  }
 }

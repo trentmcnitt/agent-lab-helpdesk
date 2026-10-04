@@ -1,0 +1,59 @@
+{
+ "v": "agentlab-cassette/0",
+ "scenario": "req-012",
+ "title": "Can I get a JetBrains license?",
+ "group": "It opens a ticket (a person approves)",
+ "recorded": "09-29-26",
+ "t0": 1790696418.441806,
+ "latency_basis": "the gap before each call's llm_call event in the original recording",
+ "input": {
+  "run_id": "rec-req-012",
+  "request_id": "req-012",
+  "requester_name": "Greg Talvert",
+  "requester_role": "operator",
+  "requester_id": null,
+  "channel": "helpdesk-requests",
+  "thread_ts": "0",
+  "message": "can i get a jetbrains license? i'm doing a lot more backend work lately and vs code just isn't cutting it for the debugging i need to do",
+  "auto_approve": false
+ },
+ "run_id": "rec-req-012",
+ "resumes": {
+  "approved": {
+   "approved": true
+  },
+  "denied": {
+   "approved": false
+  }
+ },
+ "calls": [
+  {
+   "node": "classify",
+   "key": "e6452a4fb25fe1f9001814ce138b2c69b6833d7cd628708b6d453b2b9e398ba5",
+   "model": "claude-sonnet-5",
+   "output": "{\"category\":\"needs_write\",\"rationale\":\"The requester wants a JetBrains software license, which is a Software License Request per Section 5 requiring a logged Waypoint ticket with business justification, regardless of whether JetBrains is in the standard catalog.\",\"confidence\":0.9}",
+   "usage": {
+    "input_tokens": 3096,
+    "output_tokens": 93,
+    "cache_read": 0,
+    "cache_write": 0
+   },
+   "latency_ms": 3581.4,
+   "finish_reason": null
+  },
+  {
+   "node": "propose_action",
+   "key": "ba5fa950a9fc7d01aa392fe57226e32e05e6810ca3d3afbb4229a4cd558edada",
+   "model": "claude-sonnet-5",
+   "output": "{\"action_type\":\"create_ticket\",\"title\":\"Software License Request: JetBrains IDE\",\"description\":\"Requester Greg Talvert (operator) is requesting a JetBrains license (e.g. IntelliJ IDEA or similar) to replace VS Code for backend development work, citing the need for more advanced debugging capabilities.\",\"target_system\":\"JetBrains IDE\",\"system_as_written\":\"a jetbrains license\",\"assignee\":null}",
+   "usage": {
+    "input_tokens": 1235,
+    "output_tokens": 146,
+    "cache_read": 0,
+    "cache_write": 0
+   },
+   "latency_ms": 4137.3,
+   "finish_reason": null
+  }
+ ]
+}

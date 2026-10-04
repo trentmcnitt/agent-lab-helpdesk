@@ -24,7 +24,6 @@ from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.types import Command
 
 from .. import config
-from ..bench import client as bench_client
 from ..board_adapter import BoardAdapter
 from ..events import Event, EventBus
 from ..graph import build_graph
@@ -32,6 +31,7 @@ from ..slack_adapter import MockSlackAdapter
 
 CHANNEL = "helpdesk-requests"
 _APPROVED_AT = re.compile(r"(Approved by [^.\n]*? at )\d{1,2}:\d{2} [AP]M")
+_SESSION_OK = re.compile(r"^[A-Za-z0-9_.-]{1,64}$")
 VISITOR = {"id": "demo-visitor", "name": "You (demo)", "role": "admin", "via": "web"}
 
 
@@ -44,16 +44,21 @@ class Sandbox:
     runs: dict = field(default_factory=dict)  # run_id -> live graph entry, or replay state
     last_seen: float = field(default_factory=time.time)
     lock: threading.Lock = field(default_factory=threading.Lock)
-    bench_session: str | None = None  # set when the page was opened inside the bench's shell
+    # Set when the page was opened inside Agent Lab's side-by-side shell: the visitor's live runs
+    # carry it as their session (Agent Lab's library sends them; see LiveRunner._run).
+    bench_session: str | None = None
 
     def publish(self, ev: dict) -> None:
         for q in list(self.subscribers):
             q.put_nowait(ev)
-        if self.bench_session:
-            bench_client.send(self.bench_session, ev)
 
     def meta(self, run_id: str, phase: str, **extra) -> None:
         self.publish(Event(run_id=run_id, node="_meta", event_type="phase", data={"phase": phase, **extra}).to_dict())
+
+
+def valid_session(s: str | None) -> str | None:
+    """A bench session id as the shell passes it, or None if it doesn't look like one."""
+    return s if s and _SESSION_OK.match(s) else None
 
 
 class Sandboxes:
@@ -119,6 +124,8 @@ class LiveRunner:
             bus = self._bus(box, run_id, recorder)
             graph = build_graph(bus, self.index, box.board, checkpointer=InMemorySaver(), llm=self.llm)
             cfg = {"configurable": {"thread_id": run_id}}
+            if box.bench_session:  # Agent Lab files the run (and its resume, which reuses cfg) under this session
+                cfg["metadata"] = {"session_id": box.bench_session}
             state = {"run_id": run_id, "request_id": req.get("id", run_id), "requester_name": req["requester_name"],
                      "requester_role": req["requester_role"], "requester_id": None, "channel": CHANNEL,
                      "thread_ts": thread_ts, "message": req["message"], "auto_approve": False}
@@ -175,6 +182,7 @@ class ReplayLibrary:
             rec = json.loads(p.read_text())
             self.by_id[rec["scenario"]] = rec
         self._pool = ThreadPoolExecutor(max_workers=8, thread_name_prefix="demo-replay")
+        self._clocks: dict[str, dict] = {}  # run_id -> {"vt", "paused_at"}: each run's own clock (see _emit)
 
     def start(self, box: Sandbox, scenario_id: str) -> dict | None:
         rec = self.by_id.get(scenario_id)
@@ -186,20 +194,33 @@ class ReplayLibrary:
         return {"run_id": run_id, "thread_ts": posted["ts"], "channel": CHANNEL, "mode": "replay"}
 
     def _emit(self, box: Sandbox, events: list[dict], run_id: str) -> None:
+        """Sleeps the recorded gaps capped at max_gap, but stamps events on the run's own clock,
+        which advances by the recorded gaps (uncapped) and by the visitor's real wait at the
+        approval card: shown times are the recording's plus the real human wait (static twin:
+        static/replay-engine.js)."""
+        clock = self._clocks.setdefault(run_id, {"vt": time.time()})
         prev = None
         for ev in events:
             if prev is not None:
                 time.sleep(min(max(ev["ts"] - prev, 0.0), self.max_gap) / self.speed)
+                clock["vt"] += max(ev["ts"] - prev, 0.0)
             prev = ev["ts"]
-            box.publish({**ev, "run_id": run_id, "ts": time.time()})
+            box.publish({**ev, "run_id": run_id, "ts": clock["vt"]})
+
+    def _meta(self, box: Sandbox, run_id: str, phase: str, **extra) -> None:
+        clock = self._clocks.get(run_id)
+        box.publish(Event(run_id=run_id, node="_meta", event_type="phase", data={"phase": phase, **extra},
+                          ts=clock["vt"] if clock else time.time()).to_dict())
 
     def _play_pre(self, box: Sandbox, rec: dict, run_id: str, thread_ts: str) -> None:
-        box.meta(run_id, "started", origin="replay", channel=CHANNEL, thread_ts=thread_ts,
-                 requester=rec["requester_name"])
+        self._clocks[run_id] = {"vt": time.time()}
+        self._meta(box, run_id, "started", origin="replay", channel=CHANNEL, thread_ts=thread_ts,
+                   requester=rec["requester_name"])
         self._emit(box, rec["pre"], run_id)
         if rec.get("paused"):
             box.runs[run_id] = {"kind": "replay", "rec": rec, "thread_ts": thread_ts}
-            box.meta(run_id, "awaiting_approval")
+            self._clocks[run_id]["paused_at"] = time.time()
+            self._meta(box, run_id, "awaiting_approval")
             return
         self._finish(box, rec, run_id, thread_ts, rec["final"])
 
@@ -209,6 +230,9 @@ class ReplayLibrary:
             if not entry or entry.get("kind") != "replay" or entry.get("resolved"):
                 return False
             entry["resolved"] = True
+        clock = self._clocks.get(run_id)
+        if clock and clock.get("paused_at") is not None:  # the real wait at the approval card
+            clock["vt"] += max(0.0, time.time() - clock.pop("paused_at"))
         rec = entry["rec"]
         # Same rule as a live run: an approval must carry the digest of the action shown.
         tail = "approved" if approved and digest == rec.get("action_digest") else "denied"
@@ -240,4 +264,5 @@ class ReplayLibrary:
 
     def _finish(self, box: Sandbox, rec: dict, run_id: str, thread_ts: str, final: str) -> None:
         box.slack.reply_in_thread(CHANNEL, thread_ts, final)
-        box.meta(run_id, "done", final_response=final, replay=True)
+        self._meta(box, run_id, "done", final_response=final, replay=True)
+        self._clocks.pop(run_id, None)

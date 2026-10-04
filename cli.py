@@ -9,7 +9,7 @@ import uuid
 
 from langgraph.checkpoint.memory import InMemorySaver
 
-from app import config
+from app import agent_lab, config
 from app.board_adapter import BoardAdapter
 from app.boards import make_board
 from app.events import EventBus
@@ -65,6 +65,7 @@ def main() -> None:
     sub.add_parser("run-all")
     args = parser.parse_args()
 
+    agent_lab.init()
     requests = load_seed_requests()
     index = HandbookIndex()
     board = make_board()

@@ -14,6 +14,7 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
+import agentlab as lab
 from rank_bm25 import BM25Okapi
 
 from . import config
@@ -21,6 +22,7 @@ from . import config
 _WORD_RE = re.compile(r"[a-z0-9]+")
 RRF_K = 60  # the usual constant; ranks are fused, not raw scores
 EMBEDDING_MODEL = "BAAI/bge-small-en-v1.5"
+CORPUS_ID = "handbook"  # the handbook's id on Agent Lab (lab.corpus here, lab.retrieved in the graph)
 
 STOPWORDS = frozenset("""a an the and or but if then than so to of in on at by for with from as is are was were be been
 being it its this that these those you your yours i me my we our they them their he she his her not no do does did done
@@ -54,9 +56,17 @@ class Chunk:
 class HandbookIndex:
     def __init__(self, handbook_path: Path | None = None, mode: str | None = None):
         path = handbook_path or config.HANDBOOK_PATH
-        self.chunks = self._split_sections(path.read_text())
+        raw = path.read_text()
+        self.chunks = self._split_sections(raw)
         self._bm25 = BM25Okapi([_terms(c.text) for c in self.chunks])
         self.mode = mode or config.RETRIEVAL_MODE
+        self.title = raw.lstrip().splitlines()[0].lstrip("# ").strip() if raw.lstrip().startswith("# ") else path.stem
+        # Agent Lab's sources come from the index itself: split or renumber the handbook and they follow.
+        lab.corpus(CORPUS_ID, title=self.title, items=[(c.chunk_id, c.section) for c in self.chunks],
+                   description=("The only documents it can look things up in. " + (
+                       "The AI is given the whole handbook with every request." if self.mode == "full" else
+                       f"For each request a search hands the AI the {config.RETRIEVAL_TOP_K} best matches; it never "
+                       "sees the rest, or any other company documents or systems.")))
         self._embedder = None
         if self.mode == "hybrid":
             import numpy as np

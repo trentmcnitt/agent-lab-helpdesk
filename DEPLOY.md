@@ -13,7 +13,7 @@ The public demo is `demo_server.py`, not `server.py`. It serves the same UI with
 
   When a guard refuses, the visitor gets the recorded run and the page says why. Live mode loads the embedding model, so memory peaks around 660 MB and it needs a 1 GB instance.
 
-All settings are env vars; `.env.demo.example` lists them with comments. Replays are re-recorded with `uv run scripts/record_replays.py` (about $0.10 for all eight).
+All settings are env vars; `.env.demo.example` lists them with comments. Recorded model outputs live in `demo/cassettes/`; re-record them with `uv run scripts/record_cassettes.py` (paid model calls, about $0.05 for all eight), then `uv run scripts/regen_demo.py` remakes the replays and Agent Lab recordings from them with no model calls. The image needs Agent Lab's library as a build context: `docker build --build-context agentlab=../agent-lab/sdk/python .` (a clone of [trentmcnitt/agent-lab](https://github.com/trentmcnitt/agent-lab) beside this repo; see [SETUP](SETUP.md#install))
 
 ## What was verified locally, and what wasn't
 

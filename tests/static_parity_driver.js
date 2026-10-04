@@ -10,15 +10,16 @@ const data = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
   for (const s of data.scenarios) {
     for (const choice of ['approve', 'wrong-digest']) {
       const e = new ReplayEngine(data, { sleep: async () => {} });
-      const events = [];
+      const events = [], bench = [];
       e.subscribe(ev => events.push(ev));
+      e.subscribeBench(ev => bench.push(ev));
       const r = e.start(s.id);
       await r.done;
       const rec = data.replays[s.id];
       if (rec.paused) {
         await e.resume(r.run_id, true, choice === 'approve' ? rec.action_digest : 'wrong');
       }
-      out[`${s.id}/${choice}`] = { events, thread: e.thread(r.thread_ts), board: e.board };
+      out[`${s.id}/${choice}`] = { events, bench, run_id: r.run_id, thread: e.thread(r.thread_ts), board: e.board };
     }
   }
   process.stdout.write(JSON.stringify(out));

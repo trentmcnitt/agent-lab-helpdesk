@@ -7,6 +7,11 @@ ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy UV_PROJECT_ENVIRONMENT=/opt/venv \
     PATH="/opt/venv/bin:$PATH" FASTEMBED_CACHE_PATH=/opt/fastembed PYTHONUNBUFFERED=1
 
 WORKDIR /app
+# Agent Lab's library is a path dependency (pyproject: ../agent-lab/sdk/python, i.e.
+# /agent-lab/sdk/python from /app), from a clone of trentmcnitt/agent-lab beside this repo.
+# Build with it as a named context:
+#   docker build --build-context agentlab=../agent-lab/sdk/python .
+COPY --from=agentlab . /agent-lab/sdk/python
 COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen --no-dev --no-install-project
 

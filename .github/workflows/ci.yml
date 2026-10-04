@@ -7,8 +7,19 @@ jobs:
     env:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}  # live trap tests skip if unset
       INVARIANT_K: "3"
+    defaults:
+      run:
+        working-directory: helpdesk
     steps:
+      # The agentlab library is a path dependency on a clone of Agent Lab beside this repo
+      # (pyproject: ../agent-lab/sdk/python), so both are checked out side by side.
       - uses: actions/checkout@v4
+        with:
+          path: helpdesk
+      - uses: actions/checkout@v4
+        with:
+          repository: trentmcnitt/agent-lab
+          path: agent-lab
       - uses: astral-sh/setup-uv@v5
       - run: uv sync
       - run: bash scripts/ci.sh

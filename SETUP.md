@@ -9,7 +9,12 @@
 
 ## Install
 
+The app uses Agent Lab's `agentlab` library, which isn't on PyPI yet: clone [trentmcnitt/agent-lab](https://github.com/trentmcnitt/agent-lab) beside this repo, so `../agent-lab/sdk/python` resolves (`pyproject.toml` points there).
+
 ```bash
+git clone https://github.com/trentmcnitt/agent-lab.git
+git clone https://github.com/trentmcnitt/agent-lab-helpdesk.git
+cd agent-lab-helpdesk
 uv sync
 ```
 
