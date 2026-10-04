@@ -1,6 +1,6 @@
 # Northwire Helpdesk Agent
 
-> **0.1 pre-alpha.** A portfolio project, built in a few days. Expect rough edges; the design, data and APIs will change. It is the first scenario for [Agent Lab](https://github.com/trentmcnitt/agent-lab) ([live lab](https://agentlab.trentmcnitt.com)).
+> **0.1 pre-alpha.** The design, data and APIs will change. It is the first scenario for [Agent Lab](https://github.com/trentmcnitt/agent-lab) ([live lab](https://agentlab.trentmcnitt.com)).
 
 An agent that works an internal IT/Ops helpdesk queue in real Slack. It reads a request, answers it from the company handbook when it can, proposes a system change when it can't, and hands off to a human rather than guessing. Every decision, its cost and its evidence are visible live, not just the final answer.
 
